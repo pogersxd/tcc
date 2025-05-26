@@ -125,10 +125,12 @@ img {
 
 #player__pause-icon {
   font-size: 50px;
+  transition: transform, ease, 200ms;
 }
 
 #player__pause-icon:hover {
   cursor: pointer;
+  transform: scale(1.2);
 }
 
 /* Item List */
