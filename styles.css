@@ -86,15 +86,14 @@ img {
 
 .left-bar {
   height: 100%;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr;
   align-items: center;
   justify-content: center;
-  width: 20%;
+  width: fit-content;
   padding: 20px;
   background-color: gray;
   border-radius: inherit;
-  min-width: 200px;
 }
 
 /* Main Menu */
@@ -154,6 +153,8 @@ img {
 
 .item-list__container {
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
 }
 
 /* Single Item */

@@ -1,9 +1,10 @@
 <?php
-function renderSearchBar(){
+function renderSearchBar()
+{
   return <<<HTML
           <div class="header__search-bar">
             <form action="./">
-              <p>Pesquisar: <input type="text" name="pesquisa"></p>
+              <input type="text" name="pesquisa" placeholder="Pesquisar..." />
             </form>
           </div>
         HTML;
