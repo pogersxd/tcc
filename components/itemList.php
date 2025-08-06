@@ -4,7 +4,7 @@ include_once "singleItem.php";
 function renderItemList()
 {
   $html = '';
-  for ($i = 0; $i < 10; $i++) $html .= renderSingleItem();
+  for ($i = 0; $i < 30; $i++) $html .= renderSingleItem();
   return <<<HTML
     <div class="item-list">
       <div class="item-list__header">

@@ -29,6 +29,7 @@ img {
 
 .header {
   display: flex;
+  height: fit-content;
   justify-content: space-between;
   background-color: rgb(0, 12, 65);
   padding: 10px 20px;
@@ -48,6 +49,7 @@ img {
 
 .header__link {
   padding: 10px;
+  overflow: auto;
 }
 .header__link:hover {
   background-color: aqua;
@@ -64,7 +66,7 @@ img {
 
 .header__search-bar {
   background-color: antiquewhite;
-  width: 30dvh;
+  max-width: 30dvh;
   min-width: fit-content;
   padding: 15px;
   color: gray;
@@ -82,28 +84,33 @@ img {
   flex: 1;
   border-radius: inherit;
   gap: inherit;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 .left-bar {
-  height: 100%;
+  max-height: 100%;
   display: grid;
   grid-template-rows: auto 1fr;
   align-items: center;
-  justify-content: center;
   width: fit-content;
-  padding: 20px;
   background-color: gray;
   border-radius: inherit;
+  overflow-y: auto;
 }
 
 /* Main Menu */
 
 .main-menu {
   width: 80%;
+  min-width: 60%;
   display: flex;
   flex: 1;
+  height: 100%;
   background-color: blue;
   border-radius: 15px;
+  overflow: hidden;
 }
 
 /* Player */
@@ -140,6 +147,8 @@ img {
   flex: 1;
   padding: 25px;
   gap: 10px;
+  max-height: 100%;
+  overflow-y: auto;
 }
 
 .item-list__header {
@@ -165,9 +174,9 @@ img {
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  max-width: fit-content;
   border-radius: 15px;
   transition: background-color, ease, 200ms;
+  max-width: fit-content;
 }
 
 .single-item:hover {
@@ -181,7 +190,7 @@ img {
 .single-item__image {
   width: 140px;
   height: 140px;
-  object-fit: cover;
+  object-fit:cover;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -209,6 +218,10 @@ img {
 
 .single-item__texts-type {
   font-size: 13px;
+}
+
+.left-bar .single-item{
+  scale: 0.8;
 }
 
 .teste-componente {
