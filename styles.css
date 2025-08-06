@@ -156,7 +156,7 @@ img {
   flex-direction: row;
   justify-content: space-between;
 }
-.item-list__show-more:hover {
+.item-list__show-more {
   text-decoration: underline;
 }
 
@@ -232,6 +232,6 @@ img {
   gap: 15px;
 }
 
-.teste-componente a:hover {
+.teste-componente a{
   text-decoration: underline;
 }
