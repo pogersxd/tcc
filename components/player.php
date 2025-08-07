@@ -1,12 +1,29 @@
 <?php
-function renderPlayer(){
+include "itensArrays.php";
+function renderPlayer()
+{
+  global $vetorMusicas, $vetorNomeMusicas;
+  if (!isset($_GET["musica"]) || empty($_GET["musica"])) {
+    $musica = $vetorMusicas[0];
+    $nomeMusica = $vetorNomeMusicas[0];
+    $pausePlay = "play";
+    $toca = '';
+  } else {
+    $musica = $_GET["musica"];
+    foreach ($vetorMusicas as $key => $value) {
+      if ($value === $musica) $nomeMusica = $vetorNomeMusicas[$key];
+    }
+    $pausePlay = "pause";
+    $toca = 'autoplay';
+  }
   return <<<HTML
           <div class="player">
             <div class="player__button">
-              <i class="fa-solid fa-circle-play" id="player__pause-icon"></i>
+              <i class="fa-solid fa-circle-{$pausePlay}" id="player__pause-icon"></i>
             </div>
-            <audio class="player__audio" id="player__audio">
-              <source src="assets/thinking-time-ticking-power-223023.mp3" type="audio/mpeg">
+            <p>{$nomeMusica}</p>
+            <audio class="player__audio" id="player__audio" {$toca}>
+              <source src="./assets/{$musica}" type="audio/mpeg">
             </audio>
             <div class="player__time" id="player__time">
               <p>00:00</p>
@@ -15,5 +32,5 @@ function renderPlayer(){
         HTML;
 }
 if ($_SERVER["SCRIPT_FILENAME"] === __FILE__) {
-    echo renderPlayer();
+  echo renderPlayer();
 }

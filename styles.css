@@ -93,7 +93,7 @@ img {
   max-height: 100%;
   display: grid;
   grid-template-rows: auto 1fr;
-  align-items: center;
+  justify-items: center;
   width: fit-content;
   background-color: gray;
   border-radius: inherit;
@@ -164,6 +164,7 @@ img {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 10px;
+  justify-items: center;
 }
 
 /* Single Item */
