@@ -1,4 +1,4 @@
-<?php
+ <?php
 function renderMainMenu(){
   include "itemList.php";
   $html = renderItemList();
@@ -7,4 +7,4 @@ function renderMainMenu(){
               $html
           </div>
         HTML;
-}
+}

@@ -1,10 +1,10 @@
-<?php
-function renderSingleItem($imagem, $musica, $nomeMusica, $nome)
-{
-  return <<<HTML
+ <?php
+  function renderSingleItem($imagem, $musica, $nomeMusica, $nome)
+  {
+    return <<<HTML
           <div class="single-item">
             <div class="single-item__image-button">
-              <img class="single-item__image" src="./assets/{$imagem}" alt="Imagem da música X">
+              <img class="single-item__image" src="./assets/{$imagem}" alt="Imagem da música {$nomeMusica}">
               <a href="?musica={$musica}" class="fa-solid fa-circle-play single-item__icon"></a>
             </div>
             <div class="single-item__texts">
@@ -13,4 +13,4 @@ function renderSingleItem($imagem, $musica, $nomeMusica, $nome)
             </div>
           </div>
         HTML;
-}
+  }

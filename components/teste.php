@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 function renderTeste()
 {
@@ -11,4 +11,4 @@ function renderTeste()
   HTML;
 }
 
-echo renderTeste();
+echo renderTeste();

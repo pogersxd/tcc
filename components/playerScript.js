@@ -1,4 +1,4 @@
-const audio = document.getElementById("player__audio");
+ const audio = document.getElementById("player__audio");
 const icon = document.getElementById("player__pause-icon");
 const timeContainer = document.getElementById("player__time");
 
@@ -28,4 +28,4 @@ if (audio && icon && timeContainer) {
   audio.addEventListener("timeupdate", () => {
     time.textContent = formatTime(audio.currentTime);
   });
-}
+}

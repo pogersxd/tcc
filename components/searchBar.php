@@ -1,4 +1,4 @@
-<?php
+ <?php
 function renderSearchBar()
 {
   return <<<HTML
@@ -8,4 +8,4 @@ function renderSearchBar()
             </form>
           </div>
         HTML;
-}
+}

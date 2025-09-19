@@ -1,4 +1,4 @@
-<?php
+ <?php
 function renderHeader()
 {
   include "searchBar.php";
@@ -14,4 +14,4 @@ function renderHeader()
           </div>
         </div>
         HTML;
-}
+}

@@ -1,4 +1,4 @@
-<?php
+ <?php
   require_once "./components/leftBar.php";
   require_once "./components/header.php";
   require_once "./components/mainMenu.php";
@@ -24,4 +24,4 @@
     <script src="./components/playerScript.js"></script>
     <script src="app.js"></script>
   </body>
-  </html>    
+  </html>   

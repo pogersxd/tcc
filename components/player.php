@@ -1,4 +1,4 @@
-<?php
+ <?php
 include "itensArrays.php";
 function renderPlayer()
 {
@@ -33,4 +33,4 @@ function renderPlayer()
 }
 if ($_SERVER["SCRIPT_FILENAME"] === __FILE__) {
   echo renderPlayer();
-}
+}

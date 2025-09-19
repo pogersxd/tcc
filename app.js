@@ -1,4 +1,4 @@
-function loadComponent(componentName) {
+ function loadComponent(componentName) {
   const container = document.getElementById("main-menu");
 
   if (!container) {
@@ -27,4 +27,4 @@ function loadComponent(componentName) {
     .catch((error) => {
       console.error("Erro ao carregar componente:", error);
     });
-}
+}
