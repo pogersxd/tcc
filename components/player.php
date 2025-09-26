@@ -1,22 +1,22 @@
  <?php
-include "itensArrays.php";
-function renderPlayer()
-{
-  global $vetorMusicas, $vetorNomeMusicas;
-  if (!isset($_GET["musica"]) || empty($_GET["musica"])) {
-    $musica = $vetorMusicas[0];
-    $nomeMusica = $vetorNomeMusicas[0];
-    $pausePlay = "play";
-    $toca = '';
-  } else {
-    $musica = $_GET["musica"];
-    foreach ($vetorMusicas as $key => $value) {
-      if ($value === $musica) $nomeMusica = $vetorNomeMusicas[$key];
+  include "itensArrays.php";
+  function renderPlayer()
+  {
+    global $vetorMusicas, $vetorNomeMusicas;
+    if (!isset($_GET["musica"]) || empty($_GET["musica"])) {
+      $musica = $vetorMusicas[0];
+      $nomeMusica = $vetorNomeMusicas[0];
+      $pausePlay = "play";
+      $toca = '';
+    } else {
+      $musica = $_GET["musica"];
+      foreach ($vetorMusicas as $key => $value) {
+        if ($value === $musica) $nomeMusica = $vetorNomeMusicas[$key];
+      }
+      $pausePlay = "pause";
+      $toca = 'autoplay';
     }
-    $pausePlay = "pause";
-    $toca = 'autoplay';
-  }
-  return <<<HTML
+    return <<<HTML
           <div class="player">
             <div class="player__button">
               <i class="fa-solid fa-circle-{$pausePlay}" id="player__pause-icon"></i>
@@ -30,7 +30,7 @@ function renderPlayer()
             </div>
           </div>
         HTML;
-}
-if ($_SERVER["SCRIPT_FILENAME"] === __FILE__) {
-  echo renderPlayer();
-}
+  }
+  if ($_SERVER["SCRIPT_FILENAME"] === __FILE__) {
+    echo renderPlayer();
+  }

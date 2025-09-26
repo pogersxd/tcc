@@ -1,9 +1,9 @@
  <?php
-function renderHeader()
-{
-  include "searchBar.php";
-  $html = renderSearchBar();
-  return <<<HTML
+  function renderHeader()
+  {
+    include "searchBar.php";
+    $html = renderSearchBar();
+    return <<<HTML
         <div class="header">
           <div class="header__icon-search-bar">
             <a class="header__icon" href="./"><img class="header__icon" src="assets/james.png" alt="Foto da James Sunderland"></a>
@@ -14,4 +14,4 @@ function renderHeader()
           </div>
         </div>
         HTML;
-}
+  }
