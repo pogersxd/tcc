@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TCC - Login</title>
+    <title>TCC - Registrar</title>
     <link rel="icon" href="assets/james.png">
 </head>
 
@@ -12,20 +12,21 @@
     <div>
         <div>
             <div>
-                <form action="verify_login.php" method="post">
+                <form action="create_account.php" method="post">
+                    Nome: <input type="text" name="nome" required><br>
                     Email: <input type="email" name="email" required><br>
                     Senha: <input type="password" name="senha" required><br>
-                    <input type="submit" value="Conectar">
+                    <input type="submit" value="Registrar">
                 </form>
             </div>
             <div>
-                Não tem uma conta? <a href="./register.php">Cadastre-se</a>
+                Já tem uma conta? <a href="./login.php">Entre</a>
             </div>
             <?php
             session_start();
-            if (isset($_SESSION["errou"])) {
-                if ($_SESSION["errou"] == true) echo "Email ou senha incorretos.";
-                unset($_SESSION["errou"]);
+            if (isset($_SESSION["naoUnico"])) {
+                if ($_SESSION["naoUnico"] == true) echo "Email já em uso.";
+                unset($_SESSION["naoUnico"]);
             }
             ?>
         </div>
