@@ -12,7 +12,7 @@ if (!isset($_SESSION)) header("Location: index.php")
 </head>
 
 <body>
-    <form action="addAlbumSong.php" method="post">
+    <form action="addAlbum.php" method="post">
         <input type="text">
     </form>
 </body>
