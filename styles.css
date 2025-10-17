@@ -39,8 +39,8 @@ img {
 }
 
 .header__icon {
-  max-width: 10svh;
-  min-width: 70px;
+  max-height: 10svh;
+  min-height: 70px;
   border-radius: 15px;
 }
 
@@ -235,4 +235,4 @@ img {
 
 .teste-componente a{
   text-decoration: underline;
-}
+}

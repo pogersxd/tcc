@@ -21,6 +21,7 @@
             <div>
                 Não tem uma conta? <a href="./register.php">Cadastre-se</a>
             </div>
+            <a href="./index.php">Continuar sem conta</a>
             <?php
             session_start();
             if (isset($_SESSION["errou"])) {

@@ -1,6 +1,5 @@
  <?php
   session_start();
-  if (!isset($_SESSION["email"])) header("Location: ./login.php");
   require_once "./components/leftBar.php";
   require_once "./components/header.php";
   require_once "./components/mainMenu.php";

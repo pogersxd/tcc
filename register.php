@@ -22,6 +22,7 @@
             <div>
                 Já tem uma conta? <a href="./login.php">Entre</a>
             </div>
+            <a href="./index.php">Continuar sem conta</a>
             <?php
             session_start();
             if (isset($_SESSION["naoUnico"])) {
