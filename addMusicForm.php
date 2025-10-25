@@ -18,7 +18,8 @@ $id_album = $_GET['id_album'];
     <?php
     $sql = mysqli_query($conexao, "SELECT * FROM musica WHERE id_album = $id_album");
     if (mysqli_num_rows($sql) > 0) {
-        echo "<tr>
+        echo "<table border=1>
+        <tr>
             <th>Título</th>
             <th>Arquivo</th>
             <th>Duração</th>
@@ -32,6 +33,7 @@ $id_album = $_GET['id_album'];
                 <td>{$linha['detalhes']}</td>
             </tr>";
         }
+        echo "</table>";
     } else {
         echo "<h4>Nenhuma.</h5>";
     }
@@ -41,6 +43,7 @@ $id_album = $_GET['id_album'];
         Título: <input type="text" name="titulo"><br>
         Arquivo: <input type="file" name="arquivo"><br>
         Detalhes: <br><textarea name="detalhes"></textarea><br>
+        <input type="hidden" name="id_album" value="<?= $id_album; ?>">
         <input type="submit" value="Adicionar música">
     </form>
 </body>
