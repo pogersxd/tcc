@@ -4,7 +4,7 @@
     include "searchBar.php";
     $html = renderSearchBar();
     if (isset($_SESSION['usuario'])) {
-      $perfil = '<a class="header__icon" href="./profile.php"><img class="header__icon" src="assets/james.png" alt="Foto da James Sunderland"></a>';
+      $perfil = '<a class="header__icon" href="./ownProfile.php"><img class="header__icon" src="assets/james.png" alt="Foto da James Sunderland"></a>';
       $logout = '<div class="header__link">
             <a href="./logout.php"><h1>Logout</h1></a>
           </div>

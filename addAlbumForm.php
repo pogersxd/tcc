@@ -12,6 +12,7 @@ if (!isset($_SESSION['usuario'])) header("Location: index.php");
 </head>
 
 <body>
+    <h1>Cadastrar álbum</h1>
     <form action="addAlbum.php" method="post">
         Título do álbum: <input type="text" name="titulo"><br>
         Capa do álbum: capa_padrao.jpg <input type="hidden" name="capa" value="capa_padrao.jpg"><br>
