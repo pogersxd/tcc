@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario'])) header("Location: index.php");
+if (!isset($_SESSION['usuario']) || !$_POST) header("Location: index.php");
 include_once "conect.php";
 $titulo = $_POST["titulo"];
 $capa = $_POST["capa"];

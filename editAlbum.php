@@ -21,7 +21,7 @@ if (isset($_GET['id_album'])) {
     if (mysqli_num_rows($sql) > 0) {
     ?>
         <form action="addMusicForm.php">
-            <select name="id_album">
+            <select name="id_album" required>
                 <?php
                 while ($linha = mysqli_fetch_assoc($sql)) {
                     echo "<option value='{$linha['id_album']}'>{$linha['titulo']}</option>";
@@ -36,6 +36,7 @@ if (isset($_GET['id_album'])) {
         echo "<a href='addAlbumForm.php'>Cadastrar álbum</a>";
     }
     ?>
+    <br><a href="index.php">Voltar à página inicial</a>
 </body>
 
 </html>

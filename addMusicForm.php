@@ -29,7 +29,7 @@ $id_album = $_GET['id_album'];
             echo "<tr>
                 <td>{$linha['titulo']}</td>
                 <td>{$linha['arquivo']}</td>
-                <td>{$linha['duracao']}</td>
+                <td>" . gmdate('i:s', $linha['duracao']) . "</td>
                 <td>{$linha['detalhes']}</td>
             </tr>";
         }
@@ -40,11 +40,12 @@ $id_album = $_GET['id_album'];
     ?>
     <h1>Adicionar música ao álbum</h1>
     <form action="addMusica.php" method="post" enctype="multipart/form-data">
-        Título: <input type="text" name="titulo"><br>
-        Arquivo: <input type="file" name="arquivo"><br>
-        Detalhes: <br><textarea name="detalhes"></textarea><br>
+        Título: <input type="text" name="titulo" required><br>
+        Arquivo: (máximo de 10MB)<input type="file" name="arquivo" required><br>
+        Detalhes: <br><textarea name="detalhes" required></textarea><br>
         <input type="hidden" name="id_album" value="<?= $id_album; ?>">
         <input type="submit" value="Adicionar música">
+        <br><a href="index.php">Voltar à página inicial</a>
     </form>
 </body>
 

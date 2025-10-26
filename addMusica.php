@@ -27,7 +27,10 @@ if ($_FILES['arquivo']['size'] <= 1024 * 1024 * 10) {
         'ogg',
         'm4a'
     ];
-    if ((in_array($tipo, $tiposPermitidos) && in_array($extensao, $extensoesPermitidas)) || ($tipo === 'application/octet-stream' && in_array($extensao, $extensoesPermitidas))) {
+    $extensaoCorreta = (in_array($extensao, $extensoesPermitidas));
+    $tipoCorreto = (in_array($tipo, $tiposPermitidos) && $extensaoCorreta);
+    $tipoAlternativo = ($tipo === 'application/octet-stream' && $extensaoCorreta);
+    if ($tipoCorreto || $tipoAlternativo) {
         $nomeArquivoExtensao = $nomeArquivo . '.' . $extensao;
         $feitoUpload = move_uploaded_file($_FILES['arquivo']['tmp_name'], $pasta . $nomeArquivoExtensao);
         if ($feitoUpload) {
@@ -39,6 +42,7 @@ if ($_FILES['arquivo']['size'] <= 1024 * 1024 * 10) {
         }
     } else echo "Arquivo tem um formato inválido.";
 } else echo "Arquivo muito grande.";
+echo "<br><a href='./addMusicForm.php?id_album={$id_album}'></a>";
 // $extensao = $nomeSeparado[$ultimaPosicao];
 
 // $nomeArquivoExtensao = $nomeArquivo . "." . $extensao;

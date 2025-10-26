@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 26/09/2025 às 18:38
+-- Tempo de geração: 26/10/2025 às 21:15
 -- Versão do servidor: 9.1.0
 -- Versão do PHP: 8.3.14
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `musica` (
   `id_musica` int NOT NULL AUTO_INCREMENT,
   `titulo` varchar(100) NOT NULL,
   `arquivo` varchar(255) NOT NULL,
-  `duracao` time NOT NULL,
+  `duracao` int NOT NULL,
   `detalhes` text NOT NULL,
   `id_album` int NOT NULL,
   PRIMARY KEY (`id_musica`),
@@ -99,10 +99,17 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `nome` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `senha` varchar(255) NOT NULL,
-  `foto` varchar(255) NOT NULL,
+  `foto` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'padrao.jpg',
   `bio` text NOT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `usuario`
+--
+
+INSERT INTO `usuario` (`id_usuario`, `nome`, `email`, `senha`, `foto`, `bio`) VALUES
+(1, 'diego', 'diego@gmail.com', '$2y$10$5ycetnL9aZCiYDXosLwAquLHEYU7VTJX2Q3eNk52l9iZKIfCbN9Z.', 'padrao.jpg', '');
 
 --
 -- Restrições para tabelas despejadas
