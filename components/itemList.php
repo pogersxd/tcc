@@ -1,14 +1,29 @@
  <?php
   include_once "singleItem.php";
-  include "itensArrays.php";
 
-  function renderItemList()
+  function renderItemList($pagina)
   {
-    global $vetorImagens, $vetorMusicas, $vetorNomeMusicas, $vetorNome;
-    $a = count($vetorImagens);
+    include "conect.php";
+    include_once "functions.php";
     $html = '';
-    for ($i = 0; $i < 30; $i++) {
-      $html .= renderSingleItem($vetorImagens[$i % $a], $vetorMusicas[$i % $a], $vetorNomeMusicas[$i % $a], $vetorNome[$i % $a]);
+    switch ($pagina) {
+      case 'main-menu':
+        $sql = mysqli_query($conexao, "SELECT * FROM musica");
+        if (mysqli_num_rows($sql) > 0) {
+          while ($linha = mysqli_fetch_assoc($sql)) {
+            $musica = $linha['arquivo'];
+            $titulo = $linha['titulo'];
+            $albumQuery = mysqli_query($conexao, "SELECT * FROM album WHERE id_album = {$linha['id_album']}");
+            $album = mysqli_fetch_assoc($albumQuery);
+            $capa = $album['capa'];
+            $id_usuario = $album['id_usuario'];
+            $usuarioQuery = mysqli_query($conexao, "SELECT * FROM usuario WHERE id_usuario = '$id_usuario'");
+            $usuario = mysqli_fetch_assoc($usuarioQuery);
+            $nome = $usuario['nome'];
+            $html .= renderSingleItem($capa, $musica, $titulo, $nome);
+          }
+        } else
+          $html = "<b>Nenhuma música cadastrada!</b>";
     }
     return <<<HTML
     <div class="item-list">
@@ -25,5 +40,5 @@
 
   // Quando acessado diretamente via fetch (AJAX)
   if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
-    echo renderItemList();
+    echo renderItemList($pagina);
   }

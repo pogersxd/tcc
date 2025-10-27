@@ -29,3 +29,4 @@ if (audio && icon && timeContainer) {
     time.textContent = formatTime(audio.currentTime);
   });
 }
+

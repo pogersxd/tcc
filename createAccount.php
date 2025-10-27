@@ -1,10 +1,11 @@
 <?php
 session_start();
 include_once "conect.php";
+include_once "functions.php";
 $nome = $_POST["nome"];
 $email = $_POST["email"];
-$sql = mysqli_query($conexao, "SELECT * FROM usuario WHERE email='$email'");
-if (mysqli_num_rows($sql) == 0) {
+
+if (!registroExiste($conexao, 'usuario', 'email', $email)) {
     $senha = password_hash($_POST["senha"], PASSWORD_DEFAULT);
     mysqli_query($conexao, "INSERT INTO usuario (nome,email,senha) values ('$nome','$email','$senha')");
     header("Location: ./login.php");

@@ -1,4 +1,4 @@
- function loadComponent(componentName) {
+function loadComponent(componentName) {
   const container = document.getElementById("main-menu");
 
   if (!container) {
@@ -16,7 +16,6 @@
     })
     .then((html) => {
       container.innerHTML = html;
-
       // Carrega scripts adicionais se necessário
       // if (componentName === "player") {
       //   const script = document.createElement("script");
@@ -27,4 +26,4 @@
     .catch((error) => {
       console.error("Erro ao carregar componente:", error);
     });
-}
+}
