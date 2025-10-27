@@ -1,8 +1,8 @@
  <?php
+  include_once "itemList.php";
   function renderMainMenu()
   {
-    include "itemList.php";
-    $html = renderItemList('main-menu');
+    $html = renderItemList();
     return <<<HTML
           <div class="main-menu" id="main-menu">
               $html

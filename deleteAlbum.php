@@ -1,19 +1,20 @@
 <?php
 session_start();
-include "conect.php";
-include "functions.php";
+require_once "conect.php";
+require_once "functions.php";
 if (isset($_SESSION['usuario']) || isset($_GET['id_album'])) {
     $id_album = $_GET['id_album'];
     if (registroExiste($conexao, 'album', 'id_album', $id_album)) {
         if (registroExiste($conexao, 'musica', 'id_album', $id_album)) {
             $tabelaMusica = mysqli_query($conexao, "SELECT * FROM musica WHERE id_album = '$id_album'");
-            $musica = mysqli_fetch_assoc($tabelaMusica);
-            $arquivo = $musica['arquivo'];
-            mysqli_query($conexao, "DELETE FROM musica WHERE id_album = '$id_album'");
-            $deletouMusica = unlink("./assets/songs/" . $arquivo);
-            if (!$deletouMusica) {
-                die("Erro ao excluir a música!");
+            while ($musica = mysqli_fetch_assoc($tabelaMusica)) {
+                $arquivo = $musica['arquivo'];
+                $deletouMusica = unlink("./assets/songs/" . $arquivo);
+                if (!$deletouMusica) {
+                    die("Erro ao excluir a música {$musica['titulo']}!");
+                }
             }
+            mysqli_query($conexao, "DELETE FROM musica WHERE id_album = '$id_album'");
         }
         $tabelaAlbum = mysqli_query($conexao, "SELECT * FROM album WHERE id_album = '$id_album'");
         $album = mysqli_fetch_assoc($tabelaAlbum);

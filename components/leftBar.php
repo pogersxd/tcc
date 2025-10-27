@@ -1,10 +1,9 @@
  <?php
-  include_once "singleItem.php";
-  include_once "conect.php";
+  include "singleItem.php";
+
   function renderLeftBar()
   {
     global $conexao;
-    include "functions.php";
     $sql = mysqli_query($conexao, "SELECT * FROM musica");
     $style = '';
     $html = '';

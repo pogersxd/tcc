@@ -1,7 +1,7 @@
 <?php
 session_start();
-include "conect.php";
-include "functions.php";
+require_once "conect.php";
+require_once "functions.php";
 if (isset($_SESSION['usuario']) || isset($_GET['id_musica']) || isset($_GET['id_album'])) {
     $id_musica = $_GET['id_musica'];
     $id_album = $_GET['id_album'];

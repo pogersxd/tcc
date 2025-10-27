@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once "conect.php";
-include_once "functions.php";
+require_once "conect.php";
+require_once "functions.php";
 $nome = $_POST["nome"];
 $email = $_POST["email"];
 

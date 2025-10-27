@@ -1,8 +1,8 @@
  <?php
+  include "searchBar.php";
   function renderHeader()
   {
-    include "conect.php";
-    include "searchBar.php";
+    global $conexao;
     $html = renderSearchBar();
     if (isset($_SESSION['usuario'])) {
       $tabelaUsuario = mysqli_query($conexao, "SELECT * FROM usuario WHERE id_usuario = {$_SESSION['usuario']['id_usuario']}");
@@ -21,7 +21,7 @@
           </div>';
     } else {
       $perfil = '<a class="header__icon" href="./login.php"><img class="header__icon" src="assets/james.png" alt="Foto da James Sunderland"></a>';
-      $logout = '';
+      $logout = '<h2>Não está logado em uma conta, clique no ícone à esquerda para logar.</h2>';
     }
     return <<<HTML
         <div class="header">

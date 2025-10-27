@@ -4,6 +4,8 @@
   require_once "./components/header.php";
   require_once "./components/mainMenu.php";
   require_once "./components/player.php";
+  require_once "./conect.php";
+  require_once "./functions.php";
   ?>
  <!DOCTYPE html>
  <html lang="pt-br">

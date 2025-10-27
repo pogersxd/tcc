@@ -1,8 +1,7 @@
  <?php
   function renderPlayer()
   {
-    include "conect.php";
-    include_once "functions.php";
+    global $conexao;
     if (isset($_GET["musica"])) {
       $musica = $_GET["musica"];
       $sql =  "SELECT * FROM musica WHERE arquivo = '$musica'";

@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once "conect.php";
-include_once "functions.php";
+require_once "conect.php";
+require_once "functions.php";
 if (!isset($_SESSION['usuario'])) header("Location: index.php");
 if (isset($_GET['id_album'])) {
     header("Location: addMusicForm.php?id_album={$_GET['id_album']}");

@@ -10,5 +10,4 @@ function renderTeste()
   </div>
 HTML;
 }
-
 echo renderTeste();

@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once 'conect.php';
-include_once 'functions.php';
+require_once 'conect.php';
+require_once 'functions.php';
 $email = $_POST["email"];
 $senha = $_POST["senha"];
 if (registroExiste($conexao, 'usuario', 'email', $email)) {
