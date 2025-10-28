@@ -7,8 +7,8 @@ if (!isset($_SESSION['usuario']) or !$_POST) {
     echo "erro na sessão";
     echo "<a href='index.php'>Voltar à página inicial</a>";
 } else {
-    $titulo = $_POST["titulo"];
-    $detalhes = $_POST['detalhes'];
+    $titulo = mysqli_real_escape_string($conexao, $_POST["titulo"]);
+    $detalhes = mysqli_real_escape_string($conexao, $_POST['detalhes']);
     $id_album = $_POST["id_album"];
     if (registroExiste($conexao, 'album', 'id_album', $id_album)) {
         if ($_FILES['arquivo']['size'] <= 1024 * 1024 * 10) {
