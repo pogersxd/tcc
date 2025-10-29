@@ -4,7 +4,7 @@ include_once "./getID3/getid3/getid3.php";
 include_once "conect.php";
 include_once "functions.php";
 if (!isset($_SESSION['usuario']) or !$_POST) {
-    echo "erro na sessão";
+    echo "Erro na sessão";
     echo "<a href='index.php'>Voltar à página inicial</a>";
 } else {
     $titulo = mysqli_real_escape_string($conexao, $_POST["titulo"]);

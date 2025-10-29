@@ -10,17 +10,17 @@
       $foto = $usuario['foto'];
       $nome = $usuario['nome'];
       $perfil = "<a class='header__icon' href='./ownProfile.php'><img class='header__icon' src='assets/pfps/{$foto}' alt='Foto de {$nome}'></a>";
-      $logout = '<div class="header__link">
-            <a href="./logout.php"><h1>Logout</h1></a>
-          </div>
-          <div class="header__link">
-            <a href="./addAlbumForm.php"><h1>Adicionar álbum</h1></a>
-          </div>
-          <div class="header__link">
-            <a href="./editAlbum.php"><h1>Editar álbuns</h1></a>
-          </div>';
+      $logout = '<a href="./logout.php" class="header__link">
+            <h2>Logout</h2>
+          </a>
+          <a href="./addAlbumForm.php" class="header__link">
+            <h2>Adicionar álbum</h2>
+          </a>
+          <a href="./editAlbum.php" class="header__link">
+            <h2>Editar álbuns</h2>
+          </a>';
     } else {
-      $perfil = '<a class="header__icon" href="./login.php"><img class="header__icon" src="assets/james.png" alt="Foto da James Sunderland"></a>';
+      $perfil = '<a href="./login.php"><img class="header__icon" src="assets/james.png" alt="Foto da James Sunderland"></a>';
       $logout = '<h2 title="Clique no ícone à esquerda para logar.">Não está logado</h2>';
     }
     return <<<HTML

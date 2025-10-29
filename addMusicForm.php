@@ -18,7 +18,7 @@ $tituloAlbum = $album['titulo'];
 </head>
 
 <body>
-    <h1>Músicas já presentes no álbum <?= $tituloAlbum ?>: </h1>
+    <h1>Músicas já presentes no álbum <?= "\"$tituloAlbum\"" ?>: </h1>
     <?php
     if (registroExiste($conexao, 'musica', 'id_album', $id_album)) {
         $sql = mysqli_query($conexao, "SELECT * FROM musica WHERE id_album = $id_album");

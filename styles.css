@@ -36,6 +36,7 @@ img {
   align-items: center;
   border-radius: inherit;
   overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .header__icon {
@@ -52,7 +53,7 @@ img {
 .header__link {
   padding: 10px;
   max-height: 10svh;
-  text-overflow: ellipsis;
+  text-align: center;
 }
 .header__link:hover {
   background-color: aqua;
@@ -234,10 +235,10 @@ img {
 
 .teste-componente {
   color: white;
-  padding: 30px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 
 .teste-componente a{
