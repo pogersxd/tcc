@@ -32,7 +32,7 @@ if (isset($_GET['id_album'])) {
                 echo "<tr>
                     <td>{$linha['titulo']}</td>
                     <td>{$linha['capa']}</td>
-                    <td><a href='addMusicForm?id_album={$linha['id_album']}'>Adicionar música</a>
+                    <td><a href='addMusicForm?id_album={$linha['id_album']}'>Gerenciar músicas</a>
                     | <a href='deleteAlbum?id_album={$linha['id_album']}'>Excluir</a></td>
                 </tr>";
             }

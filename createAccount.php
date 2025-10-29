@@ -2,8 +2,8 @@
 session_start();
 require_once "conect.php";
 require_once "functions.php";
-$nome = $_POST["nome"];
-$email = $_POST["email"];
+$nome =  mysqli_real_escape_string($conexao, $_POST["nome"]);
+$email = mysqli_real_escape_string($conexao, $_POST["email"]);
 
 if (!registroExiste($conexao, 'usuario', 'email', $email)) {
     $senha = password_hash($_POST["senha"], PASSWORD_DEFAULT);

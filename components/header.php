@@ -21,7 +21,7 @@
           </div>';
     } else {
       $perfil = '<a class="header__icon" href="./login.php"><img class="header__icon" src="assets/james.png" alt="Foto da James Sunderland"></a>';
-      $logout = '<h2>Não está logado em uma conta, clique no ícone à esquerda para logar.</h2>';
+      $logout = '<h2 title="Clique no ícone à esquerda para logar.">Não está logado</h2>';
     }
     return <<<HTML
         <div class="header">

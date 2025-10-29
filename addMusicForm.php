@@ -4,6 +4,9 @@ include_once "conect.php";
 include_once "functions.php";
 if (!isset($_SESSION['usuario']) or !isset($_GET['id_album'])) header("Location: index.php");
 $id_album = $_GET['id_album'];
+$tabelaAlbum = mysqli_query($conexao, "SELECT * FROM album WHERE id_album = '$id_album'");
+$album = mysqli_fetch_assoc($tabelaAlbum);
+$tituloAlbum = $album['titulo'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +18,7 @@ $id_album = $_GET['id_album'];
 </head>
 
 <body>
-    <h1>Músicas já presentes no álbum: </h1>
+    <h1>Músicas já presentes no álbum <?= $tituloAlbum ?>: </h1>
     <?php
     if (registroExiste($conexao, 'musica', 'id_album', $id_album)) {
         $sql = mysqli_query($conexao, "SELECT * FROM musica WHERE id_album = $id_album");
@@ -32,7 +35,7 @@ $id_album = $_GET['id_album'];
                 <td>{$linha['titulo']}</td>
                 <td>{$linha['arquivo']}</td>
                 <td>" . gmdate('i:s', $linha['duracao']) . "</td>
-                <td>{$linha['detalhes']}</td>
+                <td>" . nl2br($linha['detalhes']) . "</td>
                 <td><a href='deleteSong.php?id_musica={$linha['id_musica']}&id_album={$id_album}'>Excluir</a>
             </tr>";
         }

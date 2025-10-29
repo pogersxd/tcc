@@ -41,6 +41,7 @@ img {
 .header__icon {
   max-height: 10svh;
   min-height: 70px;
+  min-width: 70px;
   border-radius: 15px;
 }
 
@@ -50,6 +51,8 @@ img {
 
 .header__link {
   padding: 10px;
+  max-height: 10svh;
+  text-overflow: ellipsis;
 }
 .header__link:hover {
   background-color: aqua;
@@ -94,7 +97,7 @@ img {
   display: grid;
   grid-template-rows: auto 1fr;
   justify-items: center;
-  width: fit-content;
+  width: 200px;
   background-color: gray;
   border-radius: inherit;
   overflow-y: auto;
@@ -171,6 +174,7 @@ img {
 
 .single-item {
   padding: 25px 16px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -192,8 +196,9 @@ img {
 }
 
 .single-item__image {
+  min-width: 100px;
   width: 140px;
-  height: 140px;
+  min-height: 100px;
   object-fit:cover;
   border-radius: 50%;
   overflow: hidden;

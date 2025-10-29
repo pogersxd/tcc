@@ -3,7 +3,7 @@ session_start();
 include_once "functions.php";
 if (!isset($_SESSION['usuario']) || !$_POST) header("Location: index.php");
 include_once "conect.php";
-$titulo = $_POST["titulo"];
+$titulo = mysqli_real_escape_string($conexao, $_POST["titulo"]);
 $capa = $_POST["capa"];
 $id_usuario = $_SESSION['usuario']['id_usuario'];
 if (!registroExiste($conexao, 'album', 'titulo', $titulo)) {
