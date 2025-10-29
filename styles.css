@@ -97,7 +97,6 @@ img {
   display: grid;
   grid-template-rows: auto 1fr;
   justify-items: center;
-  width: 200px;
   background-color: gray;
   border-radius: inherit;
   overflow-y: auto;
