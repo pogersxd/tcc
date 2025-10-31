@@ -13,9 +13,9 @@ if (!isset($_SESSION['usuario'])) header("Location: index.php");
 
 <body>
     <h1>Cadastrar álbum</h1>
-    <form action="addAlbum.php" method="post">
+    <form action="addAlbum.php" method="post" enctype="multipart/form-data">
         Título do álbum: <input type="text" name="titulo" required><br>
-        Capa do álbum: capa_padrao.jpg <input type="hidden" name="capa" value="capa_padrao.jpg" required><br>
+        Capa do álbum: (máximo de 10MB) <input type="file" name="capa" required><br>
         <input type="submit" value="Adicionar">
         <br><a href="index.php">Voltar à página inicial</a>
     </form>
