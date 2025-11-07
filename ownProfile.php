@@ -1,16 +1,25 @@
 <?php
 session_start();
+if (!isset($_SESSION['usuario'])) header("Location: index.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Meu Perfil</title>
 </head>
+
 <body>
-    <h2>Não há nada aqui ainda.</h2>
-    <a href="index.php">Retornar</a>
-    
+    <h1>Meu perfil</h1>
+    <h3>Foto de perfil:</h3>
+    <img src="./assets/pfps/<?= $_SESSION['usuario']['foto'] ?>" width=100px height=100px alt="Imagem do seu perfil">
+    <h3>Nome: </h3>
+    <?= $_SESSION['usuario']['nome'] ?>
+    <h3>Bio: </h3>
+    <?= $_SESSION['usuario']['bio'] ?>
+
 </body>
+
 </html>
