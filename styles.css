@@ -246,3 +246,52 @@ img {
 .teste-componente a{
   text-decoration: underline;
 }
+
+/* deixa o fundo escuro quando o modal aparecer */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: none; /* você já controla com JS */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* joga por cima de tudo */
+}
+
+/* caixa do modal */
+.modal-content {
+    background: white;
+    color: black;
+    padding: 20px;
+    width: 350px;
+    max-width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* botões */
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.modal-buttons a {
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+#confirmDelete {
+    background: #d9534f;
+}
+
+#cancelDelete {
+    background: #5a5a5a;
+}

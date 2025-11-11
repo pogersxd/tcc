@@ -14,6 +14,7 @@ $tituloAlbum = $album['titulo'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" class="rel">
     <title>Adicionar Música ao álbum</title>
 </head>
 
@@ -36,8 +37,18 @@ $tituloAlbum = $album['titulo'];
                 <td>{$linha['arquivo']}</td>
                 <td>" . gmdate('i:s', $linha['duracao']) . "</td>
                 <td>" . nl2br($linha['detalhes']) . "</td>
-                <td><a href='deleteSong.php?id_musica={$linha['id_musica']}&id_album={$id_album}'>Excluir</a>
-            </tr>";
+                <td><button onclick='" . 'openDeleteModal("music", ' . $linha['id_musica'] . ")'>Excluir</button>
+            </tr>
+            <div id='confirmModal" . $linha['id_musica'] . "' class='modal' style='display:none'>
+                <div class='modal-content'>
+                    <h2 id='modalTitle" . $linha['id_musica'] . "'></h2>
+                    <p id='modalMessage" . $linha['id_musica'] . "'></p>
+                    <div class='modal-buttons'>
+                        <a id='confirmDelete' href='deleteSong.php?id_musica={$linha['id_musica']}&id_album={$id_album}'>Excluir</a>
+                        <a id='cancelDelete' class='cancelBtn' href='#'>Cancelar</a>
+                    </div>
+                </div>
+            </div>";
         }
         echo "</table>";
     } else {
@@ -53,6 +64,9 @@ $tituloAlbum = $album['titulo'];
         <input type="submit" value="Adicionar música">
         <br><a href="index.php">Voltar à página inicial</a>
     </form>
+
 </body>
+<script src="modal.js">
+</script>
 
 </html>
