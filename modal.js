@@ -7,7 +7,7 @@ function openDeleteModal(type, id) {
 
     modal.style.display = "flex";
     if (type == "music") {
-        dado = "id_musica"
+        dado = "id_musica";
         modalTitle.innerHTML = "<h2>Excluir música</h2>";
     } else {
         dado = "id_album";

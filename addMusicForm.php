@@ -23,7 +23,7 @@ $tituloAlbum = $album['titulo'];
     <?php
     if (registroExiste($conexao, 'musica', 'id_album', $id_album)) {
         $sql = mysqli_query($conexao, "SELECT * FROM musica WHERE id_album = $id_album");
-        echo "<table border=1>
+        echo "<table>
         <tr>
             <th>Título</th>
             <th>Arquivo</th>
