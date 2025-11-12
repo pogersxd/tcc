@@ -45,13 +45,9 @@ if (!isset($_SESSION['usuario']) or !$_POST) {
                     mysqli_query($conexao, "INSERT INTO musica (titulo, duracao, arquivo, detalhes, id_album) values ('$titulo', $duracaoSegundos, '$nomeArquivoExtensao', '$detalhes', $id_album)");
                     header("Location: addMusicForm.php?id_album={$id_album}");
                 }
-            } else echo "Arquivo tem um formato inválido.";
-        } else echo "Arquivo muito grande.";
-        echo "<br><a href='./addMusicForm.php?id_album={$id_album}'></a>";
-    } else {
-        echo "O álbum não existe mais.";
-        echo "<a href='index.php'>Retornar à página inicial</a>";
-    }
+            } else header("Location: addMusicForm.php?id_album={$id_album}&erro=0");
+        } else header("Location: addMusicForm.php?id_album={$id_album}&erro=1");
+    } else header("Location: addMusicForm.php?id_album={$id_album}&erro=2");
 }
     // $extensao = $nomeSeparado[$ultimaPosicao];
     

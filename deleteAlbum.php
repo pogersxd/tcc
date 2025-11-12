@@ -27,7 +27,5 @@ if (isset($_SESSION['usuario']) || isset($_GET['id_album'])) {
         }
         mysqli_query($conexao, "DELETE FROM album WHERE id_album = '$id_album'");
         header("Location: editAlbum.php");
-    } else {
-        echo "A música não existe mais.";
-    }
+    } else echo header("Location: editAlbum.php?erro=0");
 }

@@ -16,6 +16,6 @@ if (isset($_SESSION['usuario']) || isset($_GET['id_musica']) || isset($_GET['id_
         }
         header("Location: addMusicForm.php?id_album={$id_album}");
     } else {
-        echo "A música não existe mais.";
+        echo header("Location: addMusicForm.php?id_album={$id_album}&erro=4");
     }
 }

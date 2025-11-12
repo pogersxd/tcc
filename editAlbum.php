@@ -6,6 +6,14 @@ if (!isset($_SESSION['usuario'])) header("Location: index.php");
 if (isset($_GET['id_album'])) {
     header("Location: addMusicForm.php?id_album={$_GET['id_album']}");
 }
+$erro = '';
+$tabelaErro = [];
+if (isset($_GET['erro'])) {
+    $tabelaErro = [
+        "O álbum não existe mais."
+    ];
+    $erro = "<br>" . $tabelaErro[$_GET['erro']];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +30,7 @@ if (isset($_GET['id_album'])) {
     if (registroExiste($conexao, 'album', 'id_usuario', $_SESSION['usuario']['id_usuario'])) {
         $sql = mysqli_query($conexao, "SELECT * FROM album WHERE id_usuario = {$_SESSION['usuario']['id_usuario']}");
     ?>
-        <table border=1>
+        <table>
             <tr>
                 <th>Título</th>
                 <th>Capa</th>
@@ -47,6 +55,7 @@ if (isset($_GET['id_album'])) {
                     </div>
                 </div>";
             }
+            echo $erro;
             ?>
         </table>
     <?php } else {

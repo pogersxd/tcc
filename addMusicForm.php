@@ -7,6 +7,17 @@ $id_album = $_GET['id_album'];
 $tabelaAlbum = mysqli_query($conexao, "SELECT * FROM album WHERE id_album = '$id_album'");
 $album = mysqli_fetch_assoc($tabelaAlbum);
 $tituloAlbum = $album['titulo'];
+$erro = '';
+$tabelaErro = [];
+if (isset($_GET['erro'])) {
+    $tabelaErro = [
+        "Arquivo tem um formato inválido.",
+        "Arquivo muito grande.",
+        "Já existe um álbum com mesmo nome.",
+        "A música não existe mais."
+    ];
+    $erro = "<br>" . $tabelaErro[$_GET['erro']];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,6 +62,7 @@ $tituloAlbum = $album['titulo'];
             </div>";
         }
         echo "</table>";
+        if (isset($_GET['erro']) && $erro == ("<br>" . $tabelaErro[3])) echo $erro;
     } else {
         echo "<h4>Nenhuma.</h5>";
     }
@@ -64,7 +76,7 @@ $tituloAlbum = $album['titulo'];
         <input type="submit" value="Adicionar música">
         <br><a href="index.php">Voltar à página inicial</a>
     </form>
-
+    <?= (isset($_GET['erro']) && $erro != ("<br>" . $tabelaErro[3])) ? $erro : '' ?>
 </body>
 <script src="modal.js">
 </script>

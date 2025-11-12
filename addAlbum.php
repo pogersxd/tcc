@@ -42,13 +42,9 @@ if (!isset($_SESSION['usuario']) or !$_POST) {
                     $id_album = $album['id_album'];
                     header("Location: editAlbum.php?id_album=$id_album");
                 }
-            } else echo "Arquivo tem um formato inválido.";
-        } else echo "Arquivo muito grande.";
-        echo "<br><a href='./addAlbumForm.php'>Retornar ao formulário</a>";
-    } else {
-        echo "Já existe um album com o mesmo nome.";
-        echo "<a href='addAlbumForm.php'>Retornar à página inicial</a>";
-    }
+            } else header("Location: addAlbumForm.php?erro=0");
+        } else header("Location: addAlbumForm.php?erro=1");
+    } else header("Location: addAlbumForm.php?erro=2");
 }
     // $extensao = $nomeSeparado[$ultimaPosicao];
     

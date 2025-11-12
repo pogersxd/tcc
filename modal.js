@@ -17,8 +17,8 @@ function openDeleteModal(type, id) {
     fetch("getAlbumMusicModal.php?" + dado + "=" + id)
         .then(res => res.text()
             .then(data => {
-                if (type == "music") modalMessage.innerHTML = "<p>Deseja excluir a música : <b>" + data + " ?</b></p>";
-                else modalMessage.innerHTML = "<p>Deseja excluir as músicas:<br> <b>" + data + "</b></p>";
+                if (type == "music") modalMessage.innerHTML = "<p>Deseja excluir a seguinte música? <br><b>" + data + " ?</b></p>";
+                else modalMessage.innerHTML = "<p>Ao excluir este álbum, excluirá também as seguintes músicas, tem certeza?<br> <b>" + data + "</b></p>";
             }))
 
     cancelBtn.addEventListener("click", function (event) {
