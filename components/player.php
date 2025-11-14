@@ -23,8 +23,8 @@
               <audio class="player__audio" id="player__audio" {$toca}>
                 <source src="./assets/songs/{$musica}">
               </audio>
-              <div class="player__time" id="player__time">
-                <p>00:00</p>
+              <div class="player__time">
+                <span id="player__time">00:00</span> / {$duracao}
               </div>
             </div>
           HTML;

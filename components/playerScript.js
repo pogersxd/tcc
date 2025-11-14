@@ -1,9 +1,8 @@
 const audio = document.getElementById("player__audio");
 const icon = document.getElementById("player__pause-icon");
-const timeContainer = document.getElementById("player__time");
+const time = document.getElementById("player__time");
 
-if (audio && icon && timeContainer) {
-  const time = timeContainer.querySelector("p");
+if (audio && icon && time) {
   function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60)
       .toString()
@@ -26,7 +25,7 @@ if (audio && icon && timeContainer) {
     }
   });
   audio.addEventListener("timeupdate", () => {
-    time.textContent = formatTime(audio.currentTime);
+    time.innerHTML = formatTime(audio.currentTime);
   });
 }
 

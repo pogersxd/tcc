@@ -4,6 +4,20 @@
   box-sizing: border-box;
 }
 
+:root{
+  --cor-principal-70: hsl(0, 0%, 70%);
+  --cor-principal-60: hsl(0, 0%, 60%);
+  --cor-principal-50: hsl(0, 0%, 50%);
+  --cor-principal-40: hsl(0, 0%, 40%);
+  --cor-principal-30: hsl(0, 0%, 30%);
+  --cor-principal-15: hsl(0, 0%, 15%);
+  --cor-azul-70: hsl(240, 54%, 70%);
+  --cor-azul-50: hsl(240, 54%, 50%);
+  --cor-azul-30: hsl(240, 54%, 30%);
+  --cor-azul-20: hsl(240, 54%, 20%);
+  --cor-azul-10: hsl(240, 54%, 10%);
+}
+
 body {
   color: white;
   background-color: black;
@@ -31,7 +45,7 @@ img {
   display: flex;
   height: fit-content;
   justify-content: space-between;
-  background-color: rgb(0, 12, 65);
+  background-color: var(--cor-principal-15);
   padding: 10px 20px;
   align-items: center;
   border-radius: inherit;
@@ -56,7 +70,7 @@ img {
   text-align: center;
 }
 .header__link:hover {
-  background-color: aqua;
+  background-color: var(--cor-azul-40);
   border-radius: 15px;
 }
 
@@ -69,11 +83,11 @@ img {
 /* SearchBar */
 
 .header__search-bar {
-  background-color: antiquewhite;
+  background-color: var(--cor-principal-40);
   max-width: 30dvh;
   min-width: fit-content;
   padding: 15px;
-  color: gray;
+  color: var(--cor-principal-70);
   border-radius: 25px;
 }
 
@@ -98,7 +112,7 @@ img {
   display: grid;
   grid-template-rows: auto 1fr;
   justify-items: center;
-  background-color: gray;
+  background-color: var(--cor-principal-30);
   border-radius: inherit;
   overflow-y: auto;
 }
@@ -111,7 +125,7 @@ img {
   display: flex;
   flex: 1;
   height: 100%;
-  background-color: blue;
+  background-color: var(--cor-principal-30);
   border-radius: 15px;
   overflow: hidden;
 }
@@ -173,23 +187,20 @@ img {
 /* Single Item */
 
 .single-item {
-  padding: 25px 16px;
+  padding: 10px;
   height: fit-content;
   width: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 15px;
+  border-radius: 5%;
   transition: background-color, ease, 200ms;
   max-width: fit-content;
-}
-
-.item-list .single-item{
   gap: 10px;
 }
 
 .single-item:hover {
-  background-color: rgb(0, 12, 65);
+  background-color: var(--cor-azul-10);
 }
 
 .single-item__image-button {
@@ -197,16 +208,17 @@ img {
 }
 
 .single-item__image {
-  width: 140px;
+  width: 100%;
   min-width: 100px;
   aspect-ratio: 1 / 1;
   object-fit:cover;
-  border-radius: 50%;
+  border-radius: 5%;
   overflow: hidden;
-  display: block;
+  display: flex;
 }
 
 .single-item__icon {
+  color: var(--cor-azul-70);
   font-size: 50px;
   right: 7.5px;
   bottom: 7.5px;
