@@ -13,7 +13,7 @@
     <form action="createAccount.php" method="post">
         Nome: <input type="text" name="nome" required><br>
         Email: <input type="email" name="email" required><br>
-        Senha: <input type="password" name="senha" id="senha" required><br>
+        Senha: <input type="password" name="senha" id="senha" pattern=".{6,20}" title="Digite uma senha entre 6 e 20 dígitos" required><br>
         Confirmar senha: <input type="password" name="senha" id="confirmar" required><br>
         <button type="submit" id="botao" disabled>Registrar</button>
         <div id="mensagem" style="color: red;"></div>
@@ -48,7 +48,6 @@
             botao.disabled = false;
         }
     }
-
     senha.addEventListener("input", verificarSenhas);
     confirmarSenha.addEventListener("input", verificarSenhas);
 </script>

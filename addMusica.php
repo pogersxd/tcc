@@ -49,32 +49,3 @@ if (!isset($_SESSION['usuario']) or !$_POST) {
         } else header("Location: addMusicForm.php?id_album={$id_album}&erro=1");
     } else header("Location: addMusicForm.php?id_album={$id_album}&erro=2");
 }
-    // $extensao = $nomeSeparado[$ultimaPosicao];
-    
-    // $nomeArquivoExtensao = $nomeArquivo . "." . $extensao;
-    
-    // $check = getimagesize($_FILES["arquivo"]["tmp_name"]);
-    // if (!$check) {
-//     echo "Este arquivo não é uma imagem!";
-// }
-
-// if ($_FILES["arquivo"]['size'] > 1024 * 1024) {
-//     echo "O arquivo é muito grande!";
-// }
-// if (
-//     $extensao != "jpg" &&
-//     $extensao != "png" &&
-//     $extensao != "jpeg" &&
-//     $extensao != "gif"
-// ) {
-//     echo "A extensão do arquivo é inválida!";
-// }
-// $feitoUpload = move_uploaded_file($_FILES["arquivo"]["tmp_name"], $pasta . $nomeArquivoExtensao);
-
-// if ($feitoUpload) {
-//     require_once "conexao.php";
-//     $conexao = conectar();
-//     $sql = "INSERT INTO arquivo (nome, caminho) VALUES ('$nome', '$nomeArquivoExtensao')";
-//     executarSQL($conexao, $sql);
-// }
-// header("Location: listar_arquivos.php");
