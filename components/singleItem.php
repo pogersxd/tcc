@@ -8,8 +8,8 @@
               <a href="?musica={$musica}" class="fa-solid fa-circle-play single-item__icon"></a>
             </div>
             <div class="single-item__texts">
-              <p class="single-item__texts-title">{$nomeMusica}</p>
-              <p class="single-item__texts-type">{$nome}</p>
+              <a href="#" class="single-item__texts-title">{$nomeMusica}</a><br>
+              <a href="#" class="single-item__texts-type">{$nome}</a>
             </div>
           </div>
         HTML;

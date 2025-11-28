@@ -23,7 +23,7 @@
     <?php
     session_start();
     if (isset($_SESSION["naoUnico"])) {
-        if ($_SESSION["naoUnico"] == true) echo "Email já em uso.";
+        echo "Email já em uso.";
         unset($_SESSION["naoUnico"]);
     }
     ?>

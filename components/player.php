@@ -1,8 +1,9 @@
  <?php
+  include "functions.php";
   function renderPlayer()
   {
     global $conexao;
-    if (isset($_GET["musica"])) {
+    if (isset($_GET["musica"]) && registroExiste($conexao, "musica", "arquivo", $_GET['musica'])) {
       $musica = $_GET["musica"];
       $sql =  "SELECT * FROM musica WHERE arquivo = '$musica'";
       $tabelaMusicaQuery = mysqli_query($conexao, $sql);
@@ -31,5 +32,6 @@
     }
   }
   if ($_SERVER["SCRIPT_FILENAME"] === __FILE__) {
+    include "functions.php";
     echo renderPlayer();
   }

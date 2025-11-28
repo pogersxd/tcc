@@ -13,7 +13,7 @@
       $logout = '<a href="./logout.php" class="header__link">
             <h2>Logout</h2>
           </a>
-          <a href="./addAlbumForm.php" class="header__link">
+          <a href="#" onclick="loadComponent(\'addAlbumForm\');" class="header__link">
             <h2>Adicionar álbum</h2>
           </a>
           <a href="./editAlbum.php" class="header__link">
