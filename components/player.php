@@ -1,5 +1,6 @@
  <?php
-  include "functions.php";
+  require_once __DIR__ . "/../functions.php";
+  require_once __DIR__ . "/../conect.php";
   function renderPlayer()
   {
     global $conexao;
@@ -32,6 +33,5 @@
     }
   }
   if ($_SERVER["SCRIPT_FILENAME"] === __FILE__) {
-    include "functions.php";
     echo renderPlayer();
   }

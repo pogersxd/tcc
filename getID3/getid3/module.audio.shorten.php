@@ -23,7 +23,8 @@ class getid3_shorten extends getid3_handler
 	/**
 	 * @return bool
 	 */
-	public function Analyze() {
+	public function Analyze()
+	{
 		$info = &$this->getid3->info;
 
 		$this->fseek($info['avdataoffset']);
@@ -31,7 +32,7 @@ class getid3_shorten extends getid3_handler
 		$ShortenHeader = $this->fread(8);
 		$magic = 'ajkg';
 		if (substr($ShortenHeader, 0, 4) != $magic) {
-			$this->error('Expecting "'.getid3_lib::PrintHexBytes($magic).'" at offset '.$info['avdataoffset'].', found "'.getid3_lib::PrintHexBytes(substr($ShortenHeader, 0, 4)).'"');
+			$this->error('Expecting "' . getid3_lib::PrintHexBytes($magic) . '" at offset ' . $info['avdataoffset'] . ', found "' . getid3_lib::PrintHexBytes(substr($ShortenHeader, 0, 4)) . '"');
 			return false;
 		}
 		$info['fileformat']            = 'shn';
@@ -52,9 +53,8 @@ class getid3_shorten extends getid3_handler
 			$magic = 'SEEK';
 			if ($SeekTableMagic != $magic) {
 
-				$this->error('Expecting "'.getid3_lib::PrintHexBytes($magic).'" at offset '.$info['shn']['seektable']['offset'].', found "'.getid3_lib::PrintHexBytes($SeekTableMagic).'"');
+				$this->error('Expecting "' . getid3_lib::PrintHexBytes($magic) . '" at offset ' . $info['shn']['seektable']['offset'] . ', found "' . getid3_lib::PrintHexBytes($SeekTableMagic) . '"');
 				return false;
-
 			} else {
 
 				// typedef struct tag_TSeekEntry
@@ -115,7 +115,6 @@ class getid3_shorten extends getid3_handler
 				//}
 
 			}
-
 		}
 
 		if (preg_match('#(1|ON)#i', ini_get('safe_mode'))) {
@@ -126,15 +125,14 @@ class getid3_shorten extends getid3_handler
 		if (GETID3_OS_ISWINDOWS) {
 
 			$RequiredFiles = array('shorten.exe', 'cygwin1.dll', 'head.exe');
-			foreach ($RequiredFiles as $required_file) {
-				if (!is_readable(GETID3_HELPERAPPSDIR.$required_file)) {
-					$this->error(GETID3_HELPERAPPSDIR.$required_file.' does not exist');
+			foreach ($RequiredFiles as $require_onced_file) {
+				if (!is_readable(GETID3_HELPERAPPSDIR . $require_onced_file)) {
+					$this->error(GETID3_HELPERAPPSDIR . $require_onced_file . ' does not exist');
 					return false;
 				}
 			}
-			$commandline = GETID3_HELPERAPPSDIR.'shorten.exe -x "'.$info['filenamepath'].'" - | '.GETID3_HELPERAPPSDIR.'head.exe -c 64';
+			$commandline = GETID3_HELPERAPPSDIR . 'shorten.exe -x "' . $info['filenamepath'] . '" - | ' . GETID3_HELPERAPPSDIR . 'head.exe -c 64';
 			$commandline = str_replace('/', '\\', $commandline);
-
 		} else {
 
 			static $shorten_present;
@@ -145,8 +143,7 @@ class getid3_shorten extends getid3_handler
 				$this->error('shorten binary was not found in path or /usr/local/bin');
 				return false;
 			}
-			$commandline = (file_exists('/usr/local/bin/shorten') ? '/usr/local/bin/' : '' ) . 'shorten -x '.escapeshellarg($info['filenamepath']).' - | head -c 64';
-
+			$commandline = (file_exists('/usr/local/bin/shorten') ? '/usr/local/bin/' : '') . 'shorten -x ' . escapeshellarg($info['filenamepath']) . ' - | head -c 64';
 		}
 
 		$output = shell_exec($commandline);
@@ -156,7 +153,7 @@ class getid3_shorten extends getid3_handler
 			if (!defined('GETID3_INCLUDEPATH')) { // prevent path-exposing attacks that access modules directly on public webservers
 				exit;
 			}
-			getid3_lib::IncludeDependency(GETID3_INCLUDEPATH.'module.audio-video.riff.php', __FILE__, true);
+			getid3_lib::IncludeDependency(GETID3_INCLUDEPATH . 'module.audio-video.riff.php', __FILE__, true);
 
 			$fmt_size = getid3_lib::LittleEndian2Int(substr($output, 16, 4));
 			$DecodedWAVFORMATEX = getid3_riff::parseWAVEFORMATex(substr($output, 20, $fmt_size));
@@ -167,24 +164,19 @@ class getid3_shorten extends getid3_handler
 			if (substr($output, 20 + $fmt_size, 4) == 'data') {
 
 				$info['playtime_seconds'] = getid3_lib::SafeDiv(getid3_lib::LittleEndian2Int(substr($output, 20 + 4 + $fmt_size, 4)), $DecodedWAVFORMATEX['raw']['nAvgBytesPerSec']);
-
 			} else {
 
 				$this->error('shorten failed to decode DATA chunk to expected location, cannot determine playtime');
 				return false;
-
 			}
 
 			$info['audio']['bitrate'] = getid3_lib::SafeDiv($info['avdataend'] - $info['avdataoffset'], $info['playtime_seconds']) * 8;
-
 		} else {
 
 			$this->error('shorten failed to decode file to WAV for parsing');
 			return false;
-
 		}
 
 		return true;
 	}
-
 }

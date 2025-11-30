@@ -338,8 +338,8 @@ Version History
     * Bugfix: [demo/demo.browse] might not display file or directory name
       on PHP >=5.4.0 if filename not UTF-8 friendly
     * Bugfix: [demo/demo.zip] could read more uncompressed data than
-      required; fail to read file if local data descriptor not set;
-      some wrong include files were listed; improved error message display
+      require_onced; fail to read file if local data descriptor not set;
+      some wrong require_once files were listed; improved error message display
     * Bugfix: [module.audio-video.riff] INFO comment chunks with null name
       chunk not parsed correctly
     * Bugfix: [module.archive.gz] gzip files with filename stored may have
@@ -501,7 +501,7 @@ Version History
       - note current unofficial 64-bit PHP builds for Windows
         do not actually support 64-bit integers so are still
         subject to normal 32-bit limits (2GB) for file functions
-    » PHP v5.0.5 now minimum required version.
+    » PHP v5.0.5 now minimum require_onced version.
       Removed obsolte functions from getid3.lib.php:
         md5_file, sha1_file, image_type_to_mime_type
     » IDivX tags now parsed on AVI files
@@ -564,7 +564,7 @@ Version History
 
 
 1.8.2: [2010-12-06] James Heinrich
-    * include startup warning for PHP < v5
+    * require_once startup warning for PHP < v5
     * magic_quotes_runtime must now be disabled to use getID3
     ¤ MusicBrainz / AmpliFIND data more accessible in returned data
       from Quicktime-style files (e.g. MP4/AAC)
@@ -607,7 +607,7 @@ Version History
 
 
 1.8.0: [2010-11-23] James Heinrich
-    » Changes required for PHP v5.3+ compatability, including:
+    » Changes require_onced for PHP v5.3+ compatability, including:
       - change ereg* functions to preg_* equivalents
       - declare functions static as needed
       note: users of PHP v4.x may need to stay with getID3 v1.7.x
@@ -660,7 +660,7 @@ Version History
     ¤ start aligning demos CSS styling with v2.x styles
       new file: demos/getid3.css
     ¤ JPEG now returns parsed IPTC tags in [iptc]
-    ¤ getid3_lib::GetDataImageSize now requires $imageinfo parameter
+    ¤ getid3_lib::GetDataImageSize now require_onces $imageinfo parameter
     ¤ better support for Matroska files with AC3/DTS/MP3/OGG audio
       (support still lacking for AAC)
     ¤ standardize ID3v2 TCMP key to 'part_of_a_set' between reading
@@ -755,8 +755,8 @@ Version History
 
 1.7.8b1: [2007-01-08] Allan Hansen
     » Major update to readme.txt
-    » PHP 4.2.0 required
-    » Tagwriter requires metaflac 1.1.1+ in order to write FLAC tags.
+    » PHP 4.2.0 require_onced
+    » Tagwriter require_onces metaflac 1.1.1+ in order to write FLAC tags.
     » Removed broken and non-fixable tagwriting module for real format.
     ! Developers please help fix the above module:
       https://www.getid3.org/phpBB3/viewtopic.php?t=677
@@ -945,7 +945,7 @@ Version History
       New file: /getid3/module.graphic.tiff.php
     » Modified iconv_fallback to work with UTF-8, UTF-16, UTF-16LE,
       UTF-16BE and ISO-8859-1 even if iconv() and/or XML support is
-      not available. This means that iconv() is no longer required
+      not available. This means that iconv() is no longer require_onced
       for most users of getID3()
       (thanks Jeremia, khleeØbitpass*com)
     » Added support for Monkey's Audio v3.98+ (thanks ahØartemis*dk)
@@ -1003,7 +1003,7 @@ Version History
     * Bugfix: Added default charset to TextEncodingNameLookup() in
       module.tag.id3v2.php
     Ø Removed option_no_iconv
-      iconv() support is only a requirement for WMA/WMW/ASF, and for
+      iconv() support is only a require_oncement for WMA/WMW/ASF, and for
       destination encodings other than ISO-8859-1 and UTF-8, iconv is
       not needed otherwise. New 'iconv_req' in GetFileFormatArray()
       only set for WMA/WMV/ASF. analyze() now refuses to analyse
@@ -1084,7 +1084,7 @@ Version History
 
 
 1.7.0b5: [December-29-2003] James Heinrich
-    » Windows only: Various binary files are now required for some
+    » Windows only: Various binary files are now require_onced for some
       file formats, especially for tag writing, as well as md5sum
       (and other) calculations. These binaries are now stored in the
       directory defined as GETID3_HELPERAPPSDIR in getid3.php
@@ -1101,8 +1101,8 @@ Version History
                 /getid3/write.lyrics3.php
                 /getid3/write.metaflac.php
                 /getid3/write.vorbiscomment.php
-    » Added support for Shorten - requires shorten binary (head.exe
-      is also required under Windows).
+    » Added support for Shorten - require_onces shorten binary (head.exe
+      is also require_onced under Windows).
       New file: /getid3/module.audio.shorten.php
     » Added support for RKAU
       New file: /getid3/module.audio.rkau.php
@@ -1114,7 +1114,7 @@ Version History
       New file: /getid3/extention.cache.dbm.php
     » Added sha1_data hash option  (thanks ahØartemis*dk)
     » Added option to allow getID3() to skip ID3v2 without parsing it
-      for faster scanning when ID3v2 data is not required. If you
+      for faster scanning when ID3v2 data is not require_onced. If you
       want to enable this feature delete /getid3/module.tag.id3v2.php
       (thanks ahØartemis*dk)
     ¤ 8-bit WAV data now calculates MD5 checksums as normal, not
@@ -1330,14 +1330,14 @@ Version History
    * Bugfix: LAME CBR files with Info tag were being incorrectly
      flagged as VBR (thanks Jojo)
    * Bugfix: LAME tag not being detected for LAME 3.90 (original)
-   Changed regex pattern match for MP3 to include 3rd byte for more
+   Changed regex pattern match for MP3 to require_once 3rd byte for more
      reliable/accurate pattern matching
    Added duplicate-ID3v1 tag checking (two ID3v1 tags, one after the
      other) that has been known to occur with iTunes
      (thanks towbØtiscali*de)
    Added instructions for enabling iconv() support under Windows
    Removed some unneccesary debugging code
-   Suppressed duplicate PHP warnings for missing include files
+   Suppressed duplicate PHP warnings for missing require_once files
    Included some missing dependencies in various files
    /demo/audioinfo.class.php now copies ['audio']['encoder_options']
 
@@ -1637,8 +1637,8 @@ Version History
    » getid3.demo.write.php now writes APE tags as well.
    ¤ Renamed getid3.write.php to getid3.demo.write.php
    ¤ Renamed audioinfo.class.php to getid3.demo.audioinfo.class.php
-   ¤ getid3.php now automatically includes the getid3.functions.php
-     function library file, no need to include it seperately.
+   ¤ getid3.php now automatically require_onces the getid3.functions.php
+     function library file, no need to require_once it seperately.
    ¤ getLyrics3Filepointer() has been changed to be consistant with
      all the other similar function structures - the parameters have
      changed. The old function has been renamed to getLyrics3Data()
@@ -1869,7 +1869,7 @@ Version History
      of higher-priority tags (for example, 'artist' in ID3v1 will be
      ignored if already specified in APE), but missing values will be
      filled in (for example, if 'album' is specified in ID3v2 but not
-     in APE, it will be included in the ['comments'] array).
+     in APE, it will be require_onced in the ['comments'] array).
      Note: Root keys (['title'], ['artist'], etc) are NOT available
      in this or future versions of getID3().
      (thanks ahØartemis*dk)
@@ -1879,7 +1879,7 @@ Version History
      like ID3v2, ID3v1, APE, etc - ['md5_data']
      (thanks ahØartemis*dk for alternate md5_file() function that
      runs on UNIX system running PHP < 4.2.0)
-     NOTE: Ogg files require the use of vorbiscomment to obtain the
+     NOTE: Ogg files require_once the use of vorbiscomment to obtain the
      md5_data value. vorbiscomment must be downloaded from
      http://www.vorbis.com/download.psp and placed in the getID3()
      directory. All Ogg formats (Vorbis, OggFLAC, Speex) are affected
@@ -1897,7 +1897,7 @@ Version History
      version that uses vorbiscomment to write the comments, because
      of a reported bug that can corrupt OggVorbis files such they
      cannot be played.
-     NOTE: Ogg comment writing now requires the use of vorbiscomment
+     NOTE: Ogg comment writing now require_onces the use of vorbiscomment
      which must be downloaded from http://www.vorbis.com/download.psp
      and placed in the getID3() directory.
      NOTE: Ogg comment writing will not work if PHP is running in
@@ -2124,7 +2124,7 @@ Version History
            and no video stream is present;
      'asf' in all other cases (audio-only, video-only, or both)
    ¤ Removed support for ZIP functions (will be rewritten to not
-     require ZZIPlib support in future versions)
+     require_once ZZIPlib support in future versions)
    ¤ Added function SafeStripSlashes() as a drop-in replacement for
      stripslashes(), but that only strips slashes if magic_quotes_gpc
      is set
@@ -2183,7 +2183,7 @@ Version History
      (thanks ahØartemis*dk for sample file)
    Speed improvement code changes to getid3.mp3.php (up to 24% faster
      in some cases)  (thanks ahØartemis*dk for the code)
-   Changed all include_once() to require_once()
+   Changed all require_once() to require_once()
 
 
 1.5.5: [November-25-2002] James Heinrich
@@ -2280,7 +2280,7 @@ Version History
    * Bugfix: detecting of synch pattern for MP3 files with invalid
      data at the beginning wasn't always correct, also meant possible
      incorrect bitrate/duration/etc info for such corrupt files.
-   getid3.functions.php now includes a replacement utf8_decode()
+   getid3.functions.php now require_onces a replacement utf8_decode()
      function for those PHP installations that are not configured
      with the --with-xml option. (thanks stephaneØtekartists*com)
 
@@ -2306,14 +2306,14 @@ Version History
      New file: getid3.real.php
    » Support for BMP added. Palette and pixel data can optionally be
      extracted as well - this is slow and generally unneccesary, but
-     the option is there if you need it. Also includes PlotBMP()
+     the option is there if you need it. Also require_onces PlotBMP()
      which will take the extracted pixel data and output it as a true
-     color PNG. This function requires GD v2.0+
+     color PNG. This function require_onces GD v2.0+
      Note: Untested on 16-bit and 32-bit BMPs because I couldn't find
      any sample files - if you know of a program that can create such
      files, please email infoØgetid3Øorg
-     Note: Support for RGB (uncompressed), RLE8 and RLE4 is included
-     and tested. BITFIELDS support is also included for 16- & 32-bit
+     Note: Support for RGB (uncompressed), RLE8 and RLE4 is require_onced
+     and tested. BITFIELDS support is also require_onced for 16- & 32-bit
      formats, but it's untested, so if anybody has any test files
      please send them to infoØgetid3Øorg
      Note: Support currently only for Windows-format BMPs, and trying
@@ -2451,7 +2451,7 @@ Version History
 
 
 1.4.2: [September-12-2002] James Heinrich
-   » getID3() now requires PHP v4.1.0 or higher because it now is
+   » getID3() now require_onces PHP v4.1.0 or higher because it now is
      designed to work with register_globals = off and the new auto-
      globals ($_GET, $_SERVER, etc).
    * Bugfix: VBR MP3 files with Fraunhofer-style VBR header were not
@@ -2597,9 +2597,9 @@ Version History
      NOTE: currently untested as I'm unable to find php_zip.dll for
      PHP/Win32 - if someone has a copy of this file, please email me:
      infoØgetid3Øorg
-   » Parses JPEG files (requires GD installed)
-   » Parses PNG files  (requires GD v1.6+ installed)
-   » Parses GIF files  (requires GD < v1.6 installed)
+   » Parses JPEG files (require_onces GD installed)
+   » Parses PNG files  (require_onces GD v1.6+ installed)
+   » Parses GIF files  (require_onces GD < v1.6 installed)
    » For MP3s, once a valid synch is detected, the next 5 frames are
      also scanned for valid synch signatures, to prevent false
      identification of synch. For corrupt MP3 files this will be a bit
@@ -2637,7 +2637,7 @@ Version History
    * Bugfix: MPEG videos weren't being detected (they were being
      parsed as MP3), and even if they were, there was a typo in
      getMPEGHeaderFilepointer()  (thanks Christian Fritz)
-   * Bugfix: getid3.functions.php wasn't being included in
+   * Bugfix: getid3.functions.php wasn't being require_onced in
      getid3.write.php  (thanks mikeØftl*com)
    * Bugfix: Browse:___ directory name in getid3.check.php wasn't
      correct with directory names with ' and other strange characters
@@ -2700,8 +2700,8 @@ Version History
    * Bugfix: The warning about MP3ext wasn't always showing up
      (thanks davidbullockØtech-center*com)
    getID3v1Filepointer() cleaned up & shortened
-   Moved the include_once() statements around so that a minimum of code
-     is included
+   Moved the require_once() statements around so that a minimum of code
+     is require_onced
 
 
 1.4.0b7: [April-03-2002] James Heinrich
@@ -2726,7 +2726,7 @@ Version History
 
 1.4.0b6: [April-01-2002] James Heinrich
    * Bugfix: 1.4.0b5 introduced a bug where any RIFF file other than
-     PCM WAVE (this includes any compressed WAV, as well as all AVIs)
+     PCM WAVE (this require_onces any compressed WAV, as well as all AVIs)
      would crash getID3()
    Reduced use of fread() in getOggHeaderFilepointer() for increased
      speed
@@ -2831,14 +2831,14 @@ Version History
    ¤ RVA2/EQU2 description returned under ['description'] rather than
      ['identification']
    ¤ RVAD/EQUA adjustments now returned as signed integers, rather than
-     absolute values which required you to check flag bytes
+     absolute values which require_onced you to check flag bytes
    ¤ RVRB/REV data no longer returns under ['reverb'] array
    ¤ WXXX/W???/LINK frames now return ['url'] instead of ['URL']
    ¤ USER now properly returns both ['language'] and ['languagename']
    ¤ OWNE now returns ['purchasedateunix'] as a UNIX timestamp
      (only if ['purchasedate'] is a valid date)
    ¤ ['id3']['id3v2']['padding'] now returned with information on padding
-   ¤ ['headerlength'] now includes the initial 6 or 10 bytes of the
+   ¤ ['headerlength'] now require_onces the initial 6 or 10 bytes of the
      ID3v2 header
    ¤ ['artist'], ['title'], ['album'], ['tracknumber'], ['genre'] now
      returned for easier access for Ogg files
@@ -2950,7 +2950,7 @@ Version History
 
 1.2.3: [January-24-2002] James Heinrich
    » ID3v2.2.x 3-char FrameIDs are now fully parsed
-     Note: While I've included support for 22 FrameIDs as defined in
+     Note: While I've require_onced support for 22 FrameIDs as defined in
      the specs, I don't have test files for all of them. If anyone
      knows of programs that generate any of the untested tags, please
      email infoØgetid3Øorg ! Here's what's tested and not:
@@ -2991,7 +2991,7 @@ Version History
    » All 4-character FrameIDs are now fully parsed according to the
      specs at http://www.id3.org/id3v2.4.0-frames.txt
      ¤ This means that most no longer return ['flags'] and ['data']
-     Note: While I've included support for 30 FrameIDs as defined in
+     Note: While I've require_onced support for 30 FrameIDs as defined in
      the specs, I don't have test files for all of them. If anyone
      knows of programs that generate any of the untested tags, please
      email infoØgetid3Øorg ! Here's what's tested and not:
@@ -3027,7 +3027,7 @@ Version History
      existed or not
    Changed calling procedure to recommend using
      GetAllMP3info($filename) from getmp3header.php
-   Now includes check.php - example file
+   Now require_onces check.php - example file
    ¤ Checks to see if file is in ZIP or MP3 format
      (returned in ['format'])
      [Ed. Note: ['fileformat'] as of v1.2.1]

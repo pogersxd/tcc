@@ -1,13 +1,13 @@
  <?php
-  include "itemList.php";
+  require_once __DIR__ . "/itemList.php";
   function renderMainMenu()
   {
     $html = renderItemList();
     return <<<HTML
           <div class="main-menu" id="main-menu">
-              $html
+            $html
           </div>
-        HTML;
+          HTML;
   }
   if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
     echo renderMainMenu();

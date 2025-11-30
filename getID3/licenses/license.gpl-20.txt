@@ -66,7 +66,7 @@ refers to any such program or work, and a "work based on the Program"
 means either the Program or any derivative work under copyright law:
 that is to say, a work containing the Program or a portion of it,
 either verbatim or with modifications and/or translated into another
-language.  (Hereinafter, translation is included without limitation in
+language.  (Hereinafter, translation is require_onced without limitation in
 the term "modification".)  Each licensee is addressed as "you".
 
 Activities other than copying, distribution and modification are not
@@ -109,9 +109,9 @@ above, provided that you also meet all of these conditions:
     these conditions, and telling the user how to view a copy of this
     License.  (Exception: if the Program itself is interactive but
     does not normally print such an announcement, your work based on
-    the Program is not required to print an announcement.)
+    the Program is not require_onced to print an announcement.)
 
-These requirements apply to the modified work as a whole.  If
+These require_oncements apply to the modified work as a whole.  If
 identifiable sections of that work are not derived from the Program,
 and can be reasonably considered independent and separate works in
 themselves, then this License, and its terms, do not apply to those
@@ -157,7 +157,7 @@ making modifications to it.  For an executable work, complete source
 code means all the source code for all modules it contains, plus any
 associated interface definition files, plus the scripts used to
 control compilation and installation of the executable.  However, as a
-special exception, the source code distributed need not include
+special exception, the source code distributed need not require_once
 anything that is normally distributed (in either source or binary
 form) with the major components (compiler, kernel, and so on) of the
 operating system on which the executable runs, unless that component
@@ -177,7 +177,7 @@ However, parties who have received copies, or rights, from you under
 this License will not have their licenses terminated so long as such
 parties remain in full compliance.
 
-  5. You are not required to accept this License, since you have not
+  5. You are not require_onced to accept this License, since you have not
 signed it.  However, nothing else grants you permission to modify or
 distribute the Program or its derivative works.  These actions are
 prohibited by law if you do not accept this License.  Therefore, by

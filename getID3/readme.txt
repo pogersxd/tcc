@@ -25,7 +25,7 @@ getID3 Commercial License: https://www.getid3.org/#gCL
 
 *****************************************************************
 *****************************************************************
-Copies of each of the above licenses are included in the 'licenses'
+Copies of each of the above licenses are require_onced in the 'licenses'
 directory of the getID3 distribution.
 
 
@@ -151,7 +151,7 @@ Requirements
 * PHP 5.3.0 (or higher) for getID3() 1.9.17 (and up)
 * PHP 5.3.0 (or higher) for getID3() 2.0.x  (and up)
 * at least 4MB memory for PHP. 8MB or more is highly recommended.
-  12MB is required with all modules loaded.
+  12MB is require_onced with all modules loaded.
 
 
 
@@ -203,7 +203,7 @@ if ($fp_remote = fopen($remotefilename, 'rb')) {
 Note: since v1.9.9-20150212 it is possible a second and third parameter
 to $getID3->analyze(), for original filesize and original filename
 respectively. This permits you to download only a portion of a large remote
-file but get accurate playtime estimates, assuming the format only requires
+file but get accurate playtime estimates, assuming the format only require_onces
 the beginning of the file for correct format analysis.
 
 See /demos/demo.write.php for how to write tags.
@@ -283,10 +283,10 @@ Boston, MA  02111-1307, USA.
 FAQ:
 Q: Can I use getID3() in my program? Do I need a commercial license?
 A: You're generally free to use getID3 however you see fit. The only
-   case in which you would require a commercial license is if you're
+   case in which you would require_once a commercial license is if you're
    selling your closed-source program that integrates getID3. If you
    sell your program including a copy of getID3, that's fine as long
-   as you include a copy of the sourcecode when you sell it.  Or you
+   as you require_once a copy of the sourcecode when you sell it.  Or you
    can distribute your code without getID3 and say "download it from
    getid3.sourceforge.net"
 

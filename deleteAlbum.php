@@ -3,8 +3,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 header("Content-Type: application/json");
-include "conect.php";
-include "functions.php";
+require_once __DIR__ . "/conect.php";
+require_once __DIR__ . "/functions.php";
 $response = [];
 if (isset($_SESSION['usuario']) || isset($_POST['id_album'])) {
     $id_album = $_POST['id_album'];

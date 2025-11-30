@@ -17,57 +17,57 @@
 
 
 /**
-* This is a caching extension for getID3(). It works the exact same
-* way as the getID3 class, but return cached information very fast
-*
-* Example:
-*
-*    Normal getID3 usage (example):
-*
-*       require_once 'getid3/getid3.php';
-*       $getID3 = new getID3;
-*       $getID3->encoding = 'UTF-8';
-*       $info1 = $getID3->analyze('file1.flac');
-*       $info2 = $getID3->analyze('file2.wv');
-*
-*    getID3_cached usage:
-*
-*       require_once 'getid3/getid3.php';
-*       require_once 'getid3/extension.cache.dbm.php';
-*       $getID3 = new getID3_cached('db3', '/tmp/getid3_cache.dbm',
-*                                          '/tmp/getid3_cache.lock');
-*       $getID3->encoding = 'UTF-8';
-*       $info1 = $getID3->analyze('file1.flac');
-*       $info2 = $getID3->analyze('file2.wv');
-*
-*
-* Supported Cache Types
-*
-*   SQL Databases:          (use extension.cache.mysql)
-*
-*   cache_type          cache_options
-*   -------------------------------------------------------------------
-*   mysql               host, database, username, password
-*
-*
-*   DBM-Style Databases:    (this extension)
-*
-*   cache_type          cache_options
-*   -------------------------------------------------------------------
-*   gdbm                dbm_filename, lock_filename
-*   ndbm                dbm_filename, lock_filename
-*   db2                 dbm_filename, lock_filename
-*   db3                 dbm_filename, lock_filename
-*   db4                 dbm_filename, lock_filename  (PHP5 required)
-*
-*   PHP must have write access to both dbm_filename and lock_filename.
-*
-*
-* Recommended Cache Types
-*
-*   Infrequent updates, many reads      any DBM
-*   Frequent updates                    mysql
-*/
+ * This is a caching extension for getID3(). It works the exact same
+ * way as the getID3 class, but return cached information very fast
+ *
+ * Example:
+ *
+ *    Normal getID3 usage (example):
+ *
+ *       require_once 'getid3/getid3.php';
+ *       $getID3 = new getID3;
+ *       $getID3->encoding = 'UTF-8';
+ *       $info1 = $getID3->analyze('file1.flac');
+ *       $info2 = $getID3->analyze('file2.wv');
+ *
+ *    getID3_cached usage:
+ *
+ *       require_once 'getid3/getid3.php';
+ *       require_once 'getid3/extension.cache.dbm.php';
+ *       $getID3 = new getID3_cached('db3', '/tmp/getid3_cache.dbm',
+ *                                          '/tmp/getid3_cache.lock');
+ *       $getID3->encoding = 'UTF-8';
+ *       $info1 = $getID3->analyze('file1.flac');
+ *       $info2 = $getID3->analyze('file2.wv');
+ *
+ *
+ * Supported Cache Types
+ *
+ *   SQL Databases:          (use extension.cache.mysql)
+ *
+ *   cache_type          cache_options
+ *   -------------------------------------------------------------------
+ *   mysql               host, database, username, password
+ *
+ *
+ *   DBM-Style Databases:    (this extension)
+ *
+ *   cache_type          cache_options
+ *   -------------------------------------------------------------------
+ *   gdbm                dbm_filename, lock_filename
+ *   ndbm                dbm_filename, lock_filename
+ *   db2                 dbm_filename, lock_filename
+ *   db3                 dbm_filename, lock_filename
+ *   db4                 dbm_filename, lock_filename  (PHP5 require_onced)
+ *
+ *   PHP must have write access to both dbm_filename and lock_filename.
+ *
+ *
+ * Recommended Cache Types
+ *
+ *   Infrequent updates, many reads      any DBM
+ *   Frequent updates                    mysql
+ */
 
 
 class getID3_cached_dbm extends getID3
@@ -107,16 +107,17 @@ class getID3_cached_dbm extends getID3
      * @throws Exception
      * @throws getid3_exception
      */
-    public function __construct($cache_type, $dbm_filename, $lock_filename) {
+    public function __construct($cache_type, $dbm_filename, $lock_filename)
+    {
 
         // Check for dba extension
         if (!extension_loaded('dba')) {
-            throw new Exception('PHP is not compiled with dba support, required to use DBM style cache.');
+            throw new Exception('PHP is not compiled with dba support, require_onced to use DBM style cache.');
         }
 
         // Check for specific dba driver
         if (!function_exists('dba_handlers') || !in_array($cache_type, dba_handlers())) {
-            throw new Exception('PHP is not compiled --with '.$cache_type.' support, required to use DBM style cache.');
+            throw new Exception('PHP is not compiled --with ' . $cache_type . ' support, require_onced to use DBM style cache.');
         }
 
         // Store lock filename for cleanup operations
@@ -125,20 +126,20 @@ class getID3_cached_dbm extends getID3
         // Create lock file if needed
         if (!file_exists($this->lock_filename)) {
             if (!touch($this->lock_filename)) {
-                throw new Exception('failed to create lock file: '.$this->lock_filename);
+                throw new Exception('failed to create lock file: ' . $this->lock_filename);
             }
         }
 
         // Open lock file for writing with read/write mode (w+) to prevent truncation on BSD systems
         $this->lock = fopen($this->lock_filename, 'w+');
         if (!$this->lock) {
-            throw new Exception('Cannot open lock file: '.$this->lock_filename);
+            throw new Exception('Cannot open lock file: ' . $this->lock_filename);
         }
 
         // Acquire exclusive write lock to lock file
         if (!flock($this->lock, LOCK_EX)) {
             fclose($this->lock);
-            throw new Exception('Cannot acquire lock: '.$this->lock_filename);
+            throw new Exception('Cannot acquire lock: ' . $this->lock_filename);
         }
 
         // Store connection parameters
@@ -153,7 +154,7 @@ class getID3_cached_dbm extends getID3
             if (!$this->dba) {
                 $this->dba = dba_open($this->dbm_filename, 'n', $this->cache_type);
                 if (!$this->dba) {
-                    throw new Exception('failed to create dbm file: '.$this->dbm_filename);
+                    throw new Exception('failed to create dbm file: ' . $this->dbm_filename);
                 }
 
                 // Insert getID3 version number
@@ -164,7 +165,6 @@ class getID3_cached_dbm extends getID3
             if (dba_fetch(getID3::VERSION, $this->dba) != getID3::VERSION) {
                 $this->clear_cache();
             }
-
         } catch (Exception $e) {
             $this->safe_close();
             throw $e;
@@ -179,14 +179,16 @@ class getID3_cached_dbm extends getID3
     /**
      * Destructor - ensure proper cleanup of resources
      */
-    public function __destruct() {
+    public function __destruct()
+    {
         $this->safe_close();
     }
 
     /**
      * Safely close all resources with error handling
      */
-    private function safe_close() {
+    private function safe_close()
+    {
         try {
             // Close DBM connection if open
             if (is_resource($this->dba)) {
@@ -210,13 +212,14 @@ class getID3_cached_dbm extends getID3
      *
      * @throws Exception
      */
-    public function clear_cache() {
+    public function clear_cache()
+    {
         $this->safe_close();
 
         // Create new dbm file
         $this->dba = dba_open($this->dbm_filename, 'n', $this->cache_type);
         if (!$this->dba) {
-            throw new Exception('failed to clear cache/recreate dbm file: '.$this->dbm_filename);
+            throw new Exception('failed to clear cache/recreate dbm file: ' . $this->dbm_filename);
         }
 
         // Insert getID3 version number
@@ -236,12 +239,13 @@ class getID3_cached_dbm extends getID3
      *
      * @return mixed
      */
-    public function analyze($filename, $filesize=null, $original_filename='', $fp=null) {
+    public function analyze($filename, $filesize = null, $original_filename = '', $fp = null)
+    {
         try {
             $key = null;
             if (file_exists($filename)) {
                 // Calc key: filename::mod_time::size - should be unique
-                $key = $filename.'::'.filemtime($filename).'::'.filesize($filename);
+                $key = $filename . '::' . filemtime($filename) . '::' . filesize($filename);
 
                 // Lookup key in cache
                 $result = dba_fetch($key, $this->dba);
@@ -261,7 +265,6 @@ class getID3_cached_dbm extends getID3
             }
 
             return $result;
-
         } catch (Exception $e) {
             $this->safe_close();
             throw $e;

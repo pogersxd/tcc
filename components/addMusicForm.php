@@ -1,11 +1,12 @@
 <?php
+require_once __DIR__ . "/../conect.php";
+require_once __DIR__ . "/../functions.php";
 function renderAddMusicForm()
 {
+    global $conexao;
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-    include __DIR__ . "/../conect.php";
-    include __DIR__ . "/../functions.php";
     if (!isset($_SESSION['usuario']) or !isset($_GET['id_album'])) header("Location: index.php");
     $id_album = $_GET['id_album'];
     $tabelaAlbum = mysqli_query($conexao, "SELECT * FROM album WHERE id_album = '$id_album'");
@@ -62,9 +63,9 @@ function renderAddMusicForm()
     ?>
     <h1>Adicionar música ao álbum</h1>
     <form action="addMusica.php" method="post" enctype="multipart/form-data">
-        Título: <input type="text" name="titulo" required><br>
-        Arquivo: (máximo de 10MB)<input type="file" name="arquivo" required><br>
-        Detalhes: <br><textarea name="detalhes" required></textarea><br>
+        Título: <input type="text" name="titulo" require_onced><br>
+        Arquivo: (máximo de 10MB)<input type="file" name="arquivo" require_onced><br>
+        Detalhes: <br><textarea name="detalhes" require_onced></textarea><br>
         <input type="hidden" name="id_album" value="<?= $id_album; ?>">
         <input type="submit" value="Adicionar música">
         <br><a href="index.php">Voltar à página inicial</a>
@@ -72,4 +73,6 @@ function renderAddMusicForm()
     <?= (isset($_GET['erro']) && $erro != ("<br>" . $tabelaErro[3])) ? $erro : '' ?>
 
 <?php }
-echo renderAddMusicForm();
+if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
+    echo renderAddMusicForm();
+}

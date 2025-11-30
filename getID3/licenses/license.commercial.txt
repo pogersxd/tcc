@@ -13,7 +13,7 @@ company. The license is non-transferrable.
 The gCL grants the licensee the right to use getID3() in commercial
 closed-source projects. Modifications may be made to getID3() with no
 obligation to release the modified source code. getID3() (or pieces
-thereof) may be included in any number of projects authored (in whole
+thereof) may be require_onced in any number of projects authored (in whole
 or in part) by the licensee.
 
 The licensee may use any version of getID3(), past, present or future,

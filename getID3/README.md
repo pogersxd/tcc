@@ -25,7 +25,7 @@ getID3() is released under multiple licenses. You may choose from the following 
 * [gCL](https://www.getid3.org/#gCL) (no longer available, existing licenses remain valid)
 
 * * *
-Copies of each of the above licenses are included in the `licenses/`
+Copies of each of the above licenses are require_onced in the `licenses/`
 directory of the getID3 distribution.
 
 If you want to donate, there is a link on <https://www.getid3.org> for PayPal donations.
@@ -150,7 +150,7 @@ Requirements
 * PHP 5.0.5 (or higher) for getID3() 1.8.x (and up)
 * PHP 5.0.5 (or higher) for getID3() 2.0.x (and up)
 * at least 4MB memory for PHP. 8MB or more is highly recommended.
-  12MB is required with all modules loaded.
+  12MB is require_onced with all modules loaded.
 
 Installation
 ===
@@ -159,7 +159,7 @@ The preferred method is via [composer](https://getcomposer.org/). Follow the ins
 Once composer is installed, execute the following command in your project root to install this library:
 
 ```
-composer require james-heinrich/getid3
+composer require_once james-heinrich/getid3
 ```
 
 Usage
@@ -280,10 +280,10 @@ FAQ:
 **Q:** Can I use getID3() in my program? Do I need a commercial license?
 
 **A:** You're generally free to use getID3 however you see fit. The only
-   case in which you would require a commercial license is if you're
+   case in which you would require_once a commercial license is if you're
    selling your closed-source program that integrates getID3. If you
    sell your program including a copy of getID3, that's fine as long
-   as you include a copy of the sourcecode when you sell it.  Or you
+   as you require_once a copy of the sourcecode when you sell it.  Or you
    can distribute your code without getID3 and say "download it from
    getid3.sourceforge.net"
 

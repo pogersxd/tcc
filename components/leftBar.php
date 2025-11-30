@@ -1,6 +1,6 @@
  <?php
-  include __DIR__ . "/singleItem.php";
-  include __DIR__ . "/../conect.php";
+  require_once __DIR__ . "/singleItem.php";
+  require_once __DIR__ . "/../conect.php";
   function renderLeftBar()
   {
     global $conexao;

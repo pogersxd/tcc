@@ -23,7 +23,8 @@ class getid3_zip extends getid3_handler
 	/**
 	 * @return bool
 	 */
-	public function Analyze() {
+	public function Analyze()
+	{
 		$info = &$this->getid3->info;
 
 		$info['fileformat']      = 'zip';
@@ -35,7 +36,7 @@ class getid3_zip extends getid3_handler
 		$info['zip']['entries_count']     = 0;
 
 		if (!getid3_lib::intValueSupported($info['filesize'])) {
-			$this->error('File is larger than '.round(PHP_INT_MAX / 1073741824).'GB, not supported by PHP');
+			$this->error('File is larger than ' . round(PHP_INT_MAX / 1073741824) . 'GB, not supported by PHP');
 			return false;
 		} else {
 			$EOCDsearchData    = '';
@@ -43,11 +44,11 @@ class getid3_zip extends getid3_handler
 			while ($EOCDsearchCounter++ < 512) {
 
 				$this->fseek(-128 * $EOCDsearchCounter, SEEK_END);
-				$EOCDsearchData = $this->fread(128).$EOCDsearchData;
+				$EOCDsearchData = $this->fread(128) . $EOCDsearchData;
 
-				if (strstr($EOCDsearchData, 'PK'."\x05\x06")) {
+				if (strstr($EOCDsearchData, 'PK' . "\x05\x06")) {
 
-					$EOCDposition = strpos($EOCDsearchData, 'PK'."\x05\x06");
+					$EOCDposition = strpos($EOCDsearchData, 'PK' . "\x05\x06");
 					$this->fseek((-128 * $EOCDsearchCounter) + $EOCDposition, SEEK_END);
 					$info['zip']['end_central_directory'] = $this->ZIPparseEndOfCentralDirectory();
 
@@ -91,43 +92,47 @@ class getid3_zip extends getid3_handler
 						if ($fileentry = $this->ZIPparseLocalFileHeader()) {
 							$info['zip']['entries'][] = $fileentry;
 						} else {
-							$this->warning('Error parsing Local File Header at offset '.$central_directory_entry['entry_offset']);
+							$this->warning('Error parsing Local File Header at offset ' . $central_directory_entry['entry_offset']);
 						}
 					}
 
 					// check for EPUB files
-					if (!empty($info['zip']['entries'][0]['filename']) &&
+					if (
+						!empty($info['zip']['entries'][0]['filename']) &&
 						($info['zip']['entries'][0]['filename'] == 'mimetype') &&
 						($info['zip']['entries'][0]['compression_method'] == 'store') &&
 						($info['zip']['entries'][0]['uncompressed_size'] == 20) &&
-						isset($info['zip']['entries'][0]['data_offset'])) {
-							// http://idpf.org/epub/30/spec/epub30-ocf.html
-							// "3.3 OCF ZIP Container Media Type Identification
-							//  OCF ZIP Containers must include a mimetype file as the first file in the Container, and the contents of this file must be the MIME type string application/epub+zip.
-							//  The contents of the mimetype file must not contain any leading padding or whitespace, must not begin with the Unicode signature (or Byte Order Mark),
-							//  and the case of the MIME type string must be exactly as presented above. The mimetype file additionally must be neither compressed nor encrypted,
-							//  and there must not be an extra field in its ZIP header."
-							$this->fseek($info['zip']['entries'][0]['data_offset']);
-							if ($this->fread(20) == 'application/epub+zip') {
-								$info['fileformat'] = 'zip.epub';
-								$info['mime_type'] = 'application/epub+zip';
-							}
+						isset($info['zip']['entries'][0]['data_offset'])
+					) {
+						// http://idpf.org/epub/30/spec/epub30-ocf.html
+						// "3.3 OCF ZIP Container Media Type Identification
+						//  OCF ZIP Containers must require_once a mimetype file as the first file in the Container, and the contents of this file must be the MIME type string application/epub+zip.
+						//  The contents of the mimetype file must not contain any leading padding or whitespace, must not begin with the Unicode signature (or Byte Order Mark),
+						//  and the case of the MIME type string must be exactly as presented above. The mimetype file additionally must be neither compressed nor encrypted,
+						//  and there must not be an extra field in its ZIP header."
+						$this->fseek($info['zip']['entries'][0]['data_offset']);
+						if ($this->fread(20) == 'application/epub+zip') {
+							$info['fileformat'] = 'zip.epub';
+							$info['mime_type'] = 'application/epub+zip';
+						}
 					}
 
 					// check for Office Open XML files (e.g. .docx, .xlsx)
-					if (!empty($info['zip']['files']['[Content_Types].xml']) &&
-					    !empty($info['zip']['files']['_rels']['.rels'])      &&
-					    !empty($info['zip']['files']['docProps']['app.xml']) &&
-					    !empty($info['zip']['files']['docProps']['core.xml'])) {
-							// http://technet.microsoft.com/en-us/library/cc179224.aspx
-							$info['fileformat'] = 'zip.msoffice';
-							if (!empty($info['zip']['files']['ppt'])) {
-								$info['mime_type'] = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
-							} elseif (!empty($info['zip']['files']['xl'])) {
-								$info['mime_type'] = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-							} elseif (!empty($info['zip']['files']['word'])) {
-								$info['mime_type'] = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-							}
+					if (
+						!empty($info['zip']['files']['[Content_Types].xml']) &&
+						!empty($info['zip']['files']['_rels']['.rels'])      &&
+						!empty($info['zip']['files']['docProps']['app.xml']) &&
+						!empty($info['zip']['files']['docProps']['core.xml'])
+					) {
+						// http://technet.microsoft.com/en-us/library/cc179224.aspx
+						$info['fileformat'] = 'zip.msoffice';
+						if (!empty($info['zip']['files']['ppt'])) {
+							$info['mime_type'] = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
+						} elseif (!empty($info['zip']['files']['xl'])) {
+							$info['mime_type'] = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+						} elseif (!empty($info['zip']['files']['word'])) {
+							$info['mime_type'] = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+						}
 					}
 
 					return true;
@@ -145,7 +150,7 @@ class getid3_zip extends getid3_handler
 		// central directory couldn't be found and/or parsed
 		// scan through actual file data entries, recover as much as possible from probable trucated file
 		if ($info['zip']['compressed_size'] > ($info['filesize'] - 46 - 22)) {
-			$this->error('Warning: Truncated file! - Total compressed file sizes ('.$info['zip']['compressed_size'].' bytes) is greater than filesize minus Central Directory and End Of Central Directory structures ('.($info['filesize'] - 46 - 22).' bytes)');
+			$this->error('Warning: Truncated file! - Total compressed file sizes (' . $info['zip']['compressed_size'] . ' bytes) is greater than filesize minus Central Directory and End Of Central Directory structures (' . ($info['filesize'] - 46 - 22) . ' bytes)');
 		}
 		$this->error('Cannot find End Of Central Directory - returned list of files in [zip][entries] array may not be complete');
 		foreach ($info['zip']['entries'] as $key => $valuearray) {
@@ -157,7 +162,8 @@ class getid3_zip extends getid3_handler
 	/**
 	 * @return bool
 	 */
-	public function getZIPHeaderFilepointerTopDown() {
+	public function getZIPHeaderFilepointerTopDown()
+	{
 		$info = &$this->getid3->info;
 
 		$info['fileformat'] = 'zip';
@@ -205,7 +211,8 @@ class getid3_zip extends getid3_handler
 	/**
 	 * @return bool
 	 */
-	public function getZIPentriesFilepointer() {
+	public function getZIPentriesFilepointer()
+	{
 		$info = &$this->getid3->info;
 
 		$info['zip']['compressed_size']   = 0;
@@ -230,7 +237,8 @@ class getid3_zip extends getid3_handler
 	/**
 	 * @return array|false
 	 */
-	public function ZIPparseLocalFileHeader() {
+	public function ZIPparseLocalFileHeader()
+	{
 		$LocalFileHeader = array();
 		$LocalFileHeader['offset'] = $this->ftell();
 
@@ -288,7 +296,6 @@ class getid3_zip extends getid3_handler
 					}
 				}
 			}
-
 		}
 		$LocalFileHeader['data_offset'] = $this->ftell();
 		$this->fseek($LocalFileHeader['compressed_size'], SEEK_CUR); // this should (but may not) match value in $LocalFileHeader['raw']['compressed_size'] -- $LocalFileHeader['compressed_size'] could have been overwritten above with value from Central Directory
@@ -297,7 +304,7 @@ class getid3_zip extends getid3_handler
 			$DataDescriptor = $this->fread(16);
 			$LocalFileHeader['data_descriptor']['signature']         = getid3_lib::LittleEndian2Int(substr($DataDescriptor,  0, 4));
 			if ($LocalFileHeader['data_descriptor']['signature'] != 0x08074B50) { // "PK\x07\x08"
-				$this->getid3->warning('invalid Local File Header Data Descriptor Signature at offset '.($this->ftell() - 16).' - expecting 08 07 4B 50, found '.getid3_lib::PrintHexBytes(substr($DataDescriptor,  0, 4)));
+				$this->getid3->warning('invalid Local File Header Data Descriptor Signature at offset ' . ($this->ftell() - 16) . ' - expecting 08 07 4B 50, found ' . getid3_lib::PrintHexBytes(substr($DataDescriptor,  0, 4)));
 				$this->fseek($LocalFileHeader['offset']); // seek back to where filepointer originally was so it can be handled properly
 				return false;
 			}
@@ -310,13 +317,13 @@ class getid3_zip extends getid3_handler
 						if ($LocalFileHeader['data_descriptor']['compressed_size'] == $central_directory_entry['compressed_size']) {
 							// $LocalFileHeader['compressed_size'] already set from Central Directory
 						} else {
-							$this->warning('conflicting compressed_size from data_descriptor ('.$LocalFileHeader['data_descriptor']['compressed_size'].') vs Central Directory ('.$central_directory_entry['compressed_size'].') for file at offset '.$LocalFileHeader['offset']);
+							$this->warning('conflicting compressed_size from data_descriptor (' . $LocalFileHeader['data_descriptor']['compressed_size'] . ') vs Central Directory (' . $central_directory_entry['compressed_size'] . ') for file at offset ' . $LocalFileHeader['offset']);
 						}
 
 						if ($LocalFileHeader['data_descriptor']['uncompressed_size'] == $central_directory_entry['uncompressed_size']) {
 							$LocalFileHeader['uncompressed_size'] = $LocalFileHeader['data_descriptor']['uncompressed_size'];
 						} else {
-							$this->warning('conflicting uncompressed_size from data_descriptor ('.$LocalFileHeader['data_descriptor']['uncompressed_size'].') vs Central Directory ('.$central_directory_entry['uncompressed_size'].') for file at offset '.$LocalFileHeader['offset']);
+							$this->warning('conflicting uncompressed_size from data_descriptor (' . $LocalFileHeader['data_descriptor']['uncompressed_size'] . ') vs Central Directory (' . $central_directory_entry['uncompressed_size'] . ') for file at offset ' . $LocalFileHeader['offset']);
 						}
 						break;
 					}
@@ -329,7 +336,8 @@ class getid3_zip extends getid3_handler
 	/**
 	 * @return array|false
 	 */
-	public function ZIPparseCentralDirectory() {
+	public function ZIPparseCentralDirectory()
+	{
 		$CentralDirectory = array();
 		$CentralDirectory['offset'] = $this->ftell();
 
@@ -389,7 +397,8 @@ class getid3_zip extends getid3_handler
 	/**
 	 * @return array|false
 	 */
-	public function ZIPparseEndOfCentralDirectory() {
+	public function ZIPparseEndOfCentralDirectory()
+	{
 		$EndOfCentralDirectory = array();
 		$EndOfCentralDirectory['offset'] = $this->ftell();
 
@@ -422,7 +431,8 @@ class getid3_zip extends getid3_handler
 	 *
 	 * @return array
 	 */
-	public static function ZIPparseGeneralPurposeFlags($flagbytes, $compressionmethod) {
+	public static function ZIPparseGeneralPurposeFlags($flagbytes, $compressionmethod)
+	{
 		// https://users.cs.jmu.edu/buchhofp/forensics/formats/pkzip-printable.html
 		$ParsedFlags = array();
 		$ParsedFlags['encrypted']               = (bool) ($flagbytes & 0x0001);
@@ -475,7 +485,8 @@ class getid3_zip extends getid3_handler
 	 *
 	 * @return string
 	 */
-	public static function ZIPversionOSLookup($index) {
+	public static function ZIPversionOSLookup($index)
+	{
 		static $ZIPversionOSLookup = array(
 			0  => 'MS-DOS and OS/2 (FAT / VFAT / FAT32 file systems)',
 			1  => 'Amiga',
@@ -507,7 +518,8 @@ class getid3_zip extends getid3_handler
 	 *
 	 * @return string
 	 */
-	public static function ZIPcompressionMethodLookup($index) {
+	public static function ZIPcompressionMethodLookup($index)
+	{
 		// http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/ZIP.html
 		static $ZIPcompressionMethodLookup = array(
 			0  => 'store',
@@ -544,7 +556,8 @@ class getid3_zip extends getid3_handler
 	 *
 	 * @return int
 	 */
-	public static function DOStime2UNIXtime($DOSdate, $DOStime) {
+	public static function DOStime2UNIXtime($DOSdate, $DOStime)
+	{
 		// wFatDate
 		// Specifies the MS-DOS date. The date is a packed 16-bit value with the following format:
 		// Bits      Contents
@@ -569,5 +582,4 @@ class getid3_zip extends getid3_handler
 
 		return gmmktime($UNIXhour, $UNIXminute, $UNIXsecond, $UNIXmonth, $UNIXday, $UNIXyear);
 	}
-
 }

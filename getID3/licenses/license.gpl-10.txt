@@ -122,7 +122,7 @@ Paragraphs 1 and 2 above provided that you also do one of the following:
 Source code for a work means the preferred form of the work for making
 modifications to it.  For an executable file, complete source code means
 all the source code for all modules it contains; but, as a special
-exception, it need not include source code for modules which are standard
+exception, it need not require_once source code for modules which are standard
 libraries that accompany the operating system on which the executable
 file runs, or for standard header files or definitions files that
 accompany that operating system.

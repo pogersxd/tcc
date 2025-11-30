@@ -23,7 +23,8 @@ class getid3_mpc extends getid3_handler
 	/**
 	 * @return bool
 	 */
-	public function Analyze() {
+	public function Analyze()
+	{
 		$info = &$this->getid3->info;
 
 		$info['mpc']['header'] = array();
@@ -42,31 +43,28 @@ class getid3_mpc extends getid3_handler
 
 			// this is SV8
 			return $this->ParseMPCsv8();
-
 		} elseif (preg_match('#^MP\+#', $info['mpc']['header']['preamble'])) {
 
 			// this is SV7
 			return $this->ParseMPCsv7();
-
 		} elseif (preg_match('#^[\x00\x01\x10\x11\x40\x41\x50\x51\x80\x81\x90\x91\xC0\xC1\xD0\xD1][\x20-37][\x00\x20\x40\x60\x80\xA0\xC0\xE0]#s', $MPCheaderData)) {
 
 			// this is SV4 - SV6, handle seperately
 			return $this->ParseMPCsv6();
-
 		} else {
 
-			$this->error('Expecting "MP+" or "MPCK" at offset '.$info['avdataoffset'].', found "'.getid3_lib::PrintHexBytes(substr($MPCheaderData, 0, 4)).'"');
+			$this->error('Expecting "MP+" or "MPCK" at offset ' . $info['avdataoffset'] . ', found "' . getid3_lib::PrintHexBytes(substr($MPCheaderData, 0, 4)) . '"');
 			unset($info['fileformat']);
 			unset($info['mpc']);
 			return false;
-
 		}
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function ParseMPCsv8() {
+	public function ParseMPCsv8()
+	{
 		// this is SV8
 		// http://trac.musepack.net/trac/wiki/SV8Specification
 
@@ -89,13 +87,13 @@ class getid3_mpc extends getid3_handler
 			$thisPacket['key']      = substr($MPCheaderData, 0, $keyNameSize);
 			$thisPacket['key_name'] = $this->MPCsv8PacketName($thisPacket['key']);
 			if ($thisPacket['key'] == $thisPacket['key_name']) {
-				$this->error('Found unexpected key value "'.$thisPacket['key'].'" at offset '.$thisPacket['offset']);
+				$this->error('Found unexpected key value "' . $thisPacket['key'] . '" at offset ' . $thisPacket['offset']);
 				return false;
 			}
 			$packetLength = 0;
-			$thisPacket['packet_size'] = $this->SV8variableLengthInteger(substr($MPCheaderData, $keyNameSize), $packetLength); // includes keyname and packet_size field
+			$thisPacket['packet_size'] = $this->SV8variableLengthInteger(substr($MPCheaderData, $keyNameSize), $packetLength); // require_onces keyname and packet_size field
 			if ($thisPacket['packet_size'] === false) {
-				$this->error('Did not find expected packet length within '.$maxHandledPacketLength.' bytes at offset '.($thisPacket['offset'] + $keyNameSize));
+				$this->error('Did not find expected packet length within ' . $maxHandledPacketLength . ' bytes at offset ' . ($thisPacket['offset'] + $keyNameSize));
 				return false;
 			}
 			$packet_offset += $packetLength;
@@ -156,10 +154,18 @@ class getid3_mpc extends getid3_handler
 					$thisPacket['replaygain_album_peak']  =       getid3_lib::BigEndian2Int(substr($MPCheaderData, $packet_offset, 2));
 					$packet_offset += 2;
 
-					if ($thisPacket['replaygain_title_gain']) { $info['replay_gain']['title']['gain'] = $thisPacket['replaygain_title_gain']; }
-					if ($thisPacket['replaygain_title_peak']) { $info['replay_gain']['title']['peak'] = $thisPacket['replaygain_title_peak']; }
-					if ($thisPacket['replaygain_album_gain']) { $info['replay_gain']['album']['gain'] = $thisPacket['replaygain_album_gain']; }
-					if ($thisPacket['replaygain_album_peak']) { $info['replay_gain']['album']['peak'] = $thisPacket['replaygain_album_peak']; }
+					if ($thisPacket['replaygain_title_gain']) {
+						$info['replay_gain']['title']['gain'] = $thisPacket['replaygain_title_gain'];
+					}
+					if ($thisPacket['replaygain_title_peak']) {
+						$info['replay_gain']['title']['peak'] = $thisPacket['replaygain_title_peak'];
+					}
+					if ($thisPacket['replaygain_album_gain']) {
+						$info['replay_gain']['album']['gain'] = $thisPacket['replaygain_album_gain'];
+					}
+					if ($thisPacket['replaygain_album_peak']) {
+						$info['replay_gain']['album']['peak'] = $thisPacket['replaygain_album_peak'];
+					}
 					break;
 
 				case 'EI': // Encoder Info
@@ -179,9 +185,9 @@ class getid3_mpc extends getid3_handler
 					$packet_offset += 1;
 					$thisPacket['version_build'] = getid3_lib::BigEndian2Int(substr($MPCheaderData, $packet_offset, 1));
 					$packet_offset += 1;
-					$thisPacket['version'] = $thisPacket['version_major'].'.'.$thisPacket['version_minor'].'.'.$thisPacket['version_build'];
+					$thisPacket['version'] = $thisPacket['version_major'] . '.' . $thisPacket['version_minor'] . '.' . $thisPacket['version_build'];
 
-					$info['audio']['encoder'] = 'MPC v'.$thisPacket['version'].' ('.(($thisPacket['version_minor'] % 2) ? 'unstable' : 'stable').')';
+					$info['audio']['encoder'] = 'MPC v' . $thisPacket['version'] . ' (' . (($thisPacket['version_minor'] % 2) ? 'unstable' : 'stable') . ')';
 					$thisfile_mpc_header['encoder_version'] = $info['audio']['encoder'];
 					//$thisfile_mpc_header['quality']         = (float) ($thisPacket['quality'] / 1.5875); // values can range from 0.000 to 15.875, mapped to qualities of 0.0 to 10.0
 					$thisfile_mpc_header['quality']         = (float) ($thisPacket['quality'] - 5); // values can range from 0.000 to 15.875, of which 0..4 are "reserved/experimental", and 5..15 are mapped to qualities of 0.0 to 10.0
@@ -201,7 +207,7 @@ class getid3_mpc extends getid3_handler
 					break;
 
 				default:
-					$this->error('Found unhandled key type "'.$thisPacket['key'].'" at offset '.$thisPacket['offset']);
+					$this->error('Found unhandled key type "' . $thisPacket['key'] . '" at offset ' . $thisPacket['offset']);
 					return false;
 			}
 			if (!empty($thisPacket)) {
@@ -216,7 +222,8 @@ class getid3_mpc extends getid3_handler
 	/**
 	 * @return bool
 	 */
-	public function ParseMPCsv7() {
+	public function ParseMPCsv7()
+	{
 		// this is SV7
 		// http://www.uni-jena.de/~pfk/mpp/sv8/header.html
 
@@ -237,7 +244,7 @@ class getid3_mpc extends getid3_handler
 		$offset += 4;
 
 		if ($thisfile_mpc_header['stream_version_major'] != 7) {
-			$this->error('Only Musepack SV7 supported (this file claims to be v'.$thisfile_mpc_header['stream_version_major'].')');
+			$this->error('Only Musepack SV7 supported (this file claims to be v' . $thisfile_mpc_header['stream_version_major'] . ')');
 			return false;
 		}
 
@@ -333,7 +340,8 @@ class getid3_mpc extends getid3_handler
 	/**
 	 * @return bool
 	 */
-	public function ParseMPCsv6() {
+	public function ParseMPCsv6()
+	{
 		// this is SV4 - SV6
 
 		$info = &$this->getid3->info;
@@ -382,13 +390,13 @@ class getid3_mpc extends getid3_handler
 				break;
 
 			default:
-				$info['error'] = 'Expecting 4, 5 or 6 in version field, found '.$thisfile_mpc_header['stream_version_major'].' instead';
+				$info['error'] = 'Expecting 4, 5 or 6 in version field, found ' . $thisfile_mpc_header['stream_version_major'] . ' instead';
 				unset($info['mpc']);
 				return false;
 		}
 
 		if (($thisfile_mpc_header['stream_version_major'] > 4) && ($thisfile_mpc_header['block_size'] != 1)) {
-			$this->warning('Block size expected to be 1, actual value found: '.$thisfile_mpc_header['block_size']);
+			$this->warning('Block size expected to be 1, actual value found: ' . $thisfile_mpc_header['block_size']);
 		}
 
 		$thisfile_mpc_header['sample_rate']   = 44100; // AB: used by all files up to SV7
@@ -403,7 +411,7 @@ class getid3_mpc extends getid3_handler
 
 		$info['mpc']['bitrate']   = ($info['avdataend'] - $info['avdataoffset']) * 8 * 44100 / $thisfile_mpc_header['frame_count'] / 1152;
 		$info['audio']['bitrate'] = $info['mpc']['bitrate'];
-		$info['audio']['encoder'] = 'SV'.$thisfile_mpc_header['stream_version_major'];
+		$info['audio']['encoder'] = 'SV' . $thisfile_mpc_header['stream_version_major'];
 
 		return true;
 	}
@@ -413,7 +421,8 @@ class getid3_mpc extends getid3_handler
 	 *
 	 * @return string
 	 */
-	public function MPCprofileNameLookup($profileid) {
+	public function MPCprofileNameLookup($profileid)
+	{
 		static $MPCprofileNameLookup = array(
 			0  => 'no profile',
 			1  => 'Experimental',
@@ -440,7 +449,8 @@ class getid3_mpc extends getid3_handler
 	 *
 	 * @return int|string
 	 */
-	public function MPCfrequencyLookup($frequencyid) {
+	public function MPCfrequencyLookup($frequencyid)
+	{
 		static $MPCfrequencyLookup = array(
 			0 => 44100,
 			1 => 48000,
@@ -455,7 +465,8 @@ class getid3_mpc extends getid3_handler
 	 *
 	 * @return float|false
 	 */
-	public function MPCpeakDBLookup($intvalue) {
+	public function MPCpeakDBLookup($intvalue)
+	{
 		if ($intvalue > 0) {
 			return ((log10($intvalue) / log10(2)) - 15) * 6;
 		}
@@ -467,7 +478,8 @@ class getid3_mpc extends getid3_handler
 	 *
 	 * @return string
 	 */
-	public function MPCencoderVersionLookup($encoderversion) {
+	public function MPCencoderVersionLookup($encoderversion)
+	{
 		//Encoder version * 100  (106 = 1.06)
 		//EncoderVersion % 10 == 0        Release (1.0)
 		//EncoderVersion %  2 == 0        Beta (1.06)
@@ -482,16 +494,14 @@ class getid3_mpc extends getid3_handler
 
 			// release version
 			return number_format($encoderversion / 100, 2);
-
 		} elseif (($encoderversion % 2) == 0) {
 
 			// beta version
-			return number_format($encoderversion / 100, 2).' beta';
-
+			return number_format($encoderversion / 100, 2) . ' beta';
 		}
 
 		// alpha version
-		return number_format($encoderversion / 100, 2).' alpha';
+		return number_format($encoderversion / 100, 2) . ' alpha';
 	}
 
 	/**
@@ -501,7 +511,8 @@ class getid3_mpc extends getid3_handler
 	 *
 	 * @return int|false
 	 */
-	public function SV8variableLengthInteger($data, &$packetLength, $maxHandledPacketLength=9) {
+	public function SV8variableLengthInteger($data, &$packetLength, $maxHandledPacketLength = 9)
+	{
 		$packet_size = 0;
 		for ($packetLength = 1; $packetLength <= $maxHandledPacketLength; $packetLength++) {
 			// variable-length size field:
@@ -530,7 +541,8 @@ class getid3_mpc extends getid3_handler
 	 *
 	 * @return string
 	 */
-	public function MPCsv8PacketName($packetKey) {
+	public function MPCsv8PacketName($packetKey)
+	{
 		static $MPCsv8PacketName = array();
 		if (empty($MPCsv8PacketName)) {
 			$MPCsv8PacketName = array(

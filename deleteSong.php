@@ -2,8 +2,8 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require_once "conect.php";
-require_once "functions.php";
+require_once __DIR__ . "/conect.php";
+require_once __DIR__ . "/functions.php";
 if (isset($_SESSION['usuario']) || isset($_GET['id_musica']) || isset($_GET['id_album'])) {
     $id_musica = $_GET['id_musica'];
     $id_album = $_GET['id_album'];

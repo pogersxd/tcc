@@ -36,7 +36,8 @@ class getid3_gzip extends getid3_handler
 	/**
 	 * @return bool
 	 */
-	public function Analyze() {
+	public function Analyze()
+	{
 		$info = &$this->getid3->info;
 
 		$info['fileformat'] = 'gzip';
@@ -48,7 +49,7 @@ class getid3_gzip extends getid3_handler
 		//+---+---+---+---+---+---+---+---+---+---+
 
 		if ($info['php_memory_limit'] && ($info['filesize'] > $info['php_memory_limit'])) {
-			$this->error('File is too large ('.number_format($info['filesize']).' bytes) to read into memory (limit: '.number_format($info['php_memory_limit'] / 1048576).'MB)');
+			$this->error('File is too large (' . number_format($info['filesize']) . ' bytes) to read into memory (limit: ' . number_format($info['php_memory_limit'] / 1048576) . 'MB)');
 			return false;
 		}
 		$this->fseek(0);
@@ -63,7 +64,7 @@ class getid3_gzip extends getid3_handler
 				if (strlen($arr_members[$i]) == 0) {
 					continue;
 				}
-				$buf = "\x1F\x8B\x08".$arr_members[$i];
+				$buf = "\x1F\x8B\x08" . $arr_members[$i];
 
 				$attr = unpack($unpack_header, substr($buf, 0, $start_length));
 				if (!$this->get_os_type(ord($attr['os']))) {
@@ -89,7 +90,7 @@ class getid3_gzip extends getid3_handler
 			}
 			$thisInfo = &$info['gzip']['member_header'][++$idx];
 
-			$buff = "\x1F\x8B\x08". $member;
+			$buff = "\x1F\x8B\x08" . $member;
 
 			$attr = unpack($unpack_header, substr($buff, 0, $start_length));
 			$thisInfo['filemtime']      = getid3_lib::LittleEndian2Int($attr['mtime']);
@@ -224,7 +225,7 @@ class getid3_gzip extends getid3_handler
 					switch ($determined_format['module']) {
 						case 'tar':
 							// view TAR-file info
-							if (file_exists(GETID3_INCLUDEPATH.$determined_format['include']) && include_once(GETID3_INCLUDEPATH.$determined_format['include'])) {
+							if (file_exists(GETID3_INCLUDEPATH . $determined_format['require_once']) && require_once(GETID3_INCLUDEPATH . $determined_format['require_once'])) {
 								if (($temp_tar_filename = tempnam(GETID3_TEMP_DIR, 'getID3')) === false) {
 									// can't find anywhere to create a temp file, abort
 									$this->error('Unable to create temp file to parse TAR inside GZIP file');
@@ -267,7 +268,8 @@ class getid3_gzip extends getid3_handler
 	 *
 	 * @return string
 	 */
-	public function get_os_type($key) {
+	public function get_os_type($key)
+	{
 		static $os_type = array(
 			'0'   => 'FAT filesystem (MS-DOS, OS/2, NT/Win32)',
 			'1'   => 'Amiga',
@@ -295,7 +297,8 @@ class getid3_gzip extends getid3_handler
 	 *
 	 * @return string
 	 */
-	public function get_xflag_type($key) {
+	public function get_xflag_type($key)
+	{
 		static $xflag_type = array(
 			'0' => 'unknown',
 			'2' => 'maximum compression',
@@ -304,4 +307,3 @@ class getid3_gzip extends getid3_handler
 		return (isset($xflag_type[$key]) ? $xflag_type[$key] : '');
 	}
 }
-

@@ -75,7 +75,7 @@ Mozilla Public License Version 2.0
 
 1.14. "You" (or "Your")
     means an individual or a legal entity exercising rights under this
-    License. For legal entities, "You" includes any entity that
+    License. For legal entities, "You" require_onces any entity that
     controls, is controlled by, or is under common control with You. For
     purposes of this definition, "control" means (a) the power, direct
     or indirect, to cause the direction or management of such entity,
@@ -128,7 +128,7 @@ Contributor:
 
 This License does not grant any rights in the trademarks, service marks,
 or logos of any Contributor (except as may be necessary to comply with
-the notice requirements in Section 3.4).
+the notice require_oncements in Section 3.4).
 
 2.4. Subsequent Licenses
 
@@ -185,7 +185,7 @@ If You distribute Covered Software in Executable Form then:
 3.3. Distribution of a Larger Work
 
 You may create and distribute a Larger Work under terms of Your choice,
-provided that You also comply with the requirements of this License for
+provided that You also comply with the require_oncements of this License for
 the Covered Software. If the Larger Work is a combination of Covered
 Software with a work governed by one or more Secondary Licenses, and the
 Covered Software is not Incompatible With Secondary Licenses, this
@@ -201,7 +201,7 @@ You may not remove or alter the substance of any license notices
 (including copyright notices, patent notices, disclaimers of warranty,
 or limitations of liability) contained within the Source Code Form of
 the Covered Software, except that You may alter any license notices to
-the extent required to remedy known factual inaccuracies.
+the extent require_onced to remedy known factual inaccuracies.
 
 3.5. Application of Additional Terms
 
@@ -212,7 +212,7 @@ behalf of any Contributor. You must make it absolutely clear that any
 such warranty, support, indemnity, or liability obligation is offered by
 You alone, and You hereby agree to indemnify every Contributor for any
 liability incurred by such Contributor as a result of warranty, support,
-indemnity or liability terms You offer. You may include additional
+indemnity or liability terms You offer. You may require_once additional
 disclaimers of warranty and limitations of liability specific to any
 jurisdiction.
 
@@ -224,7 +224,7 @@ License with respect to some or all of the Covered Software due to
 statute, judicial order, or regulation then You must: (a) comply with
 the terms of this License to the maximum extent possible; and (b)
 describe the limitations and the code they affect. Such description must
-be placed in a text file included with all distributions of the Covered
+be placed in a text file require_onced with all distributions of the Covered
 Software under this License. Except to the extent prohibited by statute
 or regulation, such description must be sufficiently detailed for a
 recipient of ordinary skill to be able to understand it.
@@ -360,7 +360,7 @@ Exhibit A - Source Code Form License Notice
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 If it is not possible or desirable to put the notice in a particular
-file, then You may include the notice in a location (such as a LICENSE
+file, then You may require_once the notice in a location (such as a LICENSE
 file in a relevant directory) where a recipient would be likely to look
 for such a notice.
 

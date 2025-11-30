@@ -1,5 +1,7 @@
  <?php
-  include "searchBar.php";
+  require_once __DIR__ . "/../conect.php";
+  require_once __DIR__ . "/../functions.php";
+  require_once __DIR__ . "/searchBar.php";
   function renderHeader()
   {
     global $conexao;
@@ -37,4 +39,7 @@
           </div>
         </div>
         HTML;
+  }
+  if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
+    echo renderHeader();
   }

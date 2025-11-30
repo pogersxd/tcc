@@ -3,8 +3,8 @@ header("Content-Type: application/json");
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-include_once "conect.php";
-include_once "functions.php";
+require_once __DIR__ . "/conect.php";
+require_once __DIR__ . "/functions.php";
 $response = [];
 if (!isset($_SESSION['usuario']) or !$_POST) {
     echo "Erro na sessão";

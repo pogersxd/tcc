@@ -24,7 +24,8 @@ class getid3_dsdiff extends getid3_handler
 	/**
 	 * @return bool
 	 */
-	public function Analyze() {
+	public function Analyze()
+	{
 		$info = &$this->getid3->info;
 
 		$this->fseek($info['avdataoffset']);
@@ -32,7 +33,7 @@ class getid3_dsdiff extends getid3_handler
 
 		// https://dsd-guide.com/sites/default/files/white-papers/DSDIFF_1.5_Spec.pdf
 		if (substr($DSDIFFheader, 0, 4) != 'FRM8') {
-			$this->error('Expecting "FRM8" at offset '.$info['avdataoffset'].', found "'.getid3_lib::PrintHexBytes(substr($DSDIFFheader, 0, 4)).'"');
+			$this->error('Expecting "FRM8" at offset ' . $info['avdataoffset'] . ', found "' . getid3_lib::PrintHexBytes(substr($DSDIFFheader, 0, 4)) . '"');
 			return false;
 		}
 		unset($DSDIFFheader);
@@ -49,7 +50,7 @@ class getid3_dsdiff extends getid3_handler
 		$thisChunk = null;
 		while (!$this->feof() && ($ChunkHeader = $this->fread(12))) {
 			if (strlen($ChunkHeader) < 12) {
-				$this->error('Expecting chunk header at offset '.(isset($thisChunk['offset']) ? $thisChunk['offset'] : 'N/A').', found insufficient data in file, aborting parsing');
+				$this->error('Expecting chunk header at offset ' . (isset($thisChunk['offset']) ? $thisChunk['offset'] : 'N/A') . ', found insufficient data in file, aborting parsing');
 				break;
 			}
 			$thisChunk = array();
@@ -57,16 +58,16 @@ class getid3_dsdiff extends getid3_handler
 			$thisChunk['name'] = substr($ChunkHeader, 0, 4);
 			if (!preg_match('#^[\\x21-\\x7E]+ *$#', $thisChunk['name'])) {
 				// "a concatenation of four printable ASCII characters in the range ' ' (space, 0x20) through '~'(0x7E). Space (0x20) cannot precede printing characters; trailing spaces are allowed."
-				$this->error('Invalid chunk name "'.$thisChunk['name'].'" ('.getid3_lib::PrintHexBytes($thisChunk['name']).') at offset '.$thisChunk['offset'].', aborting parsing');
+				$this->error('Invalid chunk name "' . $thisChunk['name'] . '" (' . getid3_lib::PrintHexBytes($thisChunk['name']) . ') at offset ' . $thisChunk['offset'] . ', aborting parsing');
 			}
 			$thisChunk['size'] = getid3_lib::BigEndian2Int(substr($ChunkHeader, 4, 8));
-			$datasize = $thisChunk['size'] + ($thisChunk['size'] % 2); // "If the data is an odd number of bytes in length, a pad byte must be added at the end. The pad byte is not included in ckDataSize."
+			$datasize = $thisChunk['size'] + ($thisChunk['size'] % 2); // "If the data is an odd number of bytes in length, a pad byte must be added at the end. The pad byte is not require_onced in ckDataSize."
 
 			switch ($thisChunk['name']) {
 				case 'FRM8':
 					$thisChunk['form_type'] = $this->fread(4);
 					if ($thisChunk['form_type'] != 'DSD ') {
-						$this->error('Expecting "DSD " at offset '.($this->ftell() - 4).', found "'.getid3_lib::PrintHexBytes($thisChunk['form_type']).'", aborting parsing');
+						$this->error('Expecting "DSD " at offset ' . ($this->ftell() - 4) . ', found "' . getid3_lib::PrintHexBytes($thisChunk['form_type']) . '", aborting parsing');
 						break 2;
 					}
 					// do nothing further, prevent skipping subchunks
@@ -74,7 +75,7 @@ class getid3_dsdiff extends getid3_handler
 				case 'PROP': // PROPerty chunk
 					$thisChunk['prop_type'] = $this->fread(4);
 					if ($thisChunk['prop_type'] != 'SND ') {
-						$this->error('Expecting "SND " at offset '.($this->ftell() - 4).', found "'.getid3_lib::PrintHexBytes($thisChunk['prop_type']).'", aborting parsing');
+						$this->error('Expecting "SND " at offset ' . ($this->ftell() - 4) . ', found "' . getid3_lib::PrintHexBytes($thisChunk['prop_type']) . '", aborting parsing');
 						break 2;
 					}
 					// do nothing further, prevent skipping subchunks
@@ -86,10 +87,10 @@ class getid3_dsdiff extends getid3_handler
 				case 'FVER': // Format VERsion chunk
 					if ($thisChunk['size'] == 4) {
 						$FVER = $this->fread(4);
-						$info['dsdiff']['format_version'] = ord($FVER[0]).'.'.ord($FVER[1]).'.'.ord($FVER[2]).'.'.ord($FVER[3]);
+						$info['dsdiff']['format_version'] = ord($FVER[0]) . '.' . ord($FVER[1]) . '.' . ord($FVER[2]) . '.' . ord($FVER[3]);
 						unset($FVER);
 					} else {
-						$this->warning('Expecting "FVER" chunk to be 4 bytes, found '.$thisChunk['size'].' bytes, skipping chunk');
+						$this->warning('Expecting "FVER" chunk to be 4 bytes, found ' . $thisChunk['size'] . ' bytes, skipping chunk');
 						$this->fseek($datasize, SEEK_CUR);
 					}
 					break;
@@ -98,7 +99,7 @@ class getid3_dsdiff extends getid3_handler
 						$info['dsdiff']['sample_rate'] = getid3_lib::BigEndian2Int($this->fread(4));
 						$info['audio']['sample_rate'] = $info['dsdiff']['sample_rate'];
 					} else {
-						$this->warning('Expecting "FVER" chunk to be 4 bytes, found '.$thisChunk['size'].' bytes, skipping chunk');
+						$this->warning('Expecting "FVER" chunk to be 4 bytes, found ' . $thisChunk['size'] . ' bytes, skipping chunk');
 						$this->fseek($datasize, SEEK_CUR);
 					}
 					break;
@@ -154,7 +155,7 @@ class getid3_dsdiff extends getid3_handler
 						$thisComment['string_length']   = getid3_lib::BigEndian2Int(substr($COMT, 10, 4));
 						$thisComment['comment_text'] = $this->fread($thisComment['string_length']);
 						if ($thisComment['string_length'] % 2) {
-							// commentText[] is the description of the Comment. This text must be padded with a byte at the end, if needed, to make it an even number of bytes long. This pad byte, if present, is not included in count.
+							// commentText[] is the description of the Comment. This text must be padded with a byte at the end, if needed, to make it an even number of bytes long. This pad byte, if present, is not require_onced in count.
 							$this->fseek(1, SEEK_CUR);
 						}
 						$thisComment['comment_type']      = $this->DSDIFFcmtType($thisComment['comment_type_id']);
@@ -180,7 +181,7 @@ class getid3_dsdiff extends getid3_handler
 					$thisChunk['string_length']  = getid3_lib::BigEndian2Int(substr($MARK, 18, 4));
 					$thisChunk['description'] = ($thisChunk['string_length'] ? $this->fread($thisChunk['string_length']) : '');
 					if ($thisChunk['string_length'] % 2) {
-						// markerText[] is the description of the marker. This text must be padded with a byte at the end, if needed, to make it an even number of bytes long. This pad byte, if present, is not included in count.
+						// markerText[] is the description of the marker. This text must be padded with a byte at the end, if needed, to make it an even number of bytes long. This pad byte, if present, is not require_onced in count.
 						$this->fseek(1, SEEK_CUR);
 					}
 					$thisChunk['marker_type'] = $this->DSDIFFmarkType($thisChunk['marker_type_id']);
@@ -191,7 +192,7 @@ class getid3_dsdiff extends getid3_handler
 					$thisChunk['string_length']  = getid3_lib::BigEndian2Int($this->fread(4));
 					$thisChunk['description'] = ($thisChunk['string_length'] ? $this->fread($thisChunk['string_length']) : '');
 					if ($thisChunk['string_length'] % 2) {
-						// This text must be padded with a byte at the end, if needed, to make it an even number of bytes long. This pad byte, if present, is not included in count.
+						// This text must be padded with a byte at the end, if needed, to make it an even number of bytes long. This pad byte, if present, is not require_onced in count.
 						$this->fseek(1, SEEK_CUR);
 					}
 
@@ -212,7 +213,7 @@ class getid3_dsdiff extends getid3_handler
 				case 'ID3 ':
 					$endOfID3v2 = $this->ftell() + $datasize; // we will need to reset the filepointer after parsing ID3v2
 
-					getid3_lib::IncludeDependency(GETID3_INCLUDEPATH.'module.tag.id3v2.php', __FILE__, true);
+					getid3_lib::IncludeDependency(GETID3_INCLUDEPATH . 'module.tag.id3v2.php', __FILE__, true);
 					$getid3_temp = new getID3();
 					$getid3_temp->openfile($this->getid3->filename, $this->getid3->info['filesize'], $this->getid3->fp);
 					$getid3_id3v2 = new getid3_id3v2($getid3_temp);
@@ -231,7 +232,7 @@ class getid3_dsdiff extends getid3_handler
 					$this->fseek($datasize, SEEK_CUR);
 					break;
 				default:
-					$this->warning('Unhandled chunk "'.$thisChunk['name'].'"');
+					$this->warning('Unhandled chunk "' . $thisChunk['name'] . '"');
 					$this->fseek($datasize, SEEK_CUR);
 					break;
 			}
@@ -251,7 +252,8 @@ class getid3_dsdiff extends getid3_handler
 	 *
 	 * @return string
 	 */
-	public static function DSDIFFcmtType($cmtType) {
+	public static function DSDIFFcmtType($cmtType)
+	{
 		static $DSDIFFcmtType = array(
 			0 => 'General (album) Comment',
 			1 => 'Channel Comment',
@@ -267,7 +269,8 @@ class getid3_dsdiff extends getid3_handler
 	 *
 	 * @return string
 	 */
-	public static function DSDIFFcmtRef($cmtType, $cmtRef) {
+	public static function DSDIFFcmtRef($cmtType, $cmtRef)
+	{
 		static $DSDIFFcmtRef = array(
 			2 => array(  // Sound Source
 				0 => 'DSD recording',
@@ -288,12 +291,12 @@ class getid3_dsdiff extends getid3_handler
 				return '';
 			case 1:
 				// If the comment type is Channel Comment, the comment reference defines the channel number to which the comment belongs
-				return ($cmtRef ? 'channel '.$cmtRef : 'all channels');
+				return ($cmtRef ? 'channel ' . $cmtRef : 'all channels');
 			case 2:
 			case 3:
 				return (isset($DSDIFFcmtRef[$cmtType][$cmtRef]) ? $DSDIFFcmtRef[$cmtType][$cmtRef] : 'reserved');
 		}
-		return 'unsupported $cmtType='.$cmtType;
+		return 'unsupported $cmtType=' . $cmtType;
 	}
 
 	/**
@@ -301,7 +304,8 @@ class getid3_dsdiff extends getid3_handler
 	 *
 	 * @return string
 	 */
-	public static function DSDIFFmarkType($markType) {
+	public static function DSDIFFmarkType($markType)
+	{
 		static $DSDIFFmarkType = array(
 			0 => 'TrackStart',   // Entry point for a Track start
 			1 => 'TrackStop',    // Entry point for ending a Track
@@ -311,5 +315,4 @@ class getid3_dsdiff extends getid3_handler
 		);
 		return (isset($DSDIFFmarkType[$markType]) ? $DSDIFFmarkType[$markType] : 'reserved');
 	}
-
 }

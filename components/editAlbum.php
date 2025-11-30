@@ -1,12 +1,12 @@
 <?php
+require_once __DIR__ . "/../conect.php";
+require_once __DIR__ . "/../functions.php";
 function renderEditAlbum()
 {
-
+    global $conexao;
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-    include __DIR__ . "/../conect.php";
-    include __DIR__ . "/../functions.php";
     if (!isset($_SESSION['usuario'])) header("Location: index.php");
     if (isset($_GET['id_album'])) {
         header("Location: addMusicForm.php?id_album={$_GET['id_album']}");
@@ -46,4 +46,6 @@ function renderEditAlbum()
     }
     echo '<br><a href="#" onclick="loadComponent(\'mainMenu\')">Voltar à página inicial</a>';
 }
-echo renderEditAlbum();
+if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
+    echo renderEditAlbum();
+}

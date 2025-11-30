@@ -1,5 +1,5 @@
 <?php
-include "conect.php";
+require_once "conect.php";
 
 if (isset($_GET['id_musica'])) {
     $id = $_GET['id_musica'];

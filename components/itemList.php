@@ -1,5 +1,7 @@
  <?php
-  include __DIR__ . "/../conect.php";
+  require_once __DIR__ . "/../conect.php";
+  require_once __DIR__ . "/../functions.php";
+  require_once __DIR__ . "/singleItem.php";
   function renderItemList()
   {
     global $conexao;
@@ -34,8 +36,5 @@
 
   // Quando acessado diretamente via fetch (AJAX)
   if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
-    include __DIR__ . "/../conect.php";
-    include __DIR__ . "/../functions.php";
-    include __DIR__ . "/singleItem.php";
     echo renderItemList();
   }

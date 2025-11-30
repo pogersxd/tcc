@@ -6,7 +6,7 @@
 /////////////////////////////////////////////////////////////////
 //                                                             //
 // /helperapps/readme.txt - part of getID3()                   //
-// List of binary files required under Windows for some        //
+// List of binary files require_onced under Windows for some        //
 // features and/or file formats                                //
 // See /readme.txt for more details                            //
 //                                                            ///

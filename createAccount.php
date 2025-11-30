@@ -2,8 +2,8 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require_once "conect.php";
-require_once "functions.php";
+require_once __DIR__ . "/conect.php";
+require_once __DIR__ . "/functions.php";
 
 header("Content-Type: application/json");
 $nome =  mysqli_real_escape_string($conexao, $_POST["nome"]);

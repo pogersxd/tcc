@@ -2,12 +2,10 @@
   if (session_status() === PHP_SESSION_NONE) {
     session_start();
   }
-  require_once "./components/leftBar.php";
-  require_once "./components/header.php";
-  require_once "./components/mainMenu.php";
-  require_once "./components/player.php";
-  require_once "./conect.php";
-  require_once "./functions.php";
+  require_once __DIR__ . "/components/leftBar.php";
+  require_once __DIR__ . "/components/header.php";
+  require_once __DIR__ . "/components/mainMenu.php";
+  require_once __DIR__ . "/components/player.php";
   ?>
  <!DOCTYPE html>
  <html lang="pt-br">

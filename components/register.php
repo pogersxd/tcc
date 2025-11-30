@@ -3,10 +3,10 @@ function renderRegister()
 {
     return <<<HTML
     <form id="register">
-        Nome: <input type="text" name="nome" required><br>
-        Email: <input type="email" name="email" required><br>
-        Senha: <input type="password" name="senha" id="senha" pattern=".{6,20}" title="Digite uma senha entre 6 e 20 dígitos" required><br>
-        Confirmar senha: <input type="password" name="senha" id="confirmar" required><br>
+        Nome: <input type="text" name="nome" require_onced><br>
+        Email: <input type="email" name="email" require_onced><br>
+        Senha: <input type="password" name="senha" id="senha" pattern=".{6,20}" title="Digite uma senha entre 6 e 20 dígitos" require_onced><br>
+        Confirmar senha: <input type="password" name="senha" id="confirmar" require_onced><br>
         <button type="submit" id="botao" disabled>Registrar</button>
         <div id="mensagem" style="color: red;"></div>
     </form>
@@ -37,5 +37,6 @@ function renderRegister()
     </script>
     HTML;
 }
-
-echo renderRegister();
+if ($_SERVER["SCRIPT_FILENAME"] === __FILE__) {
+    echo renderRegister();
+}
