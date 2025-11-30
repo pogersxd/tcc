@@ -102,8 +102,6 @@ img {
   flex: 1;
   border-radius: inherit;
   gap: inherit;
-  width: 100%;
-  height: 100%;
   overflow: hidden;
 }
 
@@ -121,9 +119,10 @@ img {
 .main-menu {
   width: 80%;
   min-width: 60%;
+  padding: 25px;
   display: flex;
+  flex-direction: column;
   flex: 1;
-  height: 100%;
   background-color: var(--cor-principal-30);
   border-radius: 0 inherit 0 inherit;
   overflow: hidden;
@@ -161,7 +160,6 @@ img {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 25px;
   gap: 10px;
   max-height: 100%;
   overflow-y: auto;
@@ -251,7 +249,6 @@ img {
 
 .teste-componente {
   color: white;
-  padding: 25px;
   display: flex;
   flex-direction: column;
   gap: 10px;

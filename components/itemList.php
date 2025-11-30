@@ -1,4 +1,5 @@
  <?php
+  include __DIR__ . "/../conect.php";
   function renderItemList()
   {
     global $conexao;
@@ -17,8 +18,7 @@
         $nome = $usuario['nome'];
         $html .= renderSingleItem($capa, $musica, $titulo, $nome);
       }
-    } else
-      $html = "<b>Nenhuma música cadastrada!</b>";
+    } else $html = "<b>Nenhuma música cadastrada!</b>";
     return <<<HTML
         <div class="item-list">
           <div class="item-list__header">
@@ -34,8 +34,8 @@
 
   // Quando acessado diretamente via fetch (AJAX)
   if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
-    require_once __DIR__ . "/../conect.php";
-    require_once __DIR__ . "/../functions.php";
-    require_once __DIR__ . "/singleItem.php";
+    include __DIR__ . "/../conect.php";
+    include __DIR__ . "/../functions.php";
+    include __DIR__ . "/singleItem.php";
     echo renderItemList();
   }

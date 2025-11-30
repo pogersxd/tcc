@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include_once "./getID3/getid3/getid3.php";
 include_once "conect.php";
 include_once "functions.php";

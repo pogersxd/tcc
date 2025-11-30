@@ -1,5 +1,7 @@
  <?php
-  session_start();
+  if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+  }
   require_once "./components/leftBar.php";
   require_once "./components/header.php";
   require_once "./components/mainMenu.php";
@@ -28,6 +30,7 @@
    <?= renderPlayer(); ?>
    <script src="./components/playerScript.js"></script>
    <script src="app.js"></script>
+   <script src="modal.js"></script>
  </body>
 
  </html>

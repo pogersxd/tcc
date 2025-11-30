@@ -1,22 +1,30 @@
 <?php
-session_start();
-require_once 'conect.php';
-require_once 'functions.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+include 'conect.php';
+include 'functions.php';
+
+header("Content-Type: application/json");
 $email = $_POST["email"];
 $senha = $_POST["senha"];
+$response = [];
 if (registroExiste($conexao, 'usuario', 'email', $email)) {
     $sql = mysqli_query($conexao, "SELECT senha from usuario where email = '$email'");
     $senhaBD = mysqli_fetch_assoc($sql)['senha'];
     if (password_verify($senha, $senhaBD)) {
         $banco = mysqli_fetch_assoc(mysqli_query($conexao, "SELECT * FROM usuario where email = '$email'"));
         $_SESSION["usuario"] = $banco;
-        header("Location: index.php");
+        $response["status"] = "success";
+        $response["message"] = "Login feito com sucesso!";
     } else {
-        session_start();
-        $_SESSION["errou"] = true;
-        header("Location: ./login");
+        $response["status"] = "error";
+        $response["message"] = "Email ou senha incorretos.";
+        $response["nextComponent"] = "login";
     }
 } else {
-    $_SESSION["errou"] = true;
-    header("Location: ./login");
+    $response["status"] = "error";
+    $response["message"] = "Email ou senha incorretos.";
+    $response["nextComponent"] = "login";
 }
+echo json_encode($response);

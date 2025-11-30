@@ -1,7 +1,11 @@
 <?php
-session_start();
+header("Content-Type: application/json");
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include_once "conect.php";
 include_once "functions.php";
+$response = [];
 if (!isset($_SESSION['usuario']) or !$_POST) {
     echo "Erro na sessão";
     echo "<a href='index.php'>Voltar à página inicial</a>";
@@ -40,38 +44,24 @@ if (!isset($_SESSION['usuario']) or !$_POST) {
                     $tabelaAlbum = mysqli_query($conexao, "SELECT id_album FROM album WHERE capa='$nomeArquivoExtensao'");
                     $album = mysqli_fetch_assoc($tabelaAlbum);
                     $id_album = $album['id_album'];
-                    header("Location: editAlbum.php?id_album=$id_album");
+                    $response["status"] = "success";
+                    $response["message"] = "Album cadastrado!";
+                    $response["nextComponent"] = "editAlbum";
                 }
-            } else header("Location: addAlbumForm.php?erro=0");
-        } else header("Location: addAlbumForm.php?erro=1");
-    } else header("Location: addAlbumForm.php?erro=2");
+            } else {
+                $response["status"] = "error";
+                $response["message"] = "Formato de arquivo inválido (apenas arquivo de imagem)";
+                $response["nextComponent"] = "addAlbumForm";
+            }
+        } else {
+            $response["status"] = "error";
+            $response["message"] = "Arquivo muito grande (máx 10MB)";
+            $response["nextComponent"] = "addAlbumForm";
+        }
+    } else {
+        $response["status"] = "error";
+        $response["message"] = "Já existe um álbum com esse nome";
+        $response["nextComponent"] = "addAlbumForm";
+    }
 }
-    // $extensao = $nomeSeparado[$ultimaPosicao];
-    
-    // $nomeArquivoExtensao = $nomeArquivo . "." . $extensao;
-    
-    // $check = getimagesize($_FILES["arquivo"]["tmp_name"]);
-    // if (!$check) {
-//     echo "Este arquivo não é uma imagem!";
-// }
-
-// if ($_FILES["arquivo"]['size'] > 1024 * 1024) {
-//     echo "O arquivo é muito grande!";
-// }
-// if (
-//     $extensao != "jpg" &&
-//     $extensao != "png" &&
-//     $extensao != "jpeg" &&
-//     $extensao != "gif"
-// ) {
-//     echo "A extensão do arquivo é inválida!";
-// }
-// $feitoUpload = move_uploaded_file($_FILES["arquivo"]["tmp_name"], $pasta . $nomeArquivoExtensao);
-
-// if ($feitoUpload) {
-//     require_once "conexao.php";
-//     $conexao = conectar();
-//     $sql = "INSERT INTO arquivo (nome, caminho) VALUES ('$nome', '$nomeArquivoExtensao')";
-//     executarSQL($conexao, $sql);
-// }
-// header("Location: listar_arquivos.php");
+echo json_encode($response);

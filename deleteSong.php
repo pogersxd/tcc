@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once "conect.php";
 require_once "functions.php";
 if (isset($_SESSION['usuario']) || isset($_GET['id_musica']) || isset($_GET['id_album'])) {

@@ -1,5 +1,5 @@
  <?php
-  include_once "itemList.php";
+  include "itemList.php";
   function renderMainMenu()
   {
     $html = renderItemList();
@@ -8,4 +8,7 @@
               $html
           </div>
         HTML;
+  }
+  if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
+    echo renderMainMenu();
   }
