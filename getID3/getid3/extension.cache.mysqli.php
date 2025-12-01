@@ -59,7 +59,7 @@
  *   ndbm                dbm_filename, lock_filename
  *   db2                 dbm_filename, lock_filename
  *   db3                 dbm_filename, lock_filename
- *   db4                 dbm_filename, lock_filename  (PHP5 require_onced)
+ *   db4                 dbm_filename, lock_filename  (PHP5 required)
  *
  *   PHP must have write access to both dbm_filename and lock_filename.
  *

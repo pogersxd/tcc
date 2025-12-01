@@ -61,7 +61,7 @@ class getid3_dsdiff extends getid3_handler
 				$this->error('Invalid chunk name "' . $thisChunk['name'] . '" (' . getid3_lib::PrintHexBytes($thisChunk['name']) . ') at offset ' . $thisChunk['offset'] . ', aborting parsing');
 			}
 			$thisChunk['size'] = getid3_lib::BigEndian2Int(substr($ChunkHeader, 4, 8));
-			$datasize = $thisChunk['size'] + ($thisChunk['size'] % 2); // "If the data is an odd number of bytes in length, a pad byte must be added at the end. The pad byte is not require_onced in ckDataSize."
+			$datasize = $thisChunk['size'] + ($thisChunk['size'] % 2); // "If the data is an odd number of bytes in length, a pad byte must be added at the end. The pad byte is not required in ckDataSize."
 
 			switch ($thisChunk['name']) {
 				case 'FRM8':
@@ -155,7 +155,7 @@ class getid3_dsdiff extends getid3_handler
 						$thisComment['string_length']   = getid3_lib::BigEndian2Int(substr($COMT, 10, 4));
 						$thisComment['comment_text'] = $this->fread($thisComment['string_length']);
 						if ($thisComment['string_length'] % 2) {
-							// commentText[] is the description of the Comment. This text must be padded with a byte at the end, if needed, to make it an even number of bytes long. This pad byte, if present, is not require_onced in count.
+							// commentText[] is the description of the Comment. This text must be padded with a byte at the end, if needed, to make it an even number of bytes long. This pad byte, if present, is not required in count.
 							$this->fseek(1, SEEK_CUR);
 						}
 						$thisComment['comment_type']      = $this->DSDIFFcmtType($thisComment['comment_type_id']);
@@ -181,7 +181,7 @@ class getid3_dsdiff extends getid3_handler
 					$thisChunk['string_length']  = getid3_lib::BigEndian2Int(substr($MARK, 18, 4));
 					$thisChunk['description'] = ($thisChunk['string_length'] ? $this->fread($thisChunk['string_length']) : '');
 					if ($thisChunk['string_length'] % 2) {
-						// markerText[] is the description of the marker. This text must be padded with a byte at the end, if needed, to make it an even number of bytes long. This pad byte, if present, is not require_onced in count.
+						// markerText[] is the description of the marker. This text must be padded with a byte at the end, if needed, to make it an even number of bytes long. This pad byte, if present, is not required in count.
 						$this->fseek(1, SEEK_CUR);
 					}
 					$thisChunk['marker_type'] = $this->DSDIFFmarkType($thisChunk['marker_type_id']);
@@ -192,7 +192,7 @@ class getid3_dsdiff extends getid3_handler
 					$thisChunk['string_length']  = getid3_lib::BigEndian2Int($this->fread(4));
 					$thisChunk['description'] = ($thisChunk['string_length'] ? $this->fread($thisChunk['string_length']) : '');
 					if ($thisChunk['string_length'] % 2) {
-						// This text must be padded with a byte at the end, if needed, to make it an even number of bytes long. This pad byte, if present, is not require_onced in count.
+						// This text must be padded with a byte at the end, if needed, to make it an even number of bytes long. This pad byte, if present, is not required in count.
 						$this->fseek(1, SEEK_CUR);
 					}
 

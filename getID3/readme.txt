@@ -25,7 +25,7 @@ getID3 Commercial License: https://www.getid3.org/#gCL
 
 *****************************************************************
 *****************************************************************
-Copies of each of the above licenses are require_onced in the 'licenses'
+Copies of each of the above licenses are required in the 'licenses'
 directory of the getID3 distribution.
 
 
@@ -151,7 +151,7 @@ Requirements
 * PHP 5.3.0 (or higher) for getID3() 1.9.17 (and up)
 * PHP 5.3.0 (or higher) for getID3() 2.0.x  (and up)
 * at least 4MB memory for PHP. 8MB or more is highly recommended.
-  12MB is require_onced with all modules loaded.
+  12MB is required with all modules loaded.
 
 
 

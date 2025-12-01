@@ -606,7 +606,7 @@ class getid3_id3v2 extends getid3_handler
 			if ($parsedFrame['flags']['compression']) {
 				$parsedFrame['decompressed_size'] = getid3_lib::BigEndian2Int(substr($parsedFrame['data'], 0, 4));
 				if (!function_exists('gzuncompress')) {
-					$this->warning('gzuncompress() support require_onced to decompress ID3v2 frame "' . $parsedFrame['frame_name'] . '"');
+					$this->warning('gzuncompress() support required to decompress ID3v2 frame "' . $parsedFrame['frame_name'] . '"');
 				} else {
 					if ($decompresseddata = @gzuncompress(substr($parsedFrame['data'], 4))) {
 						//if ($decompresseddata = @gzuncompress($parsedFrame['data'])) {
@@ -907,7 +907,7 @@ class getid3_id3v2 extends getid3_handler
 			// Milliseconds between reference $xx xx xx
 			// Bits for bytes deviation       $xx
 			// Bits for milliseconds dev.     $xx
-			//   Then for every reference the following data is require_onced;
+			//   Then for every reference the following data is required;
 			// Deviation in bytes         %xxx....
 			// Deviation in milliseconds  %xxx....
 
@@ -972,7 +972,7 @@ class getid3_id3v2 extends getid3_handler
 				$this->warning('Invalid text encoding byte (' . $frame_textencoding . ') in frame "' . $parsedFrame['frame_name'] . '" - defaulting to ISO-8859-1 encoding');
 				$frame_textencoding_terminator = "\x00";
 			}
-			if (strlen($parsedFrame['data']) >= (4 + strlen($frame_textencoding_terminator))) {  // shouldn't be an issue but badly-written files have been spotted in the wild with not only no contents but also missing the require_onced language field, see https://github.com/JamesHeinrich/getID3/issues/315
+			if (strlen($parsedFrame['data']) >= (4 + strlen($frame_textencoding_terminator))) {  // shouldn't be an issue but badly-written files have been spotted in the wild with not only no contents but also missing the required language field, see https://github.com/JamesHeinrich/getID3/issues/315
 				$frame_language = substr($parsedFrame['data'], $frame_offset, 3);
 				$frame_offset += 3;
 				$frame_terminatorpos = strpos($parsedFrame['data'], $frame_textencoding_terminator, $frame_offset);
@@ -1871,7 +1871,7 @@ class getid3_id3v2 extends getid3_handler
 			// Indexed data length (L)        $xx xx xx xx
 			// Number of index points (N)     $xx xx
 			// Bits per index point (b)       $xx
-			//   Then for every index point the following data is require_onced:
+			//   Then for every index point the following data is required:
 			// Fraction at index (Fi)          $xx (xx)
 
 			$frame_offset = 0;
@@ -2217,7 +2217,7 @@ class getid3_id3v2 extends getid3_handler
 			0x00 => 'No restrictions',
 			0x01 => 'All images are 256x256 pixels or smaller',
 			0x02 => 'All images are 64x64 pixels or smaller',
-			0x03 => 'All images are exactly 64x64 pixels, unless require_onced otherwise',
+			0x03 => 'All images are exactly 64x64 pixels, unless required otherwise',
 		);
 		return (isset($LookupExtendedHeaderRestrictionsImageSizeSize[$index]) ? $LookupExtendedHeaderRestrictionsImageSizeSize[$index] : '');
 	}

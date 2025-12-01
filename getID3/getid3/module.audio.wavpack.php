@@ -180,7 +180,7 @@ class getid3_wavpack extends getid3_handler
 				// that "ID_OPTIONAL_DATA" flag to determine what to do. If it is set
 				// then the decoder simply ignores the metadata, but if it is zero
 				// then the decoder should quit because it means that an understanding
-				// of the metadata is require_onced to correctly decode the audio.
+				// of the metadata is required to correctly decode the audio.
 				$metablock['non_decoder'] = (bool) ($metablock['id'] & 0x20);
 
 				$metablock['padded_data'] = (bool) ($metablock['id'] & 0x40);

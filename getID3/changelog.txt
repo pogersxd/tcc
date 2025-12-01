@@ -338,7 +338,7 @@ Version History
     * Bugfix: [demo/demo.browse] might not display file or directory name
       on PHP >=5.4.0 if filename not UTF-8 friendly
     * Bugfix: [demo/demo.zip] could read more uncompressed data than
-      require_onced; fail to read file if local data descriptor not set;
+      required; fail to read file if local data descriptor not set;
       some wrong require_once files were listed; improved error message display
     * Bugfix: [module.audio-video.riff] INFO comment chunks with null name
       chunk not parsed correctly
@@ -501,7 +501,7 @@ Version History
       - note current unofficial 64-bit PHP builds for Windows
         do not actually support 64-bit integers so are still
         subject to normal 32-bit limits (2GB) for file functions
-    » PHP v5.0.5 now minimum require_onced version.
+    » PHP v5.0.5 now minimum required version.
       Removed obsolte functions from getid3.lib.php:
         md5_file, sha1_file, image_type_to_mime_type
     » IDivX tags now parsed on AVI files
@@ -607,7 +607,7 @@ Version History
 
 
 1.8.0: [2010-11-23] James Heinrich
-    » Changes require_onced for PHP v5.3+ compatability, including:
+    » Changes required for PHP v5.3+ compatability, including:
       - change ereg* functions to preg_* equivalents
       - declare functions static as needed
       note: users of PHP v4.x may need to stay with getID3 v1.7.x
@@ -755,7 +755,7 @@ Version History
 
 1.7.8b1: [2007-01-08] Allan Hansen
     » Major update to readme.txt
-    » PHP 4.2.0 require_onced
+    » PHP 4.2.0 required
     » Tagwriter require_onces metaflac 1.1.1+ in order to write FLAC tags.
     » Removed broken and non-fixable tagwriting module for real format.
     ! Developers please help fix the above module:
@@ -945,7 +945,7 @@ Version History
       New file: /getid3/module.graphic.tiff.php
     » Modified iconv_fallback to work with UTF-8, UTF-16, UTF-16LE,
       UTF-16BE and ISO-8859-1 even if iconv() and/or XML support is
-      not available. This means that iconv() is no longer require_onced
+      not available. This means that iconv() is no longer required
       for most users of getID3()
       (thanks Jeremia, khleeØbitpass*com)
     » Added support for Monkey's Audio v3.98+ (thanks ahØartemis*dk)
@@ -1084,7 +1084,7 @@ Version History
 
 
 1.7.0b5: [December-29-2003] James Heinrich
-    » Windows only: Various binary files are now require_onced for some
+    » Windows only: Various binary files are now required for some
       file formats, especially for tag writing, as well as md5sum
       (and other) calculations. These binaries are now stored in the
       directory defined as GETID3_HELPERAPPSDIR in getid3.php
@@ -1102,7 +1102,7 @@ Version History
                 /getid3/write.metaflac.php
                 /getid3/write.vorbiscomment.php
     » Added support for Shorten - require_onces shorten binary (head.exe
-      is also require_onced under Windows).
+      is also required under Windows).
       New file: /getid3/module.audio.shorten.php
     » Added support for RKAU
       New file: /getid3/module.audio.rkau.php
@@ -1114,7 +1114,7 @@ Version History
       New file: /getid3/extention.cache.dbm.php
     » Added sha1_data hash option  (thanks ahØartemis*dk)
     » Added option to allow getID3() to skip ID3v2 without parsing it
-      for faster scanning when ID3v2 data is not require_onced. If you
+      for faster scanning when ID3v2 data is not required. If you
       want to enable this feature delete /getid3/module.tag.id3v2.php
       (thanks ahØartemis*dk)
     ¤ 8-bit WAV data now calculates MD5 checksums as normal, not
@@ -1869,7 +1869,7 @@ Version History
      of higher-priority tags (for example, 'artist' in ID3v1 will be
      ignored if already specified in APE), but missing values will be
      filled in (for example, if 'album' is specified in ID3v2 but not
-     in APE, it will be require_onced in the ['comments'] array).
+     in APE, it will be required in the ['comments'] array).
      Note: Root keys (['title'], ['artist'], etc) are NOT available
      in this or future versions of getID3().
      (thanks ahØartemis*dk)
@@ -2312,8 +2312,8 @@ Version History
      Note: Untested on 16-bit and 32-bit BMPs because I couldn't find
      any sample files - if you know of a program that can create such
      files, please email infoØgetid3Øorg
-     Note: Support for RGB (uncompressed), RLE8 and RLE4 is require_onced
-     and tested. BITFIELDS support is also require_onced for 16- & 32-bit
+     Note: Support for RGB (uncompressed), RLE8 and RLE4 is required
+     and tested. BITFIELDS support is also required for 16- & 32-bit
      formats, but it's untested, so if anybody has any test files
      please send them to infoØgetid3Øorg
      Note: Support currently only for Windows-format BMPs, and trying
@@ -2637,7 +2637,7 @@ Version History
    * Bugfix: MPEG videos weren't being detected (they were being
      parsed as MP3), and even if they were, there was a typo in
      getMPEGHeaderFilepointer()  (thanks Christian Fritz)
-   * Bugfix: getid3.functions.php wasn't being require_onced in
+   * Bugfix: getid3.functions.php wasn't being required in
      getid3.write.php  (thanks mikeØftl*com)
    * Bugfix: Browse:___ directory name in getid3.check.php wasn't
      correct with directory names with ' and other strange characters
@@ -2701,7 +2701,7 @@ Version History
      (thanks davidbullockØtech-center*com)
    getID3v1Filepointer() cleaned up & shortened
    Moved the require_once() statements around so that a minimum of code
-     is require_onced
+     is required
 
 
 1.4.0b7: [April-03-2002] James Heinrich
@@ -2831,7 +2831,7 @@ Version History
    ¤ RVA2/EQU2 description returned under ['description'] rather than
      ['identification']
    ¤ RVAD/EQUA adjustments now returned as signed integers, rather than
-     absolute values which require_onced you to check flag bytes
+     absolute values which required you to check flag bytes
    ¤ RVRB/REV data no longer returns under ['reverb'] array
    ¤ WXXX/W???/LINK frames now return ['url'] instead of ['URL']
    ¤ USER now properly returns both ['language'] and ['languagename']
@@ -2950,7 +2950,7 @@ Version History
 
 1.2.3: [January-24-2002] James Heinrich
    » ID3v2.2.x 3-char FrameIDs are now fully parsed
-     Note: While I've require_onced support for 22 FrameIDs as defined in
+     Note: While I've required support for 22 FrameIDs as defined in
      the specs, I don't have test files for all of them. If anyone
      knows of programs that generate any of the untested tags, please
      email infoØgetid3Øorg ! Here's what's tested and not:
@@ -2991,7 +2991,7 @@ Version History
    » All 4-character FrameIDs are now fully parsed according to the
      specs at http://www.id3.org/id3v2.4.0-frames.txt
      ¤ This means that most no longer return ['flags'] and ['data']
-     Note: While I've require_onced support for 30 FrameIDs as defined in
+     Note: While I've required support for 30 FrameIDs as defined in
      the specs, I don't have test files for all of them. If anyone
      knows of programs that generate any of the untested tags, please
      email infoØgetid3Øorg ! Here's what's tested and not:

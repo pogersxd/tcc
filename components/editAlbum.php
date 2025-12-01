@@ -11,7 +11,7 @@ function renderEditAlbum()
     if (isset($_GET['id_album'])) {
         header("Location: addMusicForm.php?id_album={$_GET['id_album']}");
     }
-    echo "<h1>Seus álbuns</h1>";
+    echo "<h2>Seus álbuns</h2>";
     if (registroExiste($conexao, 'album', 'id_usuario', $_SESSION['usuario']['id_usuario'])) {
         $sql = mysqli_query($conexao, "SELECT * FROM album WHERE id_usuario = {$_SESSION['usuario']['id_usuario']}");
         echo '

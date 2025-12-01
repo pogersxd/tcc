@@ -621,7 +621,7 @@ class getID3
 			$this->info['error']               = array();           // filled in later, unset if not used
 			$this->info['warning']             = array();           // filled in later, unset if not used
 			$this->info['comments']            = array();           // filled in later, unset if not used
-			$this->info['encoding']            = $this->encoding;   // require_onced by id3v2 and iso modules - can be unset at the end if desired
+			$this->info['encoding']            = $this->encoding;   // required by id3v2 and iso modules - can be unset at the end if desired
 
 			// option_max_2gb_check
 			if ($this->option_max_2gb_check) {
@@ -755,7 +755,7 @@ class getID3
 			// module require_onces mb_convert_encoding/iconv support
 			// Check encoding/iconv support
 			if (!empty($determined_format['iconv_req']) && !function_exists('mb_convert_encoding') && !function_exists('iconv') && !in_array($this->encoding, array('ISO-8859-1', 'UTF-8', 'UTF-16LE', 'UTF-16BE', 'UTF-16'))) {
-				$errormessage = 'mb_convert_encoding() or iconv() support is require_onced for this module (' . $determined_format['require_once'] . ') for encodings other than ISO-8859-1, UTF-8, UTF-16LE, UTF16-BE, UTF-16. ';
+				$errormessage = 'mb_convert_encoding() or iconv() support is required for this module (' . $determined_format['require_once'] . ') for encodings other than ISO-8859-1, UTF-8, UTF-16LE, UTF16-BE, UTF-16. ';
 				if (GETID3_OS_ISWINDOWS) {
 					$errormessage .= 'PHP does not have mb_convert_encoding() or iconv() support. Please enable php_mbstring.dll / php_iconv.dll in php.ini, and copy php_mbstring.dll / iconv.dll from c:/php/dlls to c:/windows/system32';
 				} else {

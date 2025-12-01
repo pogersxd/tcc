@@ -26,5 +26,5 @@ getID3 Commercial License: https://www.getid3.org/#gCL
 *****************************************************************
 *****************************************************************
 
-Copies of each of the above licenses are require_onced in the 'licenses'
+Copies of each of the above licenses are required in the 'licenses'
 directory of the getID3 distribution.

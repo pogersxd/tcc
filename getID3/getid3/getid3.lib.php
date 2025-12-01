@@ -128,7 +128,7 @@ class getid3_lib
 				define('PHP_INT_MIN', ~PHP_INT_MAX);
 			}
 		}
-		// if integers are 64-bit - no other check require_onced
+		// if integers are 64-bit - no other check required
 		if ($hasINT64 || (($num <= PHP_INT_MAX) && ($num >= PHP_INT_MIN))) {
 			return true;
 		}

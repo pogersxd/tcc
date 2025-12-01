@@ -58,7 +58,7 @@
  *   ndbm                dbm_filename, lock_filename
  *   db2                 dbm_filename, lock_filename
  *   db3                 dbm_filename, lock_filename
- *   db4                 dbm_filename, lock_filename  (PHP5 require_onced)
+ *   db4                 dbm_filename, lock_filename  (PHP5 required)
  *
  *   PHP must have write access to both dbm_filename and lock_filename.
  *
@@ -112,12 +112,12 @@ class getID3_cached_dbm extends getID3
 
         // Check for dba extension
         if (!extension_loaded('dba')) {
-            throw new Exception('PHP is not compiled with dba support, require_onced to use DBM style cache.');
+            throw new Exception('PHP is not compiled with dba support, required to use DBM style cache.');
         }
 
         // Check for specific dba driver
         if (!function_exists('dba_handlers') || !in_array($cache_type, dba_handlers())) {
-            throw new Exception('PHP is not compiled --with ' . $cache_type . ' support, require_onced to use DBM style cache.');
+            throw new Exception('PHP is not compiled --with ' . $cache_type . ' support, required to use DBM style cache.');
         }
 
         // Store lock filename for cleanup operations

@@ -73,14 +73,14 @@ class getid3_asf extends getid3_handler
 
 
 		// ASF structure:
-		// * Header Object [require_onced]
-		//   * File Properties Object [require_onced]   (global file attributes)
-		//   * Stream Properties Object [require_onced] (defines media stream & characteristics)
-		//   * Header Extension Object [require_onced]  (additional functionality)
+		// * Header Object [required]
+		//   * File Properties Object [required]   (global file attributes)
+		//   * Stream Properties Object [required] (defines media stream & characteristics)
+		//   * Header Extension Object [required]  (additional functionality)
 		//   * Content Description Object          (bibliographic information)
 		//   * Script Command Object               (commands for during playback)
 		//   * Marker Object                       (named jumped points within the file)
-		// * Data Object [require_onced]
+		// * Data Object [required]
 		//   * Data Packets
 		// * Index Object
 
@@ -1118,7 +1118,7 @@ class getid3_asf extends getid3_handler
 						// * Horizontal Pixels / Meter  DWORD        32              // horizontal resolution of target device in pixels per meter - defined as biXPelsPerMeter field of BITMAPINFOHEADER structure
 						// * Vertical Pixels / Meter    DWORD        32              // vertical resolution of target device in pixels per meter - defined as biYPelsPerMeter field of BITMAPINFOHEADER structure
 						// * Colors Used Count          DWORD        32              // number of color indexes in the color table that are actually used - defined as biClrUsed field of BITMAPINFOHEADER structure
-						// * Important Colors Count     DWORD        32              // number of color index require_onced for displaying bitmap. if zero, all colors are require_onced. defined as biClrImportant field of BITMAPINFOHEADER structure
+						// * Important Colors Count     DWORD        32              // number of color index required for displaying bitmap. if zero, all colors are required. defined as biClrImportant field of BITMAPINFOHEADER structure
 						// * Codec Specific Data        BYTESTREAM   variable        // array of codec-specific data bytes
 
 						// shortcut

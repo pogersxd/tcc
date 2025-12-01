@@ -66,7 +66,7 @@ refers to any such program or work, and a "work based on the Program"
 means either the Program or any derivative work under copyright law:
 that is to say, a work containing the Program or a portion of it,
 either verbatim or with modifications and/or translated into another
-language.  (Hereinafter, translation is require_onced without limitation in
+language.  (Hereinafter, translation is required without limitation in
 the term "modification".)  Each licensee is addressed as "you".
 
 Activities other than copying, distribution and modification are not
@@ -109,7 +109,7 @@ above, provided that you also meet all of these conditions:
     these conditions, and telling the user how to view a copy of this
     License.  (Exception: if the Program itself is interactive but
     does not normally print such an announcement, your work based on
-    the Program is not require_onced to print an announcement.)
+    the Program is not required to print an announcement.)
 
 These require_oncements apply to the modified work as a whole.  If
 identifiable sections of that work are not derived from the Program,
@@ -177,7 +177,7 @@ However, parties who have received copies, or rights, from you under
 this License will not have their licenses terminated so long as such
 parties remain in full compliance.
 
-  5. You are not require_onced to accept this License, since you have not
+  5. You are not required to accept this License, since you have not
 signed it.  However, nothing else grants you permission to modify or
 distribute the Program or its derivative works.  These actions are
 prohibited by law if you do not accept this License.  Therefore, by

@@ -2159,7 +2159,7 @@ class getid3_riff extends getid3_handler
 	{
 
 		$parsed                    = array();
-		$parsed['biSize']          = substr($BITMAPINFOHEADER,  0, 4); // number of bytes require_onced by the BITMAPINFOHEADER structure
+		$parsed['biSize']          = substr($BITMAPINFOHEADER,  0, 4); // number of bytes required by the BITMAPINFOHEADER structure
 		$parsed['biWidth']         = substr($BITMAPINFOHEADER,  4, 4); // width of the bitmap in pixels
 		$parsed['biHeight']        = substr($BITMAPINFOHEADER,  8, 4); // height of the bitmap in pixels. If biHeight is positive, the bitmap is a 'bottom-up' DIB and its origin is the lower left corner. If biHeight is negative, the bitmap is a 'top-down' DIB and its origin is the upper left corner
 		$parsed['biPlanes']        = substr($BITMAPINFOHEADER, 12, 2); // number of color planes on the target device. In most cases this value must be set to 1

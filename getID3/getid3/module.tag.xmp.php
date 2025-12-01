@@ -359,7 +359,7 @@ class Image_XMP
 					break;
 
 				case 'rdf:RDF':
-					// require_onced element immediately within x:xmpmeta; no data here
+					// required element immediately within x:xmpmeta; no data here
 					break;
 
 				case 'rdf:Description':

@@ -29,12 +29,16 @@ document.addEventListener("submit", function (event) {
   switch (form.id) {
     case "add-album-form":
       arquivo = "./addAlbum.php";
+      break;
     case "registerForm":
       arquivo = "./createAccount.php";
+      break;
     case "loginForm":
       arquivo = "./verifyLogin.php";
+      break;
     case "add-music-form":
       arquivo = "./addMusica.php";
+      break;
   }
 
   event.preventDefault();
@@ -47,7 +51,7 @@ document.addEventListener("submit", function (event) {
     .then(response => response.json())
     .then(data => {
       window.alert(data.message);
-      if (arquivo === "./verifyLogin.php" && data.status === "success") window.location.reload();
+      if (form.id === "loginForm" && data.status === "success") window.location.reload();
       else loadComponent(data.nextComponent);
     })
     .catch(err => console.error(err));
@@ -58,15 +62,14 @@ document.addEventListener("click", function (event) {
   const btnDeleteAlbum = event.target.closest(".deleteAlbumBtn");
   const manageSongs = event.target.closest(".manageSongs");
   let usado;
-  if (btnDeleteAlbum) usado = btnDeleteAlbum
-  if (manageSongs) usado = manageSongs
-
-  if (usado != null) {
+  let caminho;
+  if (btnDeleteAlbum) {
+    usado = btnDeleteAlbum;
+    caminho = "deleteAlbum.php";
     event.preventDefault();
 
     const id = usado.dataset.id;
-
-    fetch("deleteAlbum.php", {
+    fetch(caminho, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -76,6 +79,25 @@ document.addEventListener("click", function (event) {
       .then(data => {
         loadComponent(data.nextComponent)
         window.alert(data.message)
+      })
+      .catch(err => console.error(err));
+  }
+
+  if (manageSongs) {
+    usado = manageSongs
+    caminho = "components/\addMusicForm.php";
+    event.preventDefault();
+    const container = document.getElementById('main-menu');
+    const id = usado.dataset.id;
+    fetch(caminho, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: "id_album=" + encodeURIComponent(id)
+    }).then(response => response.text())
+      .then(data => {
+        container.innerHTML = data;
       })
       .catch(err => console.error(err));
   }

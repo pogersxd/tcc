@@ -73,7 +73,7 @@ class getid3_quicktime extends getid3_handler
 
 			// https://github.com/JamesHeinrich/getID3/issues/382
 			// Atom sizes are stored as 32-bit number in most cases, but sometimes (notably for "mdat")
-			// a 64-bit value is require_onced, in which case the normal 32-bit size field is set to 0x00000001
+			// a 64-bit value is required, in which case the normal 32-bit size field is set to 0x00000001
 			// and the 64-bit "real" size value is the next 8 bytes.
 			$atom_size_extended_bytes = 0;
 			$atomsize = getid3_lib::BigEndian2Int(substr($AtomHeader, 0, 4));
@@ -2726,7 +2726,7 @@ class getid3_quicktime extends getid3_handler
 				0x2E => 'High Efficiency AAC Profile @ Level 4',
 				0x2F => 'High Efficiency AAC Profile @ Level 5',
 				0xFE => 'Not part of MPEG-4 audio profiles',
-				0xFF => 'No audio capability require_onced',
+				0xFF => 'No audio capability required',
 			);
 		}
 		return (isset($QuicktimeIODSaudioProfileNameLookup[$audio_profile_id]) ? $QuicktimeIODSaudioProfileNameLookup[$audio_profile_id] : 'ISO Reserved / User Private');
@@ -2803,7 +2803,7 @@ class getid3_quicktime extends getid3_handler
 				0xFC => 'Fine Granularity Scalable Profile @ Level 4',
 				0xFD => 'Fine Granularity Scalable Profile @ Level 5',
 				0xFE => 'Not part of MPEG-4 Visual profiles',
-				0xFF => 'No visual capability require_onced',
+				0xFF => 'No visual capability required',
 			);
 		}
 		return (isset($QuicktimeIODSvideoProfileNameLookup[$video_profile_id]) ? $QuicktimeIODSvideoProfileNameLookup[$video_profile_id] : 'ISO Reserved Profile');

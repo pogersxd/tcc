@@ -190,7 +190,7 @@ class getid3_write_id3v2
 		if (getID3::is_writable(dirname($this->filename))) {
 
 			// preferred method - only one copying operation, minimal chance of corrupting
-			// original file if script is interrupted, but require_onced directory to be writeable
+			// original file if script is interrupted, but required directory to be writeable
 			if (is_readable($this->filename) && is_file($this->filename) && ($fp_source = fopen($this->filename, 'rb'))) {
 
 				// Initialize getID3 engine
@@ -488,7 +488,7 @@ class getid3_write_id3v2
 					// Milliseconds between reference $xx xx xx
 					// Bits for bytes deviation       $xx
 					// Bits for milliseconds dev.     $xx
-					//   Then for every reference the following data is require_onced;
+					//   Then for every reference the following data is required;
 					// Deviation in bytes         %xxx....
 					// Deviation in milliseconds  %xxx....
 					if (($source_data_array['framesbetweenreferences'] > 0) && ($source_data_array['framesbetweenreferences'] <= 65535)) {
@@ -986,11 +986,11 @@ class getid3_write_id3v2
 							case 'IPLS':
 							case 'RVAD':
 							case 'EQUA':
-								// no additional data require_onced
+								// no additional data required
 								break;
 							case 'RBUF':
 								if ($this->majorversion == 3) {
-									// no additional data require_onced
+									// no additional data required
 								} else {
 									$this->errors[] = $source_data_array['frameid'] . ' is not a valid Frame Identifier in ' . $frame_name . ' (in ID3v2.' . $this->majorversion . ')';
 								}
@@ -998,7 +998,7 @@ class getid3_write_id3v2
 
 							default:
 								if ((substr($source_data_array['frameid'], 0, 1) == 'T') || (substr($source_data_array['frameid'], 0, 1) == 'W')) {
-									// no additional data require_onced
+									// no additional data required
 								} else {
 									$this->errors[] = $source_data_array['frameid'] . ' is not a valid Frame Identifier in ' . $frame_name . ' (in ID3v2.' . $this->majorversion . ')';
 								}
@@ -1166,7 +1166,7 @@ class getid3_write_id3v2
 					// Indexed data length (L)        $xx xx xx xx
 					// Number of index points (N)     $xx xx
 					// Bits per index point (b)       $xx
-					//   Then for every index point the following data is require_onced:
+					//   Then for every index point the following data is required:
 					// Fraction at index (Fi)          $xx (xx)
 					if (!$this->IsWithinBitRange($source_data_array['datastart'], 32, false)) {
 						$this->errors[] = 'Invalid Indexed Data Start in ' . $frame_name . ' (' . $source_data_array['datastart'] . ') (range = 0 to 4294967295)';

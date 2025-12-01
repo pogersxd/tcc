@@ -21,7 +21,7 @@
 /////////////////////////////////////////////////////////////////
 
 if (!defined('GETID3_INCLUDEPATH')) {
-	throw new Exception('getid3.php MUST be require_onced before calling getid3_writetags');
+	throw new Exception('getid3.php MUST be required before calling getid3_writetags');
 }
 if (!require_once(GETID3_INCLUDEPATH . 'getid3.lib.php')) {
 	throw new Exception('write.php depends on getid3.lib.php, which is missing.');
@@ -251,7 +251,7 @@ class getid3_writetags
 
 		$WritingFilesToInclude = array_merge($this->tagformats, $TagFormatsToRemove);
 
-		// Check for require_onced require_once files and require_once them
+		// Check for required require_once files and require_once them
 		foreach ($WritingFilesToInclude as $tagformat) {
 			switch ($tagformat) {
 				case 'ape':
