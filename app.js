@@ -33,6 +33,8 @@ document.addEventListener("submit", function (event) {
       arquivo = "./createAccount.php";
     case "loginForm":
       arquivo = "./verifyLogin.php";
+    case "add-music-form":
+      arquivo = "./addMusica.php";
   }
 
   event.preventDefault();
@@ -54,10 +56,15 @@ document.addEventListener("submit", function (event) {
 
 document.addEventListener("click", function (event) {
   const btnDeleteAlbum = event.target.closest(".deleteAlbumBtn");
-  if (btnDeleteAlbum) {
+  const manageSongs = event.target.closest(".manageSongs");
+  let usado;
+  if (btnDeleteAlbum) usado = btnDeleteAlbum
+  if (manageSongs) usado = manageSongs
+
+  if (usado != null) {
     event.preventDefault();
 
-    const id = btnDeleteAlbum.dataset.id;
+    const id = usado.dataset.id;
 
     fetch("deleteAlbum.php", {
       method: "POST",
@@ -72,7 +79,6 @@ document.addEventListener("click", function (event) {
       })
       .catch(err => console.error(err));
   }
-  else return;
 });
 
 

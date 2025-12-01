@@ -1,11 +1,11 @@
 <?php
+header("Content-Type: application/json");
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 require_once __DIR__ . '/conect.php';
 require_once __DIR__ . '/functions.php';
 
-header("Content-Type: application/json");
 $email = $_POST["email"];
 $senha = $_POST["senha"];
 $response = [];
@@ -17,6 +17,7 @@ if (registroExiste($conexao, 'usuario', 'email', $email)) {
         $_SESSION["usuario"] = $banco;
         $response["status"] = "success";
         $response["message"] = "Login feito com sucesso!";
+        $response["nextComponent"] = "login";
     } else {
         $response["status"] = "error";
         $response["message"] = "Email ou senha incorretos.";

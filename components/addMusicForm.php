@@ -7,22 +7,11 @@ function renderAddMusicForm()
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-    if (!isset($_SESSION['usuario']) or !isset($_GET['id_album'])) header("Location: index.php");
-    $id_album = $_GET['id_album'];
+    if (!isset($_SESSION['usuario']) or !isset($_POST['id_album'])) header("Location: index.php");
+    $id_album = $_POST['id_album'];
     $tabelaAlbum = mysqli_query($conexao, "SELECT * FROM album WHERE id_album = '$id_album'");
     $album = mysqli_fetch_assoc($tabelaAlbum);
     $tituloAlbum = $album['titulo'];
-    $erro = '';
-    $tabelaErro = [];
-    if (isset($_GET['erro'])) {
-        $tabelaErro = [
-            "Arquivo tem um formato inválido.",
-            "Arquivo muito grande.",
-            "Já existe um álbum com mesmo nome.",
-            "A música não existe mais."
-        ];
-        $erro = "<br>" . $tabelaErro[$_GET['erro']];
-    }
 ?>
     <h1>Músicas já presentes no álbum <?= "\"$tituloAlbum\"" ?>: </h1>
     <?php
@@ -56,13 +45,12 @@ function renderAddMusicForm()
             </div>";
         }
         echo "</table>";
-        if (isset($_GET['erro']) && $erro == ("<br>" . $tabelaErro[3])) echo $erro;
     } else {
         echo "<h4>Nenhuma.</h5>";
     }
     ?>
     <h1>Adicionar música ao álbum</h1>
-    <form action="addMusica.php" method="post" enctype="multipart/form-data">
+    <form id="add-music-form" enctype="multipart/form-data">
         Título: <input type="text" name="titulo" require_onced><br>
         Arquivo: (máximo de 10MB)<input type="file" name="arquivo" require_onced><br>
         Detalhes: <br><textarea name="detalhes" require_onced></textarea><br>
@@ -70,9 +58,7 @@ function renderAddMusicForm()
         <input type="submit" value="Adicionar música">
         <br><a href="index.php">Voltar à página inicial</a>
     </form>
-    <?= (isset($_GET['erro']) && $erro != ("<br>" . $tabelaErro[3])) ? $erro : '' ?>
-
 <?php }
 if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
-    echo renderAddMusicForm();
+    renderAddMusicForm();
 }

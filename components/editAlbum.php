@@ -25,7 +25,7 @@ function renderEditAlbum()
             echo "<tr>
                     <td>{$linha['titulo']}</td>
                     <td>{$linha['capa']}</td>
-                    <td><a href='addMusicForm?id_album={$linha['id_album']}'>Gerenciar músicas</a>
+                    <td><a href='#' class='manageSongs' data-id='{$linha['id_album']}'>Gerenciar músicas</a>
                     | <button onclick='" . 'openDeleteModal("album", ' . $linha['id_album'] . ")'>Excluir</button></td>
                 </tr>
                 <div id='confirmModal" . $linha['id_album'] . "' class='modal' style='display:none'>

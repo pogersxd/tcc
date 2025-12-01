@@ -35,7 +35,7 @@
           </div>  
           $logout 
           <div class="header__link">
-            <a href="./"><h1>Home</h1></a>
+            <a href="#" onclick="loadComponent('mainMenu')"><h2>Home</h2></a>
           </div>
         </div>
         HTML;

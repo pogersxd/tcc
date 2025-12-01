@@ -1,10 +1,12 @@
 <?php
+header("Content-Type: application/json");
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 require_once __DIR__ . "/getID3/getid3/getid3.php";
 require_once __DIR__ . "/conect.php";
 require_once __DIR__ . "/functions.php";
+$response = [];
 if (!isset($_SESSION['usuario']) or !$_POST) {
     echo "Erro na sessão";
     echo "<a href='index.php'>Voltar à página inicial</a>";
@@ -46,8 +48,22 @@ if (!isset($_SESSION['usuario']) or !$_POST) {
                     $duracaoSegundos = $infoID3['playtime_seconds'];
                     mysqli_query($conexao, "INSERT INTO musica (titulo, duracao, arquivo, detalhes, id_album) values ('$titulo', $duracaoSegundos, '$nomeArquivoExtensao', '$detalhes', $id_album)");
                     header("Location: addMusicForm.php?id_album={$id_album}");
+                    $response["status"] = "success";
+                    $response["message"] = "Formato de arquivo inválido (apenas arquivos de áudio)";
+                    $response["nextComponent"] = "addMusicForm";
+                    $response["id"] = $id_album;
                 }
-            } else header("Location: addMusicForm.php?id_album={$id_album}&erro=0");
-        } else header("Location: addMusicForm.php?id_album={$id_album}&erro=1");
+            } else {
+                $response["status"] = "error";
+                $response["message"] = "Formato de arquivo inválido (apenas arquivos de áudio)";
+                $response["nextComponent"] = "addMusicForm";
+                $response["id"] = $id_album;
+            }
+        } else {
+            $response["status"] = "error";
+            $response["message"] = "Arquivo muito grande (máx 10MB)";
+            $response["nextComponent"] = "addMusicForm";
+            $response["id"] = $id_album;
+        }
     } else header("Location: addMusicForm.php?id_album={$id_album}&erro=2");
 }
