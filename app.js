@@ -23,6 +23,18 @@ function loadComponent(componentName) {
     });
 }
 
+function reloadLeftBar() {
+  const leftbar = document.getElementById("left-bar");
+
+  fetch("./components/leftBar.php")
+    .then(response => response.text())
+    .then(data => {
+      leftbar.outerHTML = data;
+    })
+    .catch(err => { console.error(err) });
+}
+
+
 document.addEventListener("submit", function (event) {
   const form = event.target;
   let arquivo;
@@ -52,11 +64,24 @@ document.addEventListener("submit", function (event) {
     .then(data => {
       window.alert(data.message);
       if (form.id === "loginForm" && data.status === "success") window.location.reload();
+      if (form.id === "add-music-form" && data.status === "success") {
+        fetch("./components/addMusicForm.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: "id_album=" + encodeURIComponent(data.id)
+        }).then(response => response.text())
+          .then(data => {
+            const container = document.getElementById('main-menu');
+            container.innerHTML = data;
+            reloadLeftBar();
+          })
+          .catch(err => console.error(err));
+      }
       else loadComponent(data.nextComponent);
-    })
-    .catch(err => console.error(err));
-}
-);
+    });
+});
 
 document.addEventListener("click", function (event) {
   const btnDeleteAlbum = event.target.closest(".deleteAlbumBtn");
@@ -79,6 +104,7 @@ document.addEventListener("click", function (event) {
       .then(data => {
         loadComponent(data.nextComponent)
         window.alert(data.message)
+        reloadLeftBar();
       })
       .catch(err => console.error(err));
   }

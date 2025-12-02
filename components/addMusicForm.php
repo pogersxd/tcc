@@ -56,7 +56,7 @@ function renderAddMusicForm()
         Detalhes: <br><textarea name="detalhes" required></textarea><br>
         <input type="hidden" name="id_album" value="<?= $id_album; ?>">
         <input type="submit" value="Adicionar música">
-        <br><a href="index.php">Voltar à página inicial</a>
+        <br><a href="#" onclick="loadComponent('mainMenu')">Voltar à página inicial</a>
     </form>
 <?php }
 if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {

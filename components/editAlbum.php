@@ -3,6 +3,7 @@ require_once __DIR__ . "/../conect.php";
 require_once __DIR__ . "/../functions.php";
 function renderEditAlbum()
 {
+    echo "<div class='edit-album'>";
     global $conexao;
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
@@ -24,7 +25,7 @@ function renderEditAlbum()
         while ($linha = mysqli_fetch_assoc($sql)) {
             echo "<tr>
                     <td>{$linha['titulo']}</td>
-                    <td>{$linha['capa']}</td>
+                    <td><img class='edit-album__image' src='./assets/albumCovers/{$linha['capa']}'></td>
                     <td><a href='#' class='manageSongs' data-id='{$linha['id_album']}'>Gerenciar músicas</a>
                     | <button onclick='" . 'openDeleteModal("album", ' . $linha['id_album'] . ")'>Excluir</button></td>
                 </tr>
@@ -44,7 +45,7 @@ function renderEditAlbum()
         echo "Você não tem nenhum álbum cadastrado. <br>";
         echo "<a href='#' onclick='loadComponent(\"addAlbumForm\")'>Cadastrar álbum</a>";
     }
-    echo '<br><a href="#" onclick="loadComponent(\'mainMenu\')">Voltar à página inicial</a>';
+    echo '<br><a href="#" onclick="loadComponent(\'mainMenu\')">Voltar à página inicial</a></div>';
 }
 if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
     echo renderEditAlbum();

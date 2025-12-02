@@ -25,8 +25,11 @@
       $style = 'style="padding: 10px;"';
     }
     return <<<HTML
-          <div class="left-bar" {$style}>
+          <div id="left-bar" class="left-bar" {$style}>
             $html
           </div>
         HTML;
+  }
+  if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
+    echo renderLeftBar();
   }

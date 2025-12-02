@@ -258,6 +258,15 @@ img {
   text-decoration: underline;
 }
 
+.edit-album {
+  gap: 10px;
+}
+
+.edit-album__image {
+  aspect-ratio: 1 / 1;
+  width: 100px;
+}
+
 /* deixa o fundo escuro quando o modal aparecer */
 .modal {
     position: fixed;
