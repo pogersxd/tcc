@@ -63,7 +63,7 @@ document.addEventListener("submit", function (event) {
     .then(response => response.json())
     .then(data => {
       window.alert(data.message);
-      if (form.id === "loginForm" && data.status === "success") window.location.reload();
+
       if (form.id === "add-music-form" && data.status === "success") {
         fetch("./components/addMusicForm.php", {
           method: "POST",
@@ -80,6 +80,10 @@ document.addEventListener("submit", function (event) {
           .catch(err => console.error(err));
       }
       else loadComponent(data.nextComponent);
+
+      if (form.id === "loginForm" && data.status === "success") {
+        window.location.reload();
+      }
     });
 });
 
