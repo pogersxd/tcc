@@ -15,8 +15,9 @@ function loadComponent(componentName) {
     })
     .then((html) => {
       if (componentName === "mainMenu") container.outerHTML = html;
-      else container.innerHTML = html;
-      if (componentName === "register") confirmarSenha();
+      else {
+        container.innerHTML = html;
+      }
     })
     .catch((error) => {
       console.error("Erro ao carregar componente:", error);
@@ -30,6 +31,17 @@ function reloadLeftBar() {
     .then(response => response.text())
     .then(data => {
       leftbar.outerHTML = data;
+    })
+    .catch(err => { console.error(err) });
+}
+
+function reloadHeader() {
+  const header = document.getElementById("header");
+
+  fetch("./components/header.php")
+    .then(response => response.text())
+    .then(data => {
+      header.outerHTML = data;
     })
     .catch(err => { console.error(err) });
 }
@@ -90,15 +102,13 @@ document.addEventListener("submit", function (event) {
 document.addEventListener("click", function (event) {
   const btnDeleteAlbum = event.target.closest(".deleteAlbumBtn");
   const manageSongs = event.target.closest(".manageSongs");
-  let usado;
-  let caminho;
+  const btnDeleteSong = event.target.closest(".deleteSongBtn");
+
   if (btnDeleteAlbum) {
-    usado = btnDeleteAlbum;
-    caminho = "deleteAlbum.php";
     event.preventDefault();
 
-    const id = usado.dataset.id;
-    fetch(caminho, {
+    const id = btnDeleteAlbum.dataset.id;
+    fetch("./deleteAlbum.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -114,12 +124,13 @@ document.addEventListener("click", function (event) {
   }
 
   if (manageSongs) {
-    usado = manageSongs
-    caminho = "components/\addMusicForm.php";
     event.preventDefault();
+
     const container = document.getElementById('main-menu');
-    const id = usado.dataset.id;
-    fetch(caminho, {
+
+    const id = manageSongs.dataset.id;
+
+    fetch("./components/\addMusicForm.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -131,6 +142,43 @@ document.addEventListener("click", function (event) {
       })
       .catch(err => console.error(err));
   }
+
+  if (btnDeleteSong) {
+    event.preventDefault();
+
+    const id_musica = btnDeleteSong.dataset.song;
+    const id_album = btnDeleteSong.dataset.album;
+
+    fetch("./deleteSong.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: "id_musica=" + encodeURIComponent(id_musica) +
+        "&id_album=" + encodeURIComponent(id_album)
+    }).then(response => response.json())
+      .then(data => {
+        window.alert(data.message);
+        fetch(`./components/${data.nextComponent}.php`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: "id_album=" + encodeURIComponent(data.id)
+        }).then(response => response.text())
+          .then(data => {
+            const container = document.getElementById('main-menu');
+            container.innerHTML = data;
+            if (data.status === "success") reloadLeftBar();
+          })
+          .catch(err => {
+            console.error(err);
+          })
+      }).catch(err => {
+        console.error(err);
+      })
+  }
+
 });
 
 
@@ -141,6 +189,11 @@ function confirmarSenha() {
   const botao = document.getElementById("botao");
   const mensagem = document.getElementById("mensagem");
 
+  if (!senha || !confirmarSenha || !botao || !mensagem) {
+    console.log("erro");
+    return;
+  }
+
   function verificarSenhas() {
     if (senha.value === "" || confirmarSenha.value === "") {
       mensagem.innerHTML = "";
@@ -150,6 +203,7 @@ function confirmarSenha() {
     if (senha.value != confirmarSenha.value) {
       mensagem.innerHTML = "As senhas não coincidem";
       botao.disabled = true;
+      return;
     } else {
       mensagem.innerHTML = "";
       botao.disabled = false;

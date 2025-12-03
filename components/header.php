@@ -11,7 +11,7 @@
       $usuario = mysqli_fetch_assoc($tabelaUsuario);
       $foto = $usuario['foto'];
       $nome = $usuario['nome'];
-      $perfil = "<a class='header__icon' href='./ownProfile.php'><img class='header__icon' src='assets/pfps/{$foto}' alt='Foto de {$nome}'></a>";
+      $perfil = "<a class='header__icon' href='#' onclick='loadComponent(\"profile\")'><img class='header__icon' src='assets/pfps/{$foto}' alt='Foto de {$nome}'></a>";
       $logout = '
           <a href="#" onclick="loadComponent(\'addAlbumForm\');" class="header__link">
             <h2>Adicionar álbum</h2>
