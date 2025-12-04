@@ -32,5 +32,5 @@ if (isset($_SESSION['usuario']) || isset($_POST['id_musica']) || isset($_POST['i
         $response["nextComponent"] = "addMusicForm";
         $response["id"] = $id_album;
     }
-}
+} else header("Location: index.php");
 echo json_encode($response);

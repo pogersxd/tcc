@@ -15,12 +15,8 @@ function renderProfile()
             <h3>Bio: </h3>
             {$_SESSION['usuario']['bio']}
             <div>
-            <script>
-                confirmarSenha();
-                console.log("carregado");
-                </script>
             HTML;
-    }
+    } else header("Location: index.php");
 }
 if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
     echo renderProfile();

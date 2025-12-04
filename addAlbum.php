@@ -7,8 +7,7 @@ require_once __DIR__ . "/conect.php";
 require_once __DIR__ . "/functions.php";
 $response = [];
 if (!isset($_SESSION['usuario']) or !$_POST) {
-    echo "Erro na sessão";
-    echo "<a href='index.php'>Voltar à página inicial</a>";
+    header("Location: index.php");
 } else {
     $titulo = mysqli_real_escape_string($conexao, $_POST["titulo"]);
     $id_usuario = $_SESSION['usuario']['id_usuario'];

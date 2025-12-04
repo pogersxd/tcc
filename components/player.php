@@ -32,6 +32,6 @@
           HTML;
     }
   }
-  if ($_SERVER["SCRIPT_FILENAME"] === __FILE__) {
+  if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
     echo renderPlayer();
   }

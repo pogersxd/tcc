@@ -18,6 +18,7 @@ function loadComponent(componentName) {
       else {
         container.innerHTML = html;
       }
+      if (componentName === "register") confirmarSenha();
     })
     .catch((error) => {
       console.error("Erro ao carregar componente:", error);
@@ -188,11 +189,6 @@ function confirmarSenha() {
   const confirmarSenha = document.getElementById("confirmar");
   const botao = document.getElementById("botao");
   const mensagem = document.getElementById("mensagem");
-
-  if (!senha || !confirmarSenha || !botao || !mensagem) {
-    console.log("erro");
-    return;
-  }
 
   function verificarSenhas() {
     if (senha.value === "" || confirmarSenha.value === "") {

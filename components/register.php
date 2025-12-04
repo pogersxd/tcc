@@ -11,11 +11,12 @@ function renderRegister()
         <button type="submit" id="botao" disabled>Registrar</button>
         <div id="mensagem" style="color: red;"></div>
     </form>
-    Já tem uma conta? <a href="./login.php">Entre</a>
-    <a href="./index.php">Continuar sem conta</a>
+    Já tem uma conta? <a href="#" onclick="loadComponent('login')">Entre</a><br>
+    <a href="#" onclick="loadComponent('mainMenu')">Continuar sem conta</a>
     </div>
     HTML;
 }
-if ($_SERVER["SCRIPT_FILENAME"] === __FILE__) {
+
+if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
     echo renderRegister();
 }
