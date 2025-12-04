@@ -265,6 +265,8 @@ img {
 .edit-album__image {
   aspect-ratio: 1 / 1;
   width: 100px;
+  object-fit: cover;
+  overflow: hidden;
 }
 
 /* deixa o fundo escuro quando o modal aparecer */

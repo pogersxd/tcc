@@ -20,11 +20,12 @@ function loadComponent(componentName) {
       }
       if (componentName === "register") confirmarSenha();
     })
-    .catch((error) => {
-      console.error("Erro ao carregar componente:", error);
+    .catch((err) => {
+      console.error("Erro ao carregar componente:", err);
     });
 }
 
+// recarrega a barra lateral
 function reloadLeftBar() {
   const leftbar = document.getElementById("left-bar");
 
@@ -48,6 +49,7 @@ function reloadHeader() {
 }
 
 
+// submit de formularios
 document.addEventListener("submit", function (event) {
   const form = event.target;
   let arquivo;
@@ -100,6 +102,7 @@ document.addEventListener("submit", function (event) {
     });
 });
 
+// clique de links que necessitam de atributos semelhante a href = "xx.php?item=x"
 document.addEventListener("click", function (event) {
   const btnDeleteAlbum = event.target.closest(".deleteAlbumBtn");
   const manageSongs = event.target.closest(".manageSongs");
@@ -183,7 +186,7 @@ document.addEventListener("click", function (event) {
 });
 
 
-// Register
+// funcao que executa a verificacao das duas senhas
 function confirmarSenha() {
   const senha = document.getElementById("senha");
   const confirmarSenha = document.getElementById("confirmar");
@@ -207,4 +210,86 @@ function confirmarSenha() {
   }
   senha.addEventListener("input", verificarSenhas);
   confirmarSenha.addEventListener("input", verificarSenhas);
+}
+
+// carrega a musica no arquivo do player
+function loadMusica(musica) {
+  const player = document.getElementById('player');
+
+  fetch("./components/player.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "musica=" + encodeURIComponent(musica),
+  }
+  ).then(response => response.text())
+    .then(data => {
+      player.innerHTML = data;
+      logicaPlayer();
+    }).catch(err => console.error(err));
+}
+
+// carrega a logica do player
+function logicaPlayer() {
+  const audio = document.getElementById("player__audio");
+  const icon = document.getElementById("player__pause-icon");
+  const time = document.getElementById("player__time");
+
+  if (audio && icon && time) {
+    function formatTime(seconds) {
+      const minutes = Math.floor(seconds / 60)
+        .toString()
+        .padStart(2, "0");
+      const secondsRemaining = Math.floor(seconds % 60)
+        .toString()
+        .padStart(2, "0");
+      const time = minutes + ":" + secondsRemaining;
+      return time;
+    }
+    icon.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play();
+        icon.classList.remove("fa-circle-play");
+        icon.classList.add("fa-circle-pause");
+      } else {
+        audio.pause();
+        icon.classList.remove("fa-circle-pause");
+        icon.classList.add("fa-circle-play");
+      }
+    });
+    audio.addEventListener("timeupdate", () => {
+      time.innerHTML = formatTime(audio.currentTime);
+    });
+  }
+}
+
+// abre o modal de deletar
+function openDeleteModal(type, id) {
+  const modal = document.getElementById("confirmModal" + id);
+  const modalTitle = document.getElementById("modalTitle" + id);
+  const modalMessage = document.getElementById("modalMessage" + id);
+  const cancelBtn = modal.querySelector(".cancelBtn");
+  let dado;
+
+  modal.style.display = "flex";
+  if (type == "music") {
+    dado = "id_musica";
+    modalTitle.innerHTML = "<h2>Excluir música</h2>";
+  } else {
+    dado = "id_album";
+    modalTitle.innerHTML = "<h2>Excluir álbum</h2>";
+  }
+
+  fetch("getAlbumMusicModal.php?" + dado + "=" + id)
+    .then(res => res.text()
+      .then(data => {
+        if (type == "music") modalMessage.innerHTML = "<p>Deseja excluir a seguinte música? <br><b>" + data + " ?</b></p>";
+        else modalMessage.innerHTML = "<p>Ao excluir este álbum, excluirá também as seguintes músicas, tem certeza?<br> <b>" + data + "</b></p>";
+      }))
+
+  cancelBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    modal.style.display = "none";
+  })
 }
