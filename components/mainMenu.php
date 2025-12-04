@@ -2,7 +2,7 @@
   require_once __DIR__ . "/itemList.php";
   function renderMainMenu()
   {
-    $html = renderItemList();
+    $html = renderItemList('musicas');
     return <<<HTML
           <div class="main-menu" id="main-menu">
             $html

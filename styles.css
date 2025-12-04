@@ -180,6 +180,10 @@ img {
   gap: 10px;
   justify-items: center;
 }
+.item-list__buttons {
+  display: flex;
+  gap: 10px;
+}
 
 /* Single Item */
 
@@ -195,6 +199,12 @@ img {
   max-width: fit-content;
   gap: 10px;
 }
+
+.single-item__artist {
+  align-items: center;
+  width: 150px;
+}
+
 
 .single-item:hover {
   background-color: var(--cor-azul-10);
@@ -212,6 +222,10 @@ img {
   border-radius: 5%;
   overflow: hidden;
   display: flex;
+}
+
+.single-item__image-artist {
+  border-radius: 50%;
 }
 
 .single-item__icon {

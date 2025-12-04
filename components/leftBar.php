@@ -1,5 +1,5 @@
  <?php
-  require_once __DIR__ . "/singleItem.php";
+  require_once __DIR__ . "/singleItemMusica.php";
   require_once __DIR__ . "/../conect.php";
   function renderLeftBar()
   {
@@ -18,7 +18,7 @@
         $usuarioQuery = mysqli_query($conexao, "SELECT * FROM usuario WHERE id_usuario = '$id_usuario'");
         $usuario = mysqli_fetch_assoc($usuarioQuery);
         $nome = $usuario['nome'];
-        $html .= renderSingleItem($capa, $musica, $titulo, $nome);
+        $html .= renderSingleItemMusica($capa, $musica, $titulo, $nome);
       }
     } else {
       $html = "<b>Nenhuma música cadastrada!</b>";

@@ -48,6 +48,36 @@ function reloadHeader() {
     .catch(err => { console.error(err) });
 }
 
+function loadItemList(tipo) {
+  const container = document.getElementById("main-menu");
+  let nome;
+  switch (tipo) {
+    case "musicas":
+      nome = "Músicas";
+      break;
+    case "albuns":
+      nome = "Álbuns";
+      break;
+    case "artistas":
+      nome = "Artistas";
+      break;
+  }
+
+  fetch("./components/itemList.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "tipo=" + encodeURIComponent(tipo)
+  }).then(response => response.text())
+    .then(data => {
+      container.innerHTML = data;
+      const texto = document.getElementById("tipo-item-list");
+      texto.textContent = nome;
+    }).catch(err => {
+      console.error(err);
+    })
+}
 
 // submit de formularios
 document.addEventListener("submit", function (event) {
