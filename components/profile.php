@@ -4,7 +4,16 @@ function renderProfile()
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-    if (!$_POST || $_POST['id_usuario'] == $_SESSION['usuario']['id_usuario']) {
+
+    $sessionIgualPost = false;
+    if (isset($_SESSION['usuario']['id_usuario']) && $_POST) {
+        if ($_POST['id_usuario'] == $_SESSION['usuario']['id_usuario']) $sessionIgualPost = true;
+    }
+
+    $postNaoExisteMasSessaoSim = false;
+    if (!$_POST && isset($_SESSION['usuario'])) $postNaoExisteMasSessaoSim = true;
+
+    if ($sessionIgualPost || $postNaoExisteMasSessaoSim) {
         return <<<HTML
             <div>
             <h1>Meu perfil</h1>

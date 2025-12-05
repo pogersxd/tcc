@@ -6,6 +6,7 @@
     global $conexao;
     if (isset($_POST["musica"]) && registroExiste($conexao, "musica", "arquivo", $_POST['musica'])) {
       $musica = $_POST["musica"];
+      $id_usuario = $_POST["id_usuario"];
       $sql =  "SELECT * FROM musica WHERE arquivo = '$musica'";
       $tabelaMusicaQuery = mysqli_query($conexao, $sql);
       if (!$tabelaMusicaQuery) {
@@ -13,7 +14,11 @@
       }
       $tabelaMusica = mysqli_fetch_assoc($tabelaMusicaQuery);
       $titulo = $tabelaMusica['titulo'];
+      $id_album = $tabelaMusica['id_album'];
       $duracao = gmdate("i:s", $tabelaMusica['duracao']);
+      $tabelaUsuarioQuery = mysqli_query($conexao, "SELECT nome FROM usuario WHERE id_usuario = '$id_usuario'");
+      $tabelaUsuario = mysqli_fetch_assoc($tabelaUsuarioQuery);
+      $nome = $tabelaUsuario['nome'];
       $pausePlay = "pause";
       $toca = 'autoplay';
       return <<<HTML
@@ -22,7 +27,8 @@
                 <div class="player__button">
                   <i class="fa-solid fa-circle-{$pausePlay}" id="player__pause-icon"></i>
                 </div>
-                <p>{$titulo}</p>
+                <a href="#">{$titulo}</a>
+                <a href="#">{$nome}</a>
                 <audio class="player__audio" id="player__audio" {$toca}>
                   <source src="./assets/songs/{$musica}">
                 </audio>

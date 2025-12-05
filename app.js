@@ -186,7 +186,7 @@ function deleteSong(id_musica, id_album) {
       "Content-Type": "application/x-www-form-urlencoded"
     },
     body: "id_musica=" + encodeURIComponent(id_musica) +
-      "&id_album=" + encodeURIComponent(id_album)
+      "&id_album=" + encodeURIComponent(id_album),
   }).then(response => response.json())
     .then(data => {
       window.alert(data.message);
@@ -210,6 +210,19 @@ function deleteSong(id_musica, id_album) {
     })
 }
 
+function renderAlbum(id_album) {
+  const container = document.getElementById('main-menu');
+  fetch('./components/album.php', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "id_album=" + encodeURIComponent(id_album),
+  }).then(response => response.text())
+    .then(data => {
+      container.innerHTML = data;
+    }).catch(err => console.error(err));
+}
 
 
 // funcao que executa a verificacao das duas senhas
@@ -239,7 +252,7 @@ function confirmarSenha() {
 }
 
 // carrega a musica no arquivo do player
-function loadMusica(musica) {
+function loadMusica(musica, id_usuario) {
   const player = document.getElementById('player');
 
   fetch("./components/player.php", {
@@ -247,7 +260,8 @@ function loadMusica(musica) {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     },
-    body: "musica=" + encodeURIComponent(musica),
+    body: "musica=" + encodeURIComponent(musica) +
+      "&id_usuario=" + encodeURIComponent(id_usuario),
   }
   ).then(response => response.text())
     .then(data => {
