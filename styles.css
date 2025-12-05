@@ -70,7 +70,7 @@ img {
   text-align: center;
 }
 .header__link:hover {
-  background-color: var(--cor-azul-40);
+  background-color: var(--cor-azul-30);
   border-radius: 15px;
 }
 
@@ -170,7 +170,7 @@ img {
   flex-direction: row;
   justify-content: space-between;
 }
-.item-list__show-more {
+.item-list__show-more:hover {
   text-decoration: underline;
 }
 
