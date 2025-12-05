@@ -48,6 +48,21 @@ function reloadHeader() {
     .catch(err => { console.error(err) });
 }
 
+function loadProfile(id) {
+  const container = document.getElementById('main-menu');
+
+  fetch("./components/profile.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "id_usuario=" + encodeURIComponent(id)
+  }).then(response => response.text())
+    .then(data => {
+      container.innerHTML = data;
+    }).catch(err => console.error(err));
+}
+
 function loadItemList(tipo) {
   const container = document.getElementById("main-menu");
   let nome;
@@ -133,87 +148,68 @@ document.addEventListener("submit", function (event) {
 });
 
 // clique de links que necessitam de atributos semelhante a href = "xx.php?item=x"
-document.addEventListener("click", function (event) {
-  const btnDeleteAlbum = event.target.closest(".deleteAlbumBtn");
-  const manageSongs = event.target.closest(".manageSongs");
-  const btnDeleteSong = event.target.closest(".deleteSongBtn");
+function deleteAlbum(id) {
+  fetch("./deleteAlbum.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "id_album=" + encodeURIComponent(id)
+  }).then(response => response.json())
+    .then(data => {
+      loadComponent(data.nextComponent)
+      window.alert(data.message)
+      reloadLeftBar();
+    })
+    .catch(err => console.error(err));
+}
 
-  if (btnDeleteAlbum) {
-    event.preventDefault();
+function manageSongs(id) {
+  const container = document.getElementById('main-menu');
+  fetch("./components/\addMusicForm.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "id_album=" + encodeURIComponent(id)
+  }).then(response => response.text())
+    .then(data => {
+      container.innerHTML = data;
+    })
+    .catch(err => console.error(err));
+}
 
-    const id = btnDeleteAlbum.dataset.id;
-    fetch("./deleteAlbum.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: "id_album=" + encodeURIComponent(id)
-    }).then(response => response.json())
-      .then(data => {
-        loadComponent(data.nextComponent)
-        window.alert(data.message)
-        reloadLeftBar();
-      })
-      .catch(err => console.error(err));
-  }
+function deleteSong(id_musica, id_album) {
+  fetch("./deleteSong.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "id_musica=" + encodeURIComponent(id_musica) +
+      "&id_album=" + encodeURIComponent(id_album)
+  }).then(response => response.json())
+    .then(data => {
+      window.alert(data.message);
+      fetch(`./components/${data.nextComponent}.php`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "id_album=" + encodeURIComponent(data.id)
+      }).then(response => response.text())
+        .then(dados => {
+          const container = document.getElementById('main-menu');
+          container.innerHTML = dados;
+          if (data.status === "success") reloadLeftBar();
+        })
+        .catch(err => {
+          console.error(err);
+        })
+    }).catch(err => {
+      console.error(err);
+    })
+}
 
-  if (manageSongs) {
-    event.preventDefault();
-
-    const container = document.getElementById('main-menu');
-
-    const id = manageSongs.dataset.id;
-
-    fetch("./components/\addMusicForm.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: "id_album=" + encodeURIComponent(id)
-    }).then(response => response.text())
-      .then(data => {
-        container.innerHTML = data;
-      })
-      .catch(err => console.error(err));
-  }
-
-  if (btnDeleteSong) {
-    event.preventDefault();
-
-    const id_musica = btnDeleteSong.dataset.song;
-    const id_album = btnDeleteSong.dataset.album;
-
-    fetch("./deleteSong.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: "id_musica=" + encodeURIComponent(id_musica) +
-        "&id_album=" + encodeURIComponent(id_album)
-    }).then(response => response.json())
-      .then(data => {
-        window.alert(data.message);
-        fetch(`./components/${data.nextComponent}.php`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          body: "id_album=" + encodeURIComponent(data.id)
-        }).then(response => response.text())
-          .then(data => {
-            const container = document.getElementById('main-menu');
-            container.innerHTML = data;
-            if (data.status === "success") reloadLeftBar();
-          })
-          .catch(err => {
-            console.error(err);
-          })
-      }).catch(err => {
-        console.error(err);
-      })
-  }
-
-});
 
 
 // funcao que executa a verificacao das duas senhas

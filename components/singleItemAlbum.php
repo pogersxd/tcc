@@ -10,7 +10,7 @@
                 </div>
                 <div class="single-item__texts">
                   <a href="#" class="single-item__texts-title">{$titulo}</a><br>
-                  <a href="#" class="single-item__texts-type">{$nome}</a>
+                  <a href="#" onclick="loadProfile('{$id_usuario}')" class="single-item__texts-type">{$nome}</a>
                 </div>
               </div>
             HTML;

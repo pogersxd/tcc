@@ -38,7 +38,7 @@ function renderAddMusicForm()
                     <h2 id='modalTitle" . $linha['id_musica'] . "'></h2>
                     <p id='modalMessage" . $linha['id_musica'] . "'></p>
                     <div class='modal-buttons'>
-                        <a id='confirmDelete' href='#' class='deleteSongBtn' data-song='{$linha['id_musica']}' data-album='{$id_album}'>Excluir</a>
+                        <a id='confirmDelete' href='#' class='deleteSongBtn' onclick=\"deleteSong('{$linha['id_musica']}', '{$linha['id_album']}')\">Excluir</a>
                         <a id='cancelDelete' class='cancelBtn' href='#'>Cancelar</a>
                     </div>
                 </div>

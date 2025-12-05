@@ -16,7 +16,9 @@ function renderProfile()
             {$_SESSION['usuario']['bio']}
             <div>
             HTML;
-    } else header("Location: index.php");
+    } else {
+        $id_usuario = $_POST['id_usuario'];
+    }
 }
 if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
     echo renderProfile();

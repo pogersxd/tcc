@@ -1,5 +1,5 @@
  <?php
-  function renderSingleItemMusica($imagem, $musica, $nomeMusica, $nome)
+  function renderSingleItemMusica($imagem, $musica, $nomeMusica, $nome, $id_usuario)
   {
 
     return <<<HTML
@@ -10,7 +10,7 @@
                 </div>
                 <div class="single-item__texts">
                   <a href="#" class="single-item__texts-title">{$nomeMusica}</a><br>
-                  <a href="#" class="single-item__texts-type">{$nome}</a>
+                  <a href="#" onclick="loadProfile('{$id_usuario}')" class="single-item__texts-type">{$nome}</a>
                 </div>
               </div>
             HTML;

@@ -23,7 +23,7 @@ function renderEditAlbum()
             echo "<tr>
                     <td>{$linha['titulo']}</td>
                     <td><img class='edit-album__image' src='./assets/albumCovers/{$linha['capa']}'></td>
-                    <td><a href='#' class='manageSongs' data-id='{$linha['id_album']}'>Gerenciar músicas</a>
+                    <td><a href='#' class='manageSongs' onclick=\"manageSongs('{$linha['id_album']}')\">Gerenciar músicas</a>
                     | <button onclick='" . 'openDeleteModal("album", ' . $linha['id_album'] . ")'>Excluir</button></td>
                 </tr>
                 <div id='confirmModal" . $linha['id_album'] . "' class='modal' style='display:none'>
@@ -31,7 +31,7 @@ function renderEditAlbum()
                         <h2 id='modalTitle" . $linha['id_album'] . "'></h2>
                         <p id='modalMessage" . $linha['id_album'] . "'></p>
                         <div class='modal-buttons'>
-                            <a id='confirmDelete' class='deleteAlbumBtn' href='#' data-id='{$linha['id_album']}'>Excluir</a>
+                            <a id='confirmDelete' class='deleteAlbumBtn' href='#' onclick=\"deleteAlbum('{$linha['id_album']}')\">Excluir</a>
                             <a id='cancelDelete' class='cancelBtn' href='#'>Cancelar</a>
                         </div>
                     </div>

@@ -18,7 +18,7 @@
         $usuarioQuery = mysqli_query($conexao, "SELECT * FROM usuario WHERE id_usuario = '$id_usuario'");
         $usuario = mysqli_fetch_assoc($usuarioQuery);
         $nome = $usuario['nome'];
-        $html .= renderSingleItemMusica($capa, $musica, $titulo, $nome);
+        $html .= renderSingleItemMusica($capa, $musica, $titulo, $nome, $id_usuario);
       }
     } else {
       $html = "<b>Nenhuma música cadastrada!</b>";
