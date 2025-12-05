@@ -6,7 +6,7 @@ header("Content-Type: application/json");
 require_once __DIR__ . "/conect.php";
 require_once __DIR__ . "/functions.php";
 $response = [];
-if (isset($_SESSION['usuario']) || isset($_POST['id_album'])) {
+if (isset($_SESSION['usuario']) && isset($_POST['id_album'])) {
     $id_album = $_POST['id_album'];
     if (registroExiste($conexao, 'album', 'id_album', $id_album)) {
         if (registroExiste($conexao, 'musica', 'id_album', $id_album)) {

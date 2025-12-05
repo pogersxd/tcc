@@ -265,7 +265,7 @@ function loadMusica(musica, id_usuario) {
   }
   ).then(response => response.text())
     .then(data => {
-      player.innerHTML = data;
+      player.outerHTML = data;
       logicaPlayer();
     }).catch(err => console.error(err));
 }
@@ -275,6 +275,7 @@ function logicaPlayer() {
   const audio = document.getElementById("player__audio");
   const icon = document.getElementById("player__pause-icon");
   const time = document.getElementById("player__time");
+  const progress = document.getElementById('player__progress');
 
   if (audio && icon && time) {
     function formatTime(seconds) {
@@ -299,8 +300,15 @@ function logicaPlayer() {
       }
     });
     audio.addEventListener("timeupdate", () => {
-      time.innerHTML = formatTime(audio.currentTime);
+      const percent = (audio.currentTime / audio.duration) * 100;
+      progress.value = percent;
+      time.innerHTML = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
     });
+
+    progress.addEventListener("input", () => {
+      const newTime = (progress.value / 100) * audio.duration;
+      audio.currentTime = newTime;
+    })
   }
 }
 

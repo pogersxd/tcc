@@ -13,7 +13,7 @@ function renderAlbum()
         $id_usuario = $tabelaAlbum['id_album'];
         $html = "
         Capa do Álbum: <br>
-        <img src='../assets/albumCovers/{$capa}'> 
+        <img src='./assets/albumCovers/{$capa}' class='album__image'> 
         
         ";
     }

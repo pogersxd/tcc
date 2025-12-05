@@ -15,7 +15,6 @@
       $tabelaMusica = mysqli_fetch_assoc($tabelaMusicaQuery);
       $titulo = $tabelaMusica['titulo'];
       $id_album = $tabelaMusica['id_album'];
-      $duracao = gmdate("i:s", $tabelaMusica['duracao']);
       $tabelaUsuarioQuery = mysqli_query($conexao, "SELECT nome FROM usuario WHERE id_usuario = '$id_usuario'");
       $tabelaUsuario = mysqli_fetch_assoc($tabelaUsuarioQuery);
       $nome = $tabelaUsuario['nome'];
@@ -28,13 +27,14 @@
                   <i class="fa-solid fa-circle-{$pausePlay}" id="player__pause-icon"></i>
                 </div>
                 <a href="#">{$titulo}</a>
-                <a href="#">{$nome}</a>
+                <a href="#" onclick="loadProfile('{$id_usuario}')">{$nome}</a>
                 <audio class="player__audio" id="player__audio" {$toca}>
                   <source src="./assets/songs/{$musica}">
                 </audio>
                 <div class="player__time">
-                  <span id="player__time">00:00</span> / {$duracao}
+                  <span id="player__time"></span>
                 </div>
+                <input type="range" id="player__progress" min="0" max="100" value="0" step="0.1">
               </div>
             </div>
           HTML;
