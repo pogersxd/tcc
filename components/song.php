@@ -54,6 +54,24 @@ function renderSong()
     
       <!-- Outras informações -->
       <section class="song-extra">
+        <button class="song-add-playlist" onclick="openAddToPlaylistModal('{$id_musica}')">
+            <i class="fa-solid fa-plus"></i> Adicionar à playlist
+        </button>
+
+        <div class="modal" id="addToPlaylistModal">
+            <div class="modal-content">
+                <h3>Adicionar à playlist</h3>
+
+                <div id="playlistList">
+                <!-- playlists do usuário via PHP ou JS -->
+                </div>
+
+                <div class="modal-buttons">
+                <a id="cancelAddPlaylist" onclick="closeAddToPlaylistModal()">Cancelar</a>
+                </div>
+            </div>
+        </div>
+
         <div class="song-extra__item">
           <span class="song-extra__label">Álbum</span>
           <a href="#">Nome do Álbum</a>

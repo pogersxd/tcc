@@ -385,6 +385,56 @@ function logicaPlayer() {
   }
 }
 
+//playlists
+let selectedSongId = null;
+
+function openAddToPlaylistModal(songId) {
+  selectedSongId = songId;
+
+  document.getElementById("addToPlaylistModal").style.display = "flex";
+
+  loadUserPlaylists();
+}
+
+function closeAddToPlaylistModal() {
+  document.getElementById("addToPlaylistModal").style.display = "none";
+}
+
+function loadUserPlaylists() {
+  fetch("./get_playlists.php")
+    .then(res => res.json())
+    .then(playlists => {
+      const container = document.getElementById("playlistList");
+      container.innerHTML = "";
+
+      playlists.forEach(p => {
+        container.innerHTML += `
+          <div class="playlist-option" onclick="addSongToPlaylist(${p.id})">
+            ${p.nome}
+          </div>
+        `;
+      });
+      if (container.innerHTML == "") container.innerHTML = "Você não tem playlists";
+    }).catch(err => console.error(err));
+}
+
+function addSongToPlaylist(playlistId) {
+  fetch("./add_song_playlist.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      song_id: selectedSongId,
+      playlist_id: playlistId
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      alert(data.message);
+      closeAddToPlaylistModal();
+    });
+}
+
+
 // abre o modal de deletar
 function openDeleteModal(type, id) {
   const modal = document.getElementById("confirmModal" + id);

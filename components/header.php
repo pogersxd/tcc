@@ -13,6 +13,9 @@
       $nome = $usuario['nome'];
       $perfil = "<a class='header__icon' href='#' onclick='loadComponent(\"profile\")'><img class='header__icon' src='assets/pfps/{$foto}' alt='Foto de {$nome}'></a>";
       $logout = '
+          <a href="#" onclick="loadComponent(\'addPlaylistForm\');" class="header__link">
+            <h2>Adicionar playlist</h2>
+          </a>
           <a href="#" onclick="loadComponent(\'addAlbumForm\');" class="header__link">
             <h2>Adicionar álbum</h2>
           </a>
