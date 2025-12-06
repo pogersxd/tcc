@@ -13,6 +13,7 @@
         die("Erro na consulta SQL: " . mysqli_error($conexao));
       }
       $tabelaMusica = mysqli_fetch_assoc($tabelaMusicaQuery);
+      $id_musica = $tabelaMusica['id_musica'];
       $titulo = $tabelaMusica['titulo'];
       $id_album = $tabelaMusica['id_album'];
       $tabelaUsuarioQuery = mysqli_query($conexao, "SELECT nome FROM usuario WHERE id_usuario = '$id_usuario'");
@@ -26,7 +27,7 @@
                 <div class="player__button">
                   <i class="fa-solid fa-circle-{$pausePlay}" id="player__pause-icon"></i>
                 </div>
-                <a href="#" class="player__link">{$titulo}</a>
+                <a href="#" class="player__link" onclick="loadMusicaTela('{$id_musica}')">{$titulo}</a>
                 <a href="#" class="player__link" onclick="loadProfile('{$id_usuario}')"><b>{$nome}</b></a>
                 <audio class="player__audio" id="player__audio" {$toca}>
                   <source src="./assets/songs/{$musica}">

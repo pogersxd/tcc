@@ -27,6 +27,35 @@ function renderAlbum()
             $horas = floor($somaDuracao / (60 * 60)) . 'h e ';
         }
         $somaDuracao = $horas . $minutos;
+        $musicasQuery = mysqli_query($conexao, "SELECT * FROM musica WHERE id_album = '$id_album'");
+        if (mysqli_num_rows($musicasQuery) > 0) {
+            $numero = 1;
+            $html .= <<<HTML
+                <div class="album-tracklist">
+                    <div class="album-track album-track--header">
+                        <span>#</span>
+                        <span>Título</span>
+                        <span>Duração</span>
+                    </div>
+                    <div class="album-actions">
+                        <button class="album-play">
+                        <i class="fa-solid fa-play"></i> Tocar
+                        </button>
+                    </div>
+                HTML;
+            while ($musica = mysqli_fetch_assoc($musicasQuery)) {
+                $duracao = gmdate('i:s', $musica['duracao']);
+                $html .= <<<HTML
+                    <a href="#" onclick="loadMusicaTela('{$musica['id_musica']}')" class="album-track">
+                        <span>{$numero}</span>
+                        <span>{$musica['titulo']}</span>
+                        <span>{$duracao}</span>
+                    </a>
+                HTML;
+                $numero++;
+            }
+            $html .= "</div>";
+        }
     }
 
 
@@ -39,37 +68,12 @@ function renderAlbum()
             <div class="album-info">
                 <span class="album-type">Álbum</span>
                 <h1 class="album-title">{$titulo}</h1>
-                <p class="album-artist">{$usuarioNome}</p>
+                <a href="#" class="album-artist" onclick="loadProfile('{$id_usuario}')">{$usuarioNome}</a>
                 <p class="album-meta">{$somaMusicas} música(s) • {$somaDuracao}</p>
             </div>
         </div>
 
-        <div class="album-actions">
-            <button class="album-play">
-            <i class="fa-solid fa-play"></i> Tocar
-            </button>
-        </div>
-
-        <div class="album-tracklist">
-            <div class="album-track album-track--header">
-                <span>#</span>
-                <span>Título</span>
-                <span>Duração</span>
-            </div>
-
-            <div class="album-track">
-            <span>1</span>
-            <span>Música Exemplo</span>
-            <span>3:12</span>
-            </div>
-
-            <div class="album-track">
-            <span>2</span>
-            <span>Outra Música</span>
-            <span>2:58</span>
-            </div>
-
-        </div>
+        {$html}
     </div>
 HTML;
 }

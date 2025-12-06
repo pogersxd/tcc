@@ -109,6 +109,21 @@ function loadItemList(tipo) {
     })
 }
 
+function loadMusicaTela(id_musica) {
+  const container = document.getElementById('main-menu');
+
+  fetch("./components/song.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "id_musica=" + encodeURIComponent(id_musica)
+  }).then(response => response.text())
+    .then(data => {
+      container.innerHTML = data;
+    }).catch(err => console.error(err));
+}
+
 // submit de formularios
 document.addEventListener("submit", function (event) {
   const form = event.target;

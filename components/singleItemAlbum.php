@@ -4,12 +4,9 @@
 
     return <<<HTML
               <div class="single-item">
-                <div class="single-item__image-button">
                   <a href="#" onclick="renderAlbum('{$id_album}')">
                     <img class="single-item__image" src="./assets/albumCovers/{$capa}" alt="Capa do álbum {$titulo}">
                   </a>
-                  <a href="#" class="fa-solid fa-circle-play single-item__icon"></a>
-                </div>
                 <div class="single-item__texts">
                   <a href="#" onclick="renderAlbum('{$id_album}')" class="single-item__texts-title">{$titulo}</a><br>
                   <a href="#" onclick="loadProfile('{$id_usuario}')" class="single-item__texts-type">{$nome}</a>
