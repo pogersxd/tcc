@@ -26,15 +26,18 @@
                 <div class="player__button">
                   <i class="fa-solid fa-circle-{$pausePlay}" id="player__pause-icon"></i>
                 </div>
-                <a href="#">{$titulo}</a>
-                <a href="#" onclick="loadProfile('{$id_usuario}')">{$nome}</a>
+                <a href="#" class="player__link">{$titulo}</a>
+                <a href="#" class="player__link" onclick="loadProfile('{$id_usuario}')"><b>{$nome}</b></a>
                 <audio class="player__audio" id="player__audio" {$toca}>
                   <source src="./assets/songs/{$musica}">
                 </audio>
+                <div class="player__progress-wrapper">
+                  <input type="range" id="player__progress" min="0" max="100" value="0" step="0.1">
+                  <div id="progressTooltip">00:00</div>
+                </div>
                 <div class="player__time">
                   <span id="player__time"></span>
                 </div>
-                <input type="range" id="player__progress" min="0" max="100" value="0" step="0.1">
               </div>
             </div>
           HTML;

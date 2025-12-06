@@ -11,7 +11,7 @@
                   <a href="#" class="fa-solid fa-circle-play single-item__icon"></a>
                 </div>
                 <div class="single-item__texts">
-                  <a href="#" class="single-item__texts-title">{$titulo}</a><br>
+                  <a href="#" onclick="renderAlbum('{$id_album}')" class="single-item__texts-title">{$titulo}</a><br>
                   <a href="#" onclick="loadProfile('{$id_usuario}')" class="single-item__texts-type">{$nome}</a>
                 </div>
               </div>

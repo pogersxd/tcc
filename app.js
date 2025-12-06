@@ -63,6 +63,21 @@ function loadProfile(id) {
     }).catch(err => console.error(err));
 }
 
+function loadAlbum(id_album) {
+  const container = document.getElementById('main-menu');
+
+  fetch("./components/album.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "id_album=" + encodeURIComponent(id_album)
+  }).then(response => response.text())
+    .then(data => {
+      container.innerHTML = data;
+    }).catch(err => console.error(err));
+}
+
 function loadItemList(tipo) {
   const container = document.getElementById("main-menu");
   let nome;
@@ -270,12 +285,30 @@ function loadMusica(musica, id_usuario) {
     }).catch(err => console.error(err));
 }
 
+function botaoPause() {
+  const audio = document.getElementById("player__audio");
+  const icon = document.getElementById("player__pause-icon");
+
+  if (!audio || !icon) return;
+
+  if (audio.paused) {
+    audio.play();
+    icon.classList.remove("fa-circle-play");
+    icon.classList.add("fa-circle-pause");
+  } else {
+    audio.pause();
+    icon.classList.remove("fa-circle-pause");
+    icon.classList.add("fa-circle-play");
+  }
+}
+
 // carrega a logica do player
 function logicaPlayer() {
   const audio = document.getElementById("player__audio");
   const icon = document.getElementById("player__pause-icon");
   const time = document.getElementById("player__time");
   const progress = document.getElementById('player__progress');
+  const tooltip = document.getElementById('progressTooltip');
 
   if (audio && icon && time) {
     function formatTime(seconds) {
@@ -285,20 +318,13 @@ function logicaPlayer() {
       const secondsRemaining = Math.floor(seconds % 60)
         .toString()
         .padStart(2, "0");
-      const time = minutes + ":" + secondsRemaining;
-      return time;
+      return minutes + ":" + secondsRemaining;
     }
+
     icon.addEventListener("click", () => {
-      if (audio.paused) {
-        audio.play();
-        icon.classList.remove("fa-circle-play");
-        icon.classList.add("fa-circle-pause");
-      } else {
-        audio.pause();
-        icon.classList.remove("fa-circle-pause");
-        icon.classList.add("fa-circle-play");
-      }
+      botaoPause();
     });
+
     audio.addEventListener("timeupdate", () => {
       const percent = (audio.currentTime / audio.duration) * 100;
       progress.value = percent;
@@ -309,6 +335,38 @@ function logicaPlayer() {
       const newTime = (progress.value / 100) * audio.duration;
       audio.currentTime = newTime;
     })
+    progress.addEventListener("mousemove", (e) => {
+      if (!audio.duration) return;
+
+      const rect = progress.getBoundingClientRect();
+      let x = e.clientX - rect.left;
+
+      const percent = x / rect.width;
+      const hoverTime = percent * audio.duration;
+
+      if (formatTime(hoverTime) === "-1:-1") tooltip.innerHTML = "00:00";
+      else tooltip.innerHTML = formatTime(hoverTime);
+      tooltip.style.display = "block";
+
+      // centraliza no mouse
+      x -= tooltip.offsetWidth / 2;
+
+      tooltip.style.left = `${x}px`;
+    });
+
+    // quando sai do range
+    progress.addEventListener("mouseleave", () => {
+      tooltip.style.display = "none";
+    });
+
+    document.addEventListener("keydown", (e) => {
+      // evita acionar se estiver digitando em inputs
+      if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") {
+        return;
+      }
+
+      if (e.code === "Space") botaoPause();
+    });
   }
 }
 
