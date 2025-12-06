@@ -3,7 +3,6 @@ require_once __DIR__ . "/../conect.php";
 require_once __DIR__ . "/../functions.php";
 function renderEditAlbum()
 {
-    echo "<div class='edit-album'>";
     global $conexao;
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
