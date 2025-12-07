@@ -11,13 +11,14 @@ function renderEditAlbum()
     echo "<h2>Seus álbuns</h2>";
     if (registroExiste($conexao, 'album', 'id_usuario', $_SESSION['usuario']['id_usuario'])) {
         $sql = mysqli_query($conexao, "SELECT * FROM album WHERE id_usuario = {$_SESSION['usuario']['id_usuario']}");
-        echo '
-        <table>
-            <tr>
-                <th>Título</th>
-                <th>Capa</th>
-                <th>Operações</th>
-            </tr>';
+        echo <<<HTML
+            <table>
+                <tr>
+                    <th>Título</th>
+                    <th>Capa</th>
+                    <th>Operações</th>
+                </tr>
+            HTML;
         while ($linha = mysqli_fetch_assoc($sql)) {
             echo "<tr>
                     <td>{$linha['titulo']}</td>
