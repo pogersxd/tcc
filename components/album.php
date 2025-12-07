@@ -37,11 +37,11 @@ function renderAlbum()
                         <span>Título</span>
                         <span>Duração</span>
                     </div>
-                    <div class="album-actions">
+                    <!-- <div class="album-actions">
                         <button class="album-play">
                         <i class="fa-solid fa-play"></i> Tocar
                         </button>
-                    </div>
+                    </div> -->
                 HTML;
             while ($musica = mysqli_fetch_assoc($musicasQuery)) {
                 $duracao = gmdate('i:s', $musica['duracao']);

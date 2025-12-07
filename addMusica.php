@@ -13,7 +13,7 @@ $detalhes = mysqli_real_escape_string($conexao, $_POST['detalhes']);
 $id_album = $_POST["id_album"];
 if (isset($_SESSION['usuario'])) {
     if (registroExiste($conexao, 'album', 'id_album', $id_album)) {
-        if ($_FILES['arquivo']['size'] <= 1024 * 1024 * 10) {
+        if ($_FILES['arquivo']['size'] <= 1024 * 1024 * 20) {
             $pasta = __DIR__ . "/assets/songs/";
             $nomeArquivo = md5(time());
             $nomeCompleto = $_FILES["arquivo"]["name"];
@@ -62,7 +62,13 @@ if (isset($_SESSION['usuario'])) {
             $response["nextComponent"] = "addMusicForm";
             $response["id"] = $id_album;
         }
+    } else {
+
+        $response["status"] = "error";
+        $response["message"] = "O álbum não existe";
+        $response["nextComponent"] = "addMusicForm";
+        $response["id"] = $id_album;
     }
-} else header("Location: index.php");
+}
 
 echo json_encode($response);

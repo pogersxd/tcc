@@ -453,7 +453,7 @@ img {
 }
 
 .album-track--header {
-  color: var(--cor-principal-50);
+  color: var(--cor-principal-70);
   font-size: 14px;
 }
 
@@ -476,6 +476,12 @@ img {
   display: flex;
   gap: 20px;
   align-items: center;
+}
+
+@media (max-width: 500px) {
+  .profile-header {
+    flex-direction: column;
+  }
 }
 
 .profile-photo {
@@ -528,12 +534,16 @@ img {
 }
 
 .profile-edit {
+  border-radius: 20px;
+  padding: 8px;
+   border: none;
   background-color: var(--cor-azul-50);
   color: white;
 }
 
 .profile-edit:hover {
   background-color: var(--cor-azul-70);
+  cursor: pointer;
 }
 
 .profile-logout {
@@ -594,7 +604,6 @@ img {
   flex-direction: column;
   gap: 20px;
   height: 100%;
-  overflow-y: auto;
 }
 
 /* Header */
@@ -647,6 +656,7 @@ img {
 
 .song-actions {
   display: flex;
+  gap: 10px;
 }
 
 .song-play {

@@ -132,6 +132,9 @@ document.addEventListener("submit", function (event) {
     case "add-album-form":
       arquivo = "./addAlbum.php";
       break;
+    case "add-playlist-form":
+      arquivo = "./addPlaylist.php";
+      break;
     case "registerForm":
       arquivo = "./createAccount.php";
       break;
@@ -154,7 +157,7 @@ document.addEventListener("submit", function (event) {
     .then(data => {
       window.alert(data.message);
 
-      if (form.id === "add-music-form" && data.status === "success") {
+      if (form.id === "add-music-form") {
         fetch("./components/addMusicForm.php", {
           method: "POST",
           headers: {
@@ -174,7 +177,7 @@ document.addEventListener("submit", function (event) {
       if (form.id === "loginForm" && data.status === "success") {
         window.location.reload();
       }
-    });
+    }).catch(err => console.error(err));
 });
 
 // clique de links que necessitam de atributos semelhante a href = "xx.php?item=x"
@@ -354,9 +357,15 @@ function logicaPlayer() {
       if (!audio.duration) return;
 
       const rect = progress.getBoundingClientRect();
-      let x = e.clientX - rect.left;
+      const thumbWidth = 14; // aprox. tamanho do thumb em px
+      const usableWidth = rect.width - thumbWidth;
 
-      const percent = x / rect.width;
+      let x = e.clientX - rect.left - thumbWidth / 2;
+
+      if (x < 0) x = 0;
+      if (x > usableWidth) x = usableWidth;
+
+      const percent = x / usableWidth;
       const hoverTime = percent * audio.duration;
 
       if (formatTime(hoverTime) === "-1:-1") tooltip.innerHTML = "00:00";
@@ -365,6 +374,14 @@ function logicaPlayer() {
 
       // centraliza no mouse
       x -= tooltip.offsetWidth / 2;
+
+      // evita sair da esquerda
+      if (x < 0) x = 0;
+
+      // evita sair da direita
+      if (x + tooltip.offsetWidth > rect.width) {
+        x = rect.width - tooltip.offsetWidth;
+      }
 
       tooltip.style.left = `${x}px`;
     });
@@ -414,7 +431,7 @@ function loadUserPlaylists() {
           </div>
         `;
       });
-      if (container.innerHTML == "") container.innerHTML = "Você não tem playlists";
+      if (container.innerHTML == "") container.innerHTML = "<br>Você não tem playlists";
     }).catch(err => console.error(err));
 }
 

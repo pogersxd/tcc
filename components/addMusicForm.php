@@ -12,9 +12,9 @@ function renderAddMusicForm()
     $tabelaAlbum = mysqli_query($conexao, "SELECT * FROM album WHERE id_album = '$id_album'");
     $album = mysqli_fetch_assoc($tabelaAlbum);
     $tituloAlbum = $album['titulo'];
-?>
-    <h2>Músicas já presentes no álbum <?= "\"$tituloAlbum\"" ?>: </h2>
-    <?php
+
+    echo "<h2>Músicas já presentes no álbum \"$tituloAlbum\": </h2>";
+
     if (registroExiste($conexao, 'musica', 'id_album', $id_album)) {
         $sql = mysqli_query($conexao, "SELECT * FROM musica WHERE id_album = $id_album");
         echo "<table>
@@ -48,17 +48,19 @@ function renderAddMusicForm()
     } else {
         echo "<h4>Nenhuma.</h4>";
     }
-    ?>
+    echo <<<HTML
     <h2>Adicionar música ao álbum</h2>
     <form id="add-music-form" enctype="multipart/form-data">
         Título: <input type="text" name="titulo" required><br>
-        Arquivo: (máximo de 10MB)<input type="file" name="arquivo" required><br>
+        Arquivo: (máximo de 20MB)<input type="file" name="arquivo" required><br>
         Detalhes: <br><textarea name="detalhes" required></textarea><br>
-        <input type="hidden" name="id_album" value="<?= $id_album; ?>">
+        <input type="hidden" name="id_album" value="{$id_album}">
         <input type="submit" value="Adicionar música">
         <br><a href="#" onclick="loadComponent('mainMenu')">Voltar à página inicial</a>
     </form>
-<?php }
+    HTML;
+}
+
 if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
     renderAddMusicForm();
 }
