@@ -56,7 +56,7 @@ function renderAddMusicForm()
         <label>Detalhes: <br><textarea name="detalhes" required></textarea></label><br>
         <input type="hidden" name="id_album" value="{$id_album}">
         <input type="submit" value="Adicionar música">
-        <br><a href="#" onclick="loadComponent('mainMenu')">Voltar à página inicial</a>
+        <br><a href="#" class="form-link" onclick="loadComponent('mainMenu')">Voltar à página inicial</a>
     </form>
     HTML;
 }

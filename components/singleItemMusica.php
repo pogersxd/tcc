@@ -9,9 +9,7 @@
     return <<<HTML
               <div class="single-item">
                 <div class="single-item__image-button">
-                  <a href="#" onclick="loadMusicaTela('{$id_musica}')">
-                    <img class="single-item__image" src="./assets/albumCovers/{$imagem}" alt="Imagem da música {$nomeMusica}">
-                  </a>
+                  <img class="single-item__image" src="./assets/albumCovers/{$imagem}" alt="Imagem da música {$nomeMusica}">
                   <a href="#" onclick="loadMusica('{$musica}', '{$id_usuario}')" class="fa-solid fa-circle-play single-item__icon"></a>
                 </div>
                 <div class="single-item__texts">

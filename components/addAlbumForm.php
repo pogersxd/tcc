@@ -11,7 +11,7 @@ function renderAddAlbumForm()
             <label>Título do álbum: <input type="text" name="titulo" required></label><br>
             <label>Capa do álbum: (máximo de 10MB) <input type="file" name="capa" required></label><br>
             <input type="submit" value="Adicionar">
-            <br><a href="#" onclick="loadComponent('mainMenu')">Voltar à página inicial</a>
+            <br><a href="#" class="form-link" onclick="loadComponent('mainMenu')">Voltar à página inicial</a>
         </form>
     HTML;
 }

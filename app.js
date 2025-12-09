@@ -78,6 +78,36 @@ function loadAlbum(id_album) {
     }).catch(err => console.error(err));
 }
 
+function loadPlaylist(id_playlist) {
+  const container = document.getElementById('main-menu');
+
+  fetch("./components/playlist.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "id_playlist=" + encodeURIComponent(id_playlist)
+  }).then(response => response.text())
+    .then(data => {
+      container.innerHTML = data;
+    }).catch(err => console.error(err));
+}
+
+function loadEditPlaylist(id_playlist) {
+  const container = document.getElementById('main-menu');
+
+  fetch("./components/editPlaylistForm.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "id_playlist=" + encodeURIComponent(id_playlist)
+  }).then(response => response.text())
+    .then(data => {
+      container.innerHTML = data;
+    }).catch(err => console.error(err));
+}
+
 function loadItemList(tipo) {
   const container = document.getElementById("main-menu");
   let nome;
@@ -350,11 +380,12 @@ function botaoPause() {
 function logicaPlayer() {
   const audio = document.getElementById("player__audio");
   const icon = document.getElementById("player__pause-icon");
-  const time = document.getElementById("player__time");
+  const timeStart = document.getElementById("player__time-start");
+  const timeFinal = document.getElementById("player__time-final");
   const progress = document.getElementById('player__progress');
   const tooltip = document.getElementById('progressTooltip');
 
-  if (audio && icon && time) {
+  if (audio && icon && timeStart && timeFinal) {
     function formatTime(seconds) {
       const minutes = Math.floor(seconds / 60)
         .toString()
@@ -372,7 +403,8 @@ function logicaPlayer() {
     audio.addEventListener("timeupdate", () => {
       const percent = (audio.currentTime / audio.duration) * 100;
       progress.value = percent;
-      time.innerHTML = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
+      timeStart.innerHTML = formatTime(audio.currentTime)
+      timeFinal.innerHTML = formatTime(audio.duration);
     });
 
     progress.addEventListener("input", () => {

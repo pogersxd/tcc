@@ -1,6 +1,9 @@
 <?php
+require_once __DIR__ . "/../conect.php";
+require_once __DIR__ . "/singleItemAlbum.php";
 function renderProfile()
 {
+    global $conexao;
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
@@ -12,60 +15,54 @@ function renderProfile()
 
     $postNaoExisteMasSessaoSim = false;
     if (!$_POST && isset($_SESSION['usuario'])) $postNaoExisteMasSessaoSim = true;
-
+    $buttons = '';
     if ($sessionIgualPost || $postNaoExisteMasSessaoSim) {
-        // return <<<HTML
-        //     <div>
-        //     <h1>Meu perfil</h1>
-        //     <h3>Foto de perfil:</h3>
-        //     <img src="./assets/pfps/{$_SESSION['usuario']['foto']}" width=100px height=100px alt="Imagem do seu perfil">
-        //     <h3>Nome: </h3>
-        //     {$_SESSION['usuario']['nome']}
-        //     <h3>Bio: </h3>
-        //     {$_SESSION['usuario']['bio']}
-        //     <div>
-        //     HTML;
-        return <<<HTML
-            <div class="profile-page">
-                <div class="profile-header">
-                    <img src="./assets/pfps/{$_SESSION['usuario']['foto']}" alt="Foto do usuário" class="profile-photo">
-
-                    <div class="profile-info">
-                        <span class="profile-type">Perfil</span>
-                        <h1 class="profile-name">{$_SESSION['usuario']['nome']}</h1>
-
+        $buttons = <<<HTML
                         <div class="profile-buttons">
                             <button class="profile-edit"><i class="fa-solid fa-pen"></i> Editar perfil</button>
                             <a href="./logout.php" class="profile-logout" ><i class="fa-solid fa-right-from-bracket"></i> Sair</a>
                         </div>
+        HTML;
+        $nome = $_SESSION['usuario']['nome'];
+        $id_usuario = $_SESSION['usuario']['id_usuario'];
+        $bio = $_SESSION['usuario']['bio'];
+        $foto = $_SESSION['usuario']['foto'];
+    } else {
+        $id_usuario = $_POST['id_usuario'];
+        $usuarioQuery = mysqli_query($conexao, "SELECT * FROM usuario WHERE id_usuario = '$id_usuario'");
+        $usuario = mysqli_fetch_assoc($usuarioQuery);
+        $nome = $usuario['nome'];
+        $foto = $usuario['foto'];
+        $bio = $usuario['bio'];
+    }
+    $albumQuery = mysqli_query($conexao, "SELECT * FROM album WHERE id_usuario = '$id_usuario'");
+    $albuns = '<h2>Este perfil não tem álbuns</h2>';
+    if (mysqli_num_rows($albumQuery) > 0) {
+        $albuns = '<h2>Álbuns</h2>';
+        $albuns .= '<div class="profile-playlist-list">';
+        while ($album = mysqli_fetch_assoc($albumQuery)) {
+            $albuns .= renderSingleItemAlbum($album['capa'], $album['titulo'], $id_usuario, $album['id_album'], $nome);
+        }
+        $albuns .= '</div>';
+    }
+    return <<<HTML
+            <div class="profile-page">
+                <div class="profile-header">
+                    <img src="./assets/pfps/{$foto}" alt="Foto do usuário" class="profile-photo">
+
+                    <div class="profile-info">
+                        <span class="profile-type">Perfil</span>
+                        <h1 class="profile-name">{$nome}</h1>
+                        <p class="profile-text">{$bio}</p>
+                        {$buttons}
                     </div>
                 </div>
 
                 <div class="profile-section">
-                    <h2>Suas playlists</h2>
-
-                    <div class="profile-playlist-list">
-
-                    <div class="profile-playlist-card">
-                        <img src="" class="profile-playlist-image">
-                        <div class="profile-playlist-title">Minhas Favoritas</div>
-                        <div class="profile-playlist-count">18 músicas</div>
-                    </div>
-
-                    <div class="profile-playlist-card">
-                        <img src="" class="profile-playlist-image">
-                        <div class="profile-playlist-title">Para Estudar</div>
-                        <div class="profile-playlist-count">32 músicas</div>
-                    </div>
-
-                    </div>
+                    {$albuns}
+                </div>
             </div>
-
-</div>
-HTML;
-    } else {
-        $id_usuario = $_POST['id_usuario'];
-    }
+    HTML;
 }
 if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
     echo renderProfile();

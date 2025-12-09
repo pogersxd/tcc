@@ -11,7 +11,7 @@ function renderAddPlaylistForm()
             <label>Título da Playlist: <input type="text" name="titulo" required></label><br>
             <label>Capa da playlist: (máximo de 10MB) <input type="file" name="capa" required></label><br>
             <label><input type="submit" value="Adicionar"></label>
-            <br><a href="#" onclick="loadComponent('mainMenu')">Voltar à página inicial</a>
+            <br><a href="#" class="form-link" onclick="loadComponent('mainMenu')">Voltar à página inicial</a>
         </form>
     HTML;
 }
