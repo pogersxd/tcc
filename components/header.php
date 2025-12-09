@@ -16,6 +16,9 @@
           <a href="#" onclick="loadComponent(\'addPlaylistForm\');" class="header__link">
             <h2>Adicionar playlist</h2>
           </a>
+          <a href="#" onclick="loadComponent(\'editPlaylist\');" class="header__link">
+            <h2>Minhas playlists</h2>
+          </a>
           <a href="#" onclick="loadComponent(\'addAlbumForm\');" class="header__link">
             <h2>Adicionar álbum</h2>
           </a>

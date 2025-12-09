@@ -14,6 +14,9 @@ if (isset($_SESSION['usuario']) && isset($_POST['id_album'])) {
             while ($musica = mysqli_fetch_assoc($tabelaMusica)) {
                 $arquivo = $musica['arquivo'];
                 $deletouMusica = unlink("./assets/songs/" . $arquivo);
+                $id_musica = $musica['id_musica'];
+                mysqli_query($conexao, "DELETE FROM musica_playlist WHERE id_musica = '$id_musica'");
+                mysqli_query($conexao, "DELETE FROM curtido WHERE id_item = '$id_musica' AND tipo = 'musica'");
                 if (!$deletouMusica) {
                     $response["status"] = "error";
                     $response["message"] = "Erro ao deletar o arquivo: $arquivo";
@@ -39,6 +42,7 @@ if (isset($_SESSION['usuario']) && isset($_POST['id_album'])) {
                 exit();
             }
         }
+        mysqli_query($conexao, "DELETE FROM curtido WHERE id_item = '$id_album' AND tipo = 'album'");
         mysqli_query($conexao, "DELETE FROM album WHERE id_album = '$id_album'");
         $response["status"] = "success";
         $response["message"] = "Álbum deletado com sucesso!";

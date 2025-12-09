@@ -180,6 +180,22 @@ document.addEventListener("submit", function (event) {
     }).catch(err => console.error(err));
 });
 
+function deletePlaylist(id) {
+  fetch("./deleteAlbum.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "id_album=" + encodeURIComponent(id)
+  }).then(response => response.json())
+    .then(data => {
+      loadComponent(data.nextComponent)
+      window.alert(data.message)
+      reloadLeftBar();
+    })
+    .catch(err => console.error(err));
+}
+
 // clique de links que necessitam de atributos semelhante a href = "xx.php?item=x"
 function deleteAlbum(id) {
   fetch("./deleteAlbum.php", {

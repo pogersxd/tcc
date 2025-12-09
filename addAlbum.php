@@ -14,6 +14,9 @@ if (!isset($_SESSION['usuario']) or !$_POST) {
     if (!registroExiste($conexao, 'album', 'titulo', $titulo)) {
         if ($_FILES['capa']['size'] <= 1024 * 1024 * 10) {
             $pasta = __DIR__ . "/assets/albumCovers/";
+            if (!is_dir($pasta)) {
+                mkdir($pasta, 0777, true);
+            }
             $nomeArquivo = md5(time());
             $nomeCompleto = $_FILES["capa"]["name"];
             $nomeSeparado = explode('.', $nomeCompleto);

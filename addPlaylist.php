@@ -1,19 +1,30 @@
 <?php
-header("Content-Type: application/json");
+header("Content-Type: application/json; charset=utf-8");
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 require_once __DIR__ . "/conect.php";
 require_once __DIR__ . "/functions.php";
 $response = [];
-if (!isset($_SESSION['usuario']) or !$_POST) {
-    header("Location: index.php");
+if (!isset($_SESSION['usuario']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode([
+        "status" => "error",
+        "message" => "Sessão expirada ou acesso inválido",
+        "nextComponent" => "loginForm"
+    ]);
+    exit;
 } else {
     $titulo = mysqli_real_escape_string($conexao, $_POST["titulo"]);
     $id_usuario = $_SESSION['usuario']['id_usuario'];
-    if (!registroExiste($conexao, 'album', 'titulo', $titulo)) {
+    if (!registroExiste($conexao, 'playlist', 'titulo', $titulo)) {
         if ($_FILES['capa']['size'] <= 1024 * 1024 * 10) {
             $pasta = __DIR__ . "/assets/playlistCovers/";
+
+            if (!is_dir($pasta)) {
+                mkdir($pasta, 0777, true);
+            }
+
             $nomeArquivo = md5(time());
             $nomeCompleto = $_FILES["capa"]["name"];
             $nomeSeparado = explode('.', $nomeCompleto);
@@ -41,11 +52,9 @@ if (!isset($_SESSION['usuario']) or !$_POST) {
                 if ($feitoUpload) {
                     mysqli_query($conexao, "INSERT INTO playlist (titulo, capa, id_usuario) VALUES ('$titulo','$nomeArquivoExtensao',$id_usuario)");
                     $tabelaPlaylist = mysqli_query($conexao, "SELECT id_playlist FROM playlist WHERE capa='$nomeArquivoExtensao'");
-                    $album = mysqli_fetch_assoc($tabelaAlbum);
-                    $id_playlist = $album['id_album'];
                     $response["status"] = "success";
                     $response["message"] = "Album cadastrado!";
-                    $response["nextComponent"] = "editAlbum";
+                    $response["nextComponent"] = "editPlaylist";
                 }
             } else {
                 $response["status"] = "error";
@@ -59,8 +68,9 @@ if (!isset($_SESSION['usuario']) or !$_POST) {
         }
     } else {
         $response["status"] = "error";
-        $response["message"] = "Já existe um álbum com esse nome";
+        $response["message"] = "Já existe uma playlist com esse nome";
         $response["nextComponent"] = "addPlaylistForm";
     }
 }
-echo json_encode($response);
+echo json_encode($response, JSON_UNESCAPED_UNICODE);
+exit;

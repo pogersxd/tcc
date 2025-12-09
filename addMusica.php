@@ -15,6 +15,9 @@ if (isset($_SESSION['usuario'])) {
     if (registroExiste($conexao, 'album', 'id_album', $id_album)) {
         if ($_FILES['arquivo']['size'] <= 1024 * 1024 * 20) {
             $pasta = __DIR__ . "/assets/songs/";
+            if (!is_dir($pasta)) {
+                mkdir($pasta, 0777, true);
+            }
             $nomeArquivo = md5(time());
             $nomeCompleto = $_FILES["arquivo"]["name"];
             $nomeSeparado = explode('.', $nomeCompleto);
