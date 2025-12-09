@@ -6,10 +6,10 @@ function renderAddAlbumForm()
     }
     if (!isset($_SESSION['usuario'])) header("Location: index.php");
     return <<<HTML
-        <h1>Cadastrar álbum</h1>
-        <form id="add-album-form" enctype="multipart/form-data">
-            Título do álbum: <input type="text" name="titulo" required><br>
-            Capa do álbum: (máximo de 10MB) <input type="file" name="capa" required><br>
+        <h2 class="form-title">Cadastrar álbum</h2>
+        <form id="add-album-form" class="default-form" enctype="multipart/form-data">
+            <label>Título do álbum: <input type="text" name="titulo" required></label><br>
+            <label>Capa do álbum: (máximo de 10MB) <input type="file" name="capa" required></label><br>
             <input type="submit" value="Adicionar">
             <br><a href="#" onclick="loadComponent('mainMenu')">Voltar à página inicial</a>
         </form>

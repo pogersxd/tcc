@@ -2,10 +2,10 @@
 function renderLogin()
 {
     return <<<HTML
-    <h1>Realizar Login</h1>
-    <form id="loginForm">
-        Email: <input type="email" name="email" required><br>
-        Senha: <input type="password" name="senha" required><br>
+    <h2 class="form-title">Realizar Login</h2>
+    <form id="loginForm" class="default-form">
+        <label>Email: <input type="email" name="email" required></label><br>
+        <label>Senha: <input type="password" name="senha" required></label><br>
         <input type="submit" value="Conectar">
     </form>
     Não tem uma conta? <a href="#" onclick="loadComponent('register')">Cadastre-se</a><br>

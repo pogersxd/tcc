@@ -49,11 +49,11 @@ function renderAddMusicForm()
         echo "<h4>Nenhuma.</h4>";
     }
     echo <<<HTML
-    <h2>Adicionar música ao álbum</h2>
-    <form id="add-music-form" enctype="multipart/form-data">
-        Título: <input type="text" name="titulo" required><br>
-        Arquivo: (máximo de 20MB)<input type="file" name="arquivo" required><br>
-        Detalhes: <br><textarea name="detalhes" required></textarea><br>
+    <h2 class="form-title">Adicionar música ao álbum</h2>
+    <form id="add-music-form" class="default-form" enctype="multipart/form-data">
+        <label>Título: <input type="text" name="titulo" required></label><br>
+        <label>Arquivo: (máximo de 20MB)<input type="file" name="arquivo" required></label><br>
+        <label>Detalhes: <br><textarea name="detalhes" required></textarea></label><br>
         <input type="hidden" name="id_album" value="{$id_album}">
         <input type="submit" value="Adicionar música">
         <br><a href="#" onclick="loadComponent('mainMenu')">Voltar à página inicial</a>

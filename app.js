@@ -109,6 +109,16 @@ function loadItemList(tipo) {
     })
 }
 
+function curtirMusica(id) {
+
+}
+function curtirMusica(id) {
+
+}
+function curtirMusica(id) {
+
+}
+
 function loadMusicaTela(id_musica) {
   const container = document.getElementById('main-menu');
 

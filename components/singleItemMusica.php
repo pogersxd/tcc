@@ -15,8 +15,8 @@
                   <a href="#" onclick="loadMusica('{$musica}', '{$id_usuario}')" class="fa-solid fa-circle-play single-item__icon"></a>
                 </div>
                 <div class="single-item__texts">
-                  <a href="#" onclick="loadMusicaTela('{$id_musica}')"class="single-item__texts-title">{$nomeMusica}</a><br>
-                  <a href="#" onclick="loadProfile('{$id_usuario}')" class="single-item__texts-type">{$nome}</a>
+                  <a href="#" onclick="loadMusicaTela('{$id_musica}')"class="single-item__texts-title" title="{$nomeMusica}">{$nomeMusica}</a>
+                  <a href="#" onclick="loadProfile('{$id_usuario}')" class="single-item__texts-type" title="{$nome}">{$nome}</a>
                 </div>
               </div>
             HTML;

@@ -7,7 +7,11 @@ require_once __DIR__ . "/conect.php";
 require_once __DIR__ . "/functions.php";
 $response = [];
 if (!isset($_SESSION['usuario']) or !$_POST) {
-    header("Location: index.php");
+    $response["status"] = "error";
+    $response["message"] = "Arquivo muito grande (máx 10MB)";
+    $response["nextComponent"] = "mainMenu";
+    echo json_encode($response);
+    exit();
 } else {
     $titulo = mysqli_real_escape_string($conexao, $_POST["titulo"]);
     $id_usuario = $_SESSION['usuario']['id_usuario'];

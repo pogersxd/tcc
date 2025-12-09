@@ -8,7 +8,7 @@
                     <img class="single-item__image single-item__image-artist" src="./assets/pfps/{$foto}" alt="Foto do artista {$nome}">
                   </a>
                 <div class="single-item__texts">
-                  <a href="#" onclick="loadProfile('{$id_usuario}')" class="single-item__texts-title">{$nome}</a><br>
+                  <a href="#" onclick="loadProfile('{$id_usuario}')" class="single-item__texts-title" title="{$nome}">{$nome}</a>
                 </div>
               </div>
             HTML;
