@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 07/12/2025 às 19:09
+-- Tempo de geração: 10/12/2025 às 02:23
 -- Versão do servidor: 9.1.0
 -- Versão do PHP: 8.3.14
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `album` (
   `id_usuario` int NOT NULL,
   PRIMARY KEY (`id_album`),
   KEY `id_usuario_em_album` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `album`
@@ -47,11 +47,33 @@ INSERT INTO `album` (`id_album`, `titulo`, `capa`, `id_usuario`) VALUES
 (36, 'Alucinação', '08d67e30eb8fc7aa2391f249cd48daa4.jpg', 1),
 (37, 'Sgt. Pepper\'s Lonely Hearts Club Band', 'ce1140ca726b6fe8525636ab7b194447.jpg', 1),
 (38, 'SEYCHELLES', 'cfd69c16ddd0ecff321bb93af1eea72b.jpg', 1),
-(39, 'Led Zeppelin IV', '54af4e4862c0701fee43b8fb40f2e87b.jpg', 1),
 (40, 'The Beatles', '3855d43496bd42fd536603a9fb727fef.jpg', 1),
 (41, 'TOHO BOSSA NOVA 2', 'e04c78edfae5ff7edc706d595cadf78a.jpg', 1),
 (42, 'TOHO BOSSA NOVA 3', '9b268111b53e7cbb260d75ad8b71ef14.jpeg', 1),
 (43, 'Wish You Were Here', 'a1bce5e939c9c43f22706d33a688b29f.png', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `curtido`
+--
+
+DROP TABLE IF EXISTS `curtido`;
+CREATE TABLE IF NOT EXISTS `curtido` (
+  `id_curtido` int NOT NULL AUTO_INCREMENT,
+  `id_item` int NOT NULL,
+  `tipo` varchar(10) NOT NULL,
+  `id_usuario` int NOT NULL,
+  PRIMARY KEY (`id_curtido`),
+  KEY `curtido_id_usuario` (`id_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `curtido`
+--
+
+INSERT INTO `curtido` (`id_curtido`, `id_item`, `tipo`, `id_usuario`) VALUES
+(15, 35, 'album', 1);
 
 -- --------------------------------------------------------
 
@@ -84,7 +106,6 @@ INSERT INTO `musica` (`id_musica`, `titulo`, `arquivo`, `duracao`, `detalhes`, `
 (43, 'She\'s Leaving Home', 'c9d7c70622b036664fad18c3ac4c4a3c.mp3', 215, 'Wednesday morning at five o\'clock\r\nAs the day begins\r\nSilently closing her bedroom door\r\nLeaving the note that she hoped would say more\r\n\r\nShe goes downstairs to the kitchen\r\nClutching her handkerchief\r\nQuietly turning the backdoor key\r\nStepping outside, she is free\r\n\r\nShe\r\n(We gave her most of our lives)\r\nIs leaving\r\n(Sacrified most of our lives)\r\nHome\r\n(We gave her everything money could buy)\r\nShe\'s leaving home after living alone (bye, bye)\r\nFor so many years\r\n\r\nFather snores as his wife gets into\r\nHer dressing gown\r\nPicks up the letter that\'s lying there\r\nStanding alone at the top of the stairs\r\n\r\nShe breaks down and cries to her husband\r\nDaddy, our baby is gone\r\nWhy would she treat us so thoughtlessly?\r\nHow could she do this to me?\r\n\r\nShe\r\n(We never thought of ourselves)\r\nIs leaving\r\n(Never a thought for ourselves)\r\nHome\r\n(We struggled hard all our lives to get by)\r\nShe\'s leaving home after living alone (bye, bye)\r\nFor so many years\r\n\r\nFriday morning, at nine o\'clock\r\nShe is far away\r\nWaiting to keep the appointment she made\r\nMeeting a man from the motor trade\r\n\r\nShe\r\n(What did we do that was wrong?)\r\nIs having\r\n(We didn\'t know it was wrong)\r\nFun\r\n(Fun is the one thing that money can\'t buy)\r\nSomething inside that was always denied (bye, bye)\r\nFor so many years\r\n\r\nShe\'s leaving home\r\nBye, bye', 37),
 (44, 'A Day In The Life', '72e5c8b580463c5cf001d4c6f47eede6.mp3', 337, 'I read the news today, oh, boy\r\nAbout a lucky man who made the grade\r\nAnd though the news was rather sad\r\nWell, I just had to laugh\r\nI saw the photograph\r\n\r\nHe blew his mind out in a car\r\nHe didn\'t notice that the lights had changed\r\nA crowd of people stood and stared\r\nThey\'d seen his face before\r\nNobody was really sure if he was from the House of Lords\r\n\r\nI saw a film today, oh, boy\r\nThe English Army had just won the war\r\nA crowd of people turned away\r\nBut I just had to look\r\nHaving read the book\r\nI\'d love to turn you on\r\n\r\nWoke up, fell out of bed\r\nDragged a comb across my head\r\nFound my way downstairs and drank a cup\r\nAnd looking up, I noticed I was late\r\n\r\nFound my coat and grabbed my hat\r\nMade the bus in seconds flat\r\nFound my way upstairs and had a smoke\r\nAnd somebody spoke, and I went into a dream\r\n(Aah, aah, aah, aah)\r\n\r\nI read the news today, oh, boy\r\nFour thousand holes in Blackburn, Lancashire\r\nAnd though the holes were rather small\r\nThey had to count them all\r\nNow they know how many holes it takes to fill the Albert Hall\r\nI\'d love to turn you on', 37),
 (45, 'トーキョー レギー', '178ed1ac6e137424204b361e34cac869.mp3', 265, '[Chorus]\r\nNatsu ga mata kuru itsuka no melody\r\nHashiru kaze ni nori kokoro hazuma se\r\nGoran yo futari no yume sae koe o hisomete\r\nSoko made kite iru no sa\r\n\r\n[Verse 1]\r\nKirakira nemuri wa kimamana melody\r\nUtsurautsura to boku o sugite yuku\r\nMe o hosome kimi o miagete miru\r\nUmi no uta doko ka de kikoete kuru\r\n\r\n[Chorus]\r\nNatsu ga mata kuru itsuka no melody\r\nHashiru kaze ni nori kokoro hazuma se\r\nGoran yo futari no yume sae koe o hisomete\r\nSoko made kite iru no sa', 38),
-(46, 'Stairway To Heaven', 'b17eee4d6d805ef2dc042f07a5bf4283.mp3', 483, 'There\'s a lady who\'s sure\r\nAll that glitters is gold\r\nAnd she\'s buying a stairway to heaven\r\nWhen she gets there, she knows\r\nIf the stores are all closed\r\nWith a word she can get what she came for\r\n\r\nOoh-ooh-ooh\r\nOoh-ooh-ooh-ooh-ooh\r\nAnd she\'s buying a stairway to heaven\r\n\r\nThere\'s a sign on the wall\r\nBut she wants to be sure\r\n\'Cause you know sometimes words have two meanings\r\nIn a tree by the brook\r\nThere\'s a songbird who sings\r\nSometimes all of our thoughts are misgiven\r\n\r\nOoh, it makes me wonder\r\nOoh, makes me wonder\r\n\r\nThere\'s a feeling I get\r\nWhen I look to the west\r\nAnd my spirit is crying for leaving\r\nIn my thoughts, I have seen\r\nRings of smoke through the trees\r\nAnd the voices of those who stand looking\r\n\r\nOoh, makes me wonder\r\nOoh, really makes me wonder\r\n\r\nAnd it\'s whispered that soon\r\nIf we all call the tune\r\nThen the piper will lead us to reason\r\nAnd a new day will dawn\r\nFor those who stand long\r\nAnd the forests will echo with laughter\r\n\r\nOh, whoa, whoa, whoa, whoa, oh\r\n\r\nIf there\'s a bustle in your hedgerow\r\nDon\'t be alarmed now\r\nIt\'s just a spring-clean for the May Queen\r\nYes, there are two paths you can go by\r\nBut in the long run\r\nThere\'s still time to change the road you\'re on\r\n\r\nAnd it makes me wonder\r\nOh, whoa, whoa, oh\r\n\r\nYour head is humming and it won\'t go\r\nIn case you don\'t know\r\nThe piper\'s calling you to join him\r\nDear lady, can you hear the wind blow?\r\nAnd did you know\r\nYour stairway lies on the whispering wind?\r\n\r\nAnd as we wind on down the road\r\nOur shadows taller than our soul\r\nThere walks a lady we all know\r\nWho shines white light and wants to show\r\nHow everything still turns to gold\r\nAnd if you listen very hard\r\nThe tune will come to you, at last\r\nWhen all are one and one is all, yeah\r\nTo be a rock and not to roll\r\n\r\nAnd she\'s buying a stairway to heaven', 39),
 (47, 'Fotografia 3 X 4', 'c3828010baecb04ab8a7f24c12c4076a.mp3', 323, 'Eu me lembro muito bem do dia que eu cheguei\r\nJovem que desce do norte pra cidade grande\r\nOs pés cansados e feridos de andar légua tirana\r\nDe lágrimas nos olhos de ler o Pessoa\r\nE de ver o verde da cana\r\n\r\nEm cada esquina que eu passava, um guarda me parava\r\nPedia os meus documentos e depois sorria\r\nExaminando o 3X4 da fotografia\r\nE estranhando o nome do lugar de onde eu vinha\r\n\r\nPois o que pesa no norte, pela Lei da Gravidade\r\nDisso Newton já sabia, cai no sul, grande cidade\r\nSão Paulo violento, corre o rio que me engana\r\nCopacabana, zona norte e os cabarés\r\nDa Lapa onde eu morei\r\n\r\nMesmo vivendo assim, não me esqueci de amar\r\nQue o homem é pra mulher, e o coração pra gente dar\r\nMas a mulher, a mulher que eu amei\r\nNão pôde me seguir, não\r\n\r\nDesses casos de família e de dinheiro eu nunca entendi bem\r\nVeloso, o Sol não é tão bonito pra quem vem do norte e vai viver na rua\r\n\r\nA noite fria me ensinou a amar mais o meu dia\r\nE pela dor eu descobri o poder da alegria\r\nE a certeza de que tenho coisas novas\r\nCoisas novas pra dizer\r\n\r\nA minha história é talvez, é talvez igual à tua\r\nJovem que desceu do norte, que no sul viveu na rua\r\nE que ficou desnorteado\r\nComo é comum no seu tempo\r\nE que ficou desapontado\r\nComo é comum no seu tempo\r\nE que ficou apaixonado e violento\r\nComo, como você\r\n\r\nA minha história é talvez, é talvez igual à tua\r\nJovem que desceu do norte, que no sul viveu na rua\r\nE que ficou desnorteado\r\nComo é comum no seu tempo\r\nE que ficou desapontado\r\nComo é comum no seu tempo\r\nE que ficou apaixonado e violento\r\nComo, como você\r\n\r\nEu sou como você\r\nEu sou como você\r\nEu sou como você\r\nQue me ouve agora\r\nEu, eu sou como você\r\nEu sou como você\r\nEu sou como você\r\nEu sou como você\r\nEu sou como você\r\nEu sou como você', 36),
 (48, 'Sujeito De Sorte', 'ce9f1b3f883fdc9d5efeeb01a99c0132.mp3', 197, 'Presentemente, eu posso me\r\nConsiderar um sujeito de sorte\r\nPorque apesar de muito moço\r\nMe sinto são, e salvo, e forte\r\nE tenho comigo pensado\r\nDeus é brasileiro e anda do meu lado\r\nE assim já não posso sofrer no ano passado\r\n\r\nTenho sangrado demais\r\nTenho chorado pra cachorro\r\nAno passado eu morri\r\nMas esse ano eu não morro\r\nTenho sangrado demais\r\nTenho chorado pra cachorro\r\nAno passado eu morri\r\nMas esse ano eu não morro\r\n\r\nAno passado eu morri\r\nMas esse ano eu não morro\r\nAno passado eu morri\r\nMas esse ano eu não morro\r\n\r\nPresentemente, eu posso me\r\nConsiderar um sujeito de sorte\r\nPorque apesar de muito moço\r\nMe sinto são, e salvo, e forte\r\nE tenho comigo pensado\r\nDeus é brasileiro e anda do meu lado\r\nE assim já não posso sofrer no ano passado\r\n\r\nTenho sangrado demais\r\nTenho chorado pra cachorro\r\nAno passado eu morri\r\nMas esse ano eu não morro\r\nTenho sangrado demais\r\nTenho chorado pra cachorro\r\nAno passado eu morri\r\nMas esse ano eu não morro\r\n\r\nAno passado eu morri\r\nMas esse ano eu não morro\r\nAno passado eu morri\r\nMas esse ano eu não morro\r\n\r\nPresentemente, eu posso me\r\nConsiderar um sujeito de sorte\r\nPorque apesar de muito moço\r\nMe sinto são, e salvo, e forte\r\nE tenho comigo pensado\r\nDeus é brasileiro e anda do meu lado\r\nE assim já não posso sofrer no ano passado\r\n\r\nTenho sangrado demais\r\nTenho chorado pra cachorro\r\nAno passado eu morri\r\nMas esse ano eu não morro\r\nTenho sangrado demais\r\nTenho chorado pra cachorro\r\nAno passado eu morri\r\nMas esse ano eu não morro\r\n\r\nAno passado eu morri\r\nMas esse ano eu não morro\r\nAno passado eu morri\r\nMas esse ano eu não morro', 36),
 (49, 'Velha Roupa Colorida', 'ea6b7816400e9bf737445fee4983c9de.mp3', 290, 'Você não sente nem vê, mas eu não posso deixar de dizer, meu amigo\r\nQue uma nova mudança em breve vai acontecer\r\nE o que há algum tempo era jovem e novo, hoje é antigo\r\nE precisamos todos rejuvenescer\r\n\r\nNunca mais meu pai falou: She\'s leaving home\r\nE meteu o pé na estrada, like a rolling stone\r\nNunca mais eu convidei minha menina\r\nPara correr no meu carro\r\nLoucura, chiclete e som\r\n\r\nNunca mais você saiu à rua em grupo reunido\r\nO dedo em V, cabelo ao vento\r\nAmor e flor, quêde o cartaz?\r\nNo presente, a mente, o corpo é diferente\r\nE o passado é uma roupa que não nos serve mais\r\nNo presente, a mente, o corpo é diferente\r\nE o passado é uma roupa que não nos serve mais\r\n\r\nVocê não sente nem vê, mas eu não posso deixar de dizer, meu amigo\r\nQue uma nova mudança em breve vai acontecer\r\nE o que há algum tempo era jovem e novo, hoje é antigo\r\nE precisamos todos rejuvenescer\r\n\r\nComo Poe, poeta louco americano\r\nEu pergunto ao passarinho\r\nBlack bird, assum-preto, o que se faz?\r\nE raven, never, raven, never, raven\r\nNever, raven, never, raven\r\nAssum-preto, pássaro-preto, black bird, me responde\r\nTudo já ficou atrás\r\nE raven, never, raven, never, raven\r\nNever, raven, never, raven\r\nBlack bird, assum-preto, pássaro-preto, me responde\r\nO passado nunca mais\r\n\r\nVocê não sente nem vê, mas eu não posso deixar de dizer, meu amigo\r\nQue uma nova mudança em breve vai acontecer\r\nE o que há algum tempo era jovem e novo, hoje é antigo\r\nE precisamos todos rejuvenescer\r\nE precisamos todos rejuvenescer\r\nE precisamos todos rejuvenescer', 36),
@@ -113,7 +134,14 @@ CREATE TABLE IF NOT EXISTS `musica_playlist` (
   PRIMARY KEY (`id_musicaplaylist`),
   KEY `id_musica_em_conexao_playlist` (`id_musica`),
   KEY `id_playlist_em_conexao_playlist` (`id_playlist`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `musica_playlist`
+--
+
+INSERT INTO `musica_playlist` (`id_playlist`, `id_musica`, `id_musicaplaylist`) VALUES
+(1, 39, 3);
 
 -- --------------------------------------------------------
 
@@ -129,7 +157,14 @@ CREATE TABLE IF NOT EXISTS `playlist` (
   `id_usuario` int NOT NULL,
   PRIMARY KEY (`id_playlist`),
   KEY `id_usuario_em_playlist` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `playlist`
+--
+
+INSERT INTO `playlist` (`id_playlist`, `titulo`, `capa`, `id_usuario`) VALUES
+(1, 'tempo', '5e4439423067b1a3aea134b9cd74452e.png', 1);
 
 -- --------------------------------------------------------
 
@@ -166,6 +201,12 @@ INSERT INTO `usuario` (`id_usuario`, `nome`, `email`, `senha`, `foto`, `bio`) VA
 --
 ALTER TABLE `album`
   ADD CONSTRAINT `id_usuario_em_album` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
+
+--
+-- Restrições para tabelas `curtido`
+--
+ALTER TABLE `curtido`
+  ADD CONSTRAINT `curtido_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
 
 --
 -- Restrições para tabelas `musica`
