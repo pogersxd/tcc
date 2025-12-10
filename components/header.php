@@ -25,24 +25,23 @@
           <a href="#" onclick="loadComponent(\'editAlbum\')" class="header__link">
             <h2>Meus álbuns</h2>
           </a>
-          <a href="./logout.php" class="header__link">
-            <h2>Logout</h2>
-          </a>
           ';
     } else {
-      $perfil = '<a href="#" onclick="loadComponent(\'login\')"><img class="header__icon" src="assets/james.png" alt="Foto da James Sunderland"></a>';
+      $perfil = '<a href="#" onclick="loadComponent(\'login\')"><img class="header__icon" src="./assets/pfps/padrao.jpg" alt="Foto padrão"></a>';
       $logout = '<h2 title="Clique no ícone à esquerda para logar.">Não está logado</h2>';
     }
     return <<<HTML
-        <div class="header">
-          <div class="header__icon-search-bar">
-            $perfil
-            $html
-          </div>  
-          $logout 
-          <a href="#" onclick="loadComponent('mainMenu')" class="header__link">
-            <h2>Home</h2>
-          </a>
+        <div id="header">
+          <div class="header">
+            <div class="header__icon-search-bar">
+              $perfil
+              $html
+            </div>  
+            $logout 
+            <a href="#" onclick="loadComponent('mainMenu')" class="header__link">
+              <h2>Home</h2>
+            </a>
+          </div>
         </div>
         HTML;
   }

@@ -3,47 +3,45 @@ require_once __DIR__ . "/../conect.php";
 require_once __DIR__ . "/../functions.php";
 function renderAddMusicForm()
 {
-    global $conexao;
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-    if (!isset($_SESSION['usuario']) or !isset($_POST['id_album'])) header("Location: index.php");
-    $id_album = $_POST['id_album'];
-    $tabelaAlbum = mysqli_query($conexao, "SELECT * FROM album WHERE id_album = '$id_album'");
-    $album = mysqli_fetch_assoc($tabelaAlbum);
-    $tituloAlbum = $album['titulo'];
+  global $conexao;
+  if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+  }
+  if (!isset($_SESSION['usuario']) or !isset($_POST['id_album'])) header("Location: index.php");
+  $id_album = $_POST['id_album'];
+  $tabelaAlbum = mysqli_query($conexao, "SELECT * FROM album WHERE id_album = '$id_album'");
+  $album = mysqli_fetch_assoc($tabelaAlbum);
+  $tituloAlbum = $album['titulo'];
 
-    echo "<div class='album-music-page'>";
+  echo "<div class='album-music-page'>";
 
-    echo "<h2 class='page-title'>
+  echo "<h2 class='page-title'>
         Músicas já presentes no álbum \"$tituloAlbum\"
       </h2>";
 
-    if (registroExiste($conexao, 'musica', 'id_album', $id_album)) {
+  if (registroExiste($conexao, 'musica', 'id_album', $id_album)) {
 
-        echo "<div class='album-music-table-wrapper'>
+    echo "<div class='album-music-table-wrapper'>
             <table class='album-music-table'>
               <thead>
                 <tr>
                   <th>Título</th>
                   <th>Arquivo</th>
                   <th>Duração</th>
-                  <th>Detalhes</th>
                   <th>Ações</th>
                 </tr>
               </thead>
               <tbody>";
 
-        $sql = mysqli_query($conexao, "SELECT * FROM musica WHERE id_album = $id_album");
+    $sql = mysqli_query($conexao, "SELECT * FROM musica WHERE id_album = $id_album");
 
-        while ($linha = mysqli_fetch_assoc($sql)) {
+    while ($linha = mysqli_fetch_assoc($sql)) {
 
-            echo "
+      echo "
         <tr>
           <td>{$linha['titulo']}</td>
           <td>{$linha['arquivo']}</td>
           <td>" . gmdate('i:s', $linha['duracao']) . "</td>
-          <td class='music-details'>" . nl2br($linha['detalhes']) . "</td>
 
           <td class='music-actions'>
             <button class='btn-edit'
@@ -68,21 +66,21 @@ function renderAddMusicForm()
                 </div>
             </div>
         </div>";
-        }
-
-        echo "</tbody></table></div>";
-    } else {
-        echo "<p class='empty-info'>Nenhuma música cadastrada.</p>";
     }
 
-    echo "</div>";
+    echo "</tbody></table></div>";
+  } else {
+    echo "<p class='empty-info'>Nenhuma música cadastrada.</p>";
+  }
 
-    echo <<<HTML
+  echo "</div>";
+
+  echo <<<HTML
     <h2 class="form-title">Adicionar música ao álbum</h2>
     <form id="add-music-form" class="default-form" enctype="multipart/form-data">
         <label>Título: <input type="text" name="titulo" required></label><br>
         <label>Arquivo: (máximo de 20MB)<input type="file" name="arquivo" required></label><br>
-        <label>Detalhes: <br><textarea name="detalhes" required></textarea></label><br>
+        <label>Detalhes: <br><textarea rows="15" name="detalhes" required></textarea></label><br>
         <input type="hidden" name="id_album" value="{$id_album}">
         <input type="submit" value="Adicionar música">
         <br><a href="#" class="form-link" onclick="loadComponent('mainMenu')">Voltar à página inicial</a>
@@ -91,5 +89,5 @@ function renderAddMusicForm()
 }
 
 if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
-    renderAddMusicForm();
+  renderAddMusicForm();
 }

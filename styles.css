@@ -50,14 +50,14 @@ img {
   background-color: var(--cor-principal-15);
   padding: 10px 20px;
   align-items: center;
-  border-radius: inherit;
+  border-radius: 15px;
   overflow-x: auto;
   overflow-y: hidden;
 }
 
 .header__icon {
   max-height: 10svh;
-  min-height: 75px;
+  min-width: 75px;
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 15px;
@@ -85,18 +85,50 @@ img {
 }
 /* SearchBar */
 
+/* ===== Search Bar ===== */
+
 .header__search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
   background-color: var(--cor-principal-40);
-  max-width: 30dvh;
-  min-width: fit-content;
-  padding: 15px;
-  color: var(--cor-principal-70);
+  padding: 10px 15px;
   border-radius: 25px;
+
+  transition: background-color 200ms ease, box-shadow 200ms ease;
 }
 
-.header__search-bar-send {
-  display: none;
+/* efeito ao focar dentro */
+.header__search-bar:focus-within {
+  background-color: var(--cor-principal-50);
+  box-shadow: 0 0 0 2px var(--cor-azul-30);
 }
+
+/* input */
+.header__search-bar input {
+  background: transparent;
+  border: none;
+  outline: none;
+
+  color: white;
+  font-size: 14px;
+  width: 220px;
+}
+
+/* placeholder */
+.header__search-bar input::placeholder {
+  color: var(--cor-principal-70);
+}
+
+/* responsivo */
+@media (max-width: 500px) {
+  .header__search-bar input {
+    width: 150px;
+  }
+}
+
+
 
 /* left-bar */
 
@@ -134,6 +166,7 @@ img {
   background-color: var(--cor-principal-30);
   border-radius: 0 inherit 0 inherit;
   overflow-y: auto;
+  gap: 10px;
 }
 
 /* Player */
@@ -216,7 +249,7 @@ img {
   accent-color: var(--cor-azul-70);
   width: 30vw;
   max-width: 400px;
-  min-width: 200px;
+  min-width: 150px;
 }
 
 #player__progress:hover {
@@ -1135,4 +1168,9 @@ img {
   color: var(--cor-principal-60);
 }
 
+.details-collapsed {
+  max-height: 60px;
+  overflow: hidden;
+  position: relative;
+}
 

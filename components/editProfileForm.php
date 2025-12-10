@@ -21,7 +21,7 @@ function renderEditPlaylistForm()
         <br>
 
         <label>Bio:</label>
-        <textarea name="bio" required>{$bio}</textarea>
+        <textarea name="bio" rows="15" required>{$bio}</textarea>
 
         <br>
 

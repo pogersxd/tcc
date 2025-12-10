@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 10/12/2025 às 21:12
+-- Tempo de geração: 10/12/2025 às 22:49
 -- Versão do servidor: 9.1.0
 -- Versão do PHP: 8.3.14
 
@@ -66,19 +66,21 @@ CREATE TABLE IF NOT EXISTS `curtido` (
   `id_usuario` int NOT NULL,
   PRIMARY KEY (`id_curtido`),
   KEY `curtido_id_usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `curtido`
 --
 
 INSERT INTO `curtido` (`id_curtido`, `id_item`, `tipo`, `id_usuario`) VALUES
-(15, 35, 'album', 1),
-(16, 39, 'musica', 1),
 (18, 39, 'musica', 2),
 (19, 36, 'album', 2),
 (20, 40, 'musica', 2),
-(21, 1, 'artista', 2);
+(21, 1, 'artista', 2),
+(25, 45, 'musica', 1),
+(26, 60, 'musica', 1),
+(27, 57, 'musica', 1),
+(28, 47, 'musica', 1);
 
 -- --------------------------------------------------------
 
@@ -104,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `musica` (
 
 INSERT INTO `musica` (`id_musica`, `titulo`, `arquivo`, `duracao`, `detalhes`, `id_album`) VALUES
 (38, 'Certifique Flan.', '6d28758928107bbaa1faaa6403b0285f.mp3', 212, 'nachi', 34),
-(39, 'Something', '50d0a4ca6acf5c3b01fb65f5d41a16f8.mp3', 182, 'asdsadasd\r\n', 35),
+(39, 'Something', '50d0a4ca6acf5c3b01fb65f5d41a16f8.mp3', 182, 'Something in the way she moves\r\nAttracts me like no other lover\r\nSomething in the way she woos me\r\nI don\'t want to leave in now\r\nYou know I believe and how\r\n\r\nSomewhere in her smile she knows\r\nThat I don\'t need no other lover\r\nSomething in her style that shows me\r\nI don\'t want to leave in now\r\nYou know I believe and how\r\n\r\nYou\'re asking me will my love grow?\r\nI don\'t know, I don\'t know\r\nYou stick around now it may show\r\nI don\'t know, I don\'t know\r\n\r\nSomething in the way she knows\r\nAnd all I have to do is think of her\r\nSomething in the things she shows me\r\nI don\'t want to leave in now\r\nYou know I believe and how', 35),
 (40, 'Alucinação', '2880e57f57f8d2735e525f8d5c7163e2.mp3', 294, 'Eu não estou interessado em nenhuma teoria\r\nEm nenhuma fantasia, nem no algo mais\r\nNem em tinta pro meu rosto, ou oba-oba, ou melodia\r\nPara acompanhar bocejos, sonhos matinais\r\n\r\nEu não estou interessado em nenhuma teoria\r\nNem nessas coisas do Oriente, romances astrais\r\nA minha alucinação é suportar o dia a dia\r\nE meu delírio é a experiência com coisas reais\r\n\r\nUm preto, um pobre, um estudante, uma mulher sozinha\r\nBlue jeans e motocicletas, pessoas cinzas normais\r\nGarotas dentro da noite, revólver, cheira a cachorro\r\nOs humilhados do parque com os seus jornais\r\n\r\nCarneiros, mesa, trabalho, meu corpo que cai do oitavo andar\r\nE a solidão das pessoas dessas capitais\r\nA violência da noite, o movimento do tráfego\r\nUm rapaz delicado e alegre que canta e requebra, é demais\r\nCravos, espinhas no rosto, rock, hot dog, play it cool, baby\r\nDoze jovens coloridos, dois policiais\r\n\r\nCumprindo o seu duro dever\r\nE defendendo o seu amor\r\nE nossa vida\r\nCumprindo o seu duro dever\r\nE defendendo o seu amor\r\nE nossa vida\r\n\r\nMas eu não estou interessado em nenhuma teoria\r\nEm nenhuma fantasia, nem no algo mais\r\nLonge, o profeta do terror que a Laranja Mecânica anuncia\r\nAmar e mudar as coisas me interessa mais\r\n\r\nAmar e mudar as coisas\r\nAmar e mudar as coisas me interessa mais\r\n\r\nUm preto, um pobre, um estudante, uma mulher sozinha\r\nBlue jeans e motocicletas, pessoas cinzas normais\r\nGarotas dentro da noite, revólver, cheira a cachorro\r\nOs humilhados do parque com os seus jornais\r\n\r\nCarneiros, mesa, trabalho, meu corpo que cai do oitavo andar\r\nE a solidão das pessoas dessas capitais\r\nA violência da noite, o movimento do tráfego\r\nUm rapaz delicado e alegre que canta e requebra, é demais\r\nCravos, espinhas no rosto, rock, hot dog, play it cool, baby\r\nDoze jovens coloridos, dois policiais\r\n\r\nCumprindo o seu duro dever\r\nE defendendo o seu amor\r\nE nossa vida\r\nCumprindo o seu duro dever\r\nE defendendo o seu amor\r\nE nossa vida\r\n\r\nMas eu não estou interessado em nenhuma teoria\r\nEm nenhuma fantasia, nem no algo mais\r\nLonge, o profeta do terror que a Laranja Mecânica anuncia\r\nAmar e mudar as coisas me interessa mais\r\n\r\nAmar e mudar as coisas\r\nAmar e mudar as coisas me interessa mais', 36),
 (41, 'I Want You (She\'s So Heavy)', '339a0f63e2c8de6655fee0d21a01d627.mp3', 467, 'I want you, I want you so bad\r\nI want you, I want you so bad\r\nIt\'s driving me mad, it\'s driving me mad\r\n\r\nI want you, I want you so bad, babe\r\nI want you, I want you so bad\r\nIt\'s driving me mad, it\'s driving me\r\n\r\nI want you, I want you so bad, babe\r\nI want you, I want you so bad\r\nIt\'s driving me mad, it\'s driving me bad\r\n\r\nI want you, I want you so bad\r\nI want you, I want you so bad\r\nIt\'s driving me mad, it\'s driving me\r\n\r\nShe\'s so heavy\r\nHeavy (heavy, heavy)\r\n\r\nShe\'s so heavy\r\nShe\'s so heavy (heavy, heavy)\r\n\r\nI want you, I want you so bad\r\nI want you, I want you so bad\r\nIt\'s driving me mad, it\'s driving me mad\r\n\r\nI want you, you know I want you so bad, babe\r\nI want you, you know I want you so bad\r\nIt\'s driving me mad, it\'s driving me mad\r\n\r\nYeah!\r\n\r\nShe\'s so', 35),
 (42, 'Sgt. Pepper\'s Lonely Hearts Club Band', '67c549224a4fc834d7f445284e151c49.mp3', 122, 'It was twenty years ago today\r\nSergeant Pepper taught the band to play\r\nThey\'ve been going in and out of style\r\nBut they\'re guaranteed to raise a smile\r\n\r\nSo may I introduce to you\r\nThe act you\'ve known for all these years\r\nSergeant Pepper\'s Lonely Hearts Club Band\r\n\r\nWe\'re Sergeant Pepper\'s Lonely Hearts Club Band\r\nWe hope you will enjoy the show\r\nSergeant Pepper\'s Lonely Hearts Club Band\r\nSit back and let the evening go\r\n\r\nSergeant Pepper\'s Lonely\r\nSergeant Pepper\'s Lonely\r\nSergeant Pepper\'s Lonely Hearts Club Band\r\n\r\nIt\'s wonderful to be here\r\nIt\'s certainly a thrill\r\nYou\'re such a lovely audience\r\nWe\'d like to take you home with us\r\nWe\'d love to take you home\r\n\r\nI don\'t really want to stop the show\r\nBut I thought you might like to know\r\nThat the singer\'s going to sing a song\r\nAnd he wants you all to sing along\r\nSo let me introduce to you\r\nThe one and only Billy Shears\r\nAnd Sergeant Pepper\'s Lonely Hearts Club Band', 37),
@@ -193,7 +195,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nome`, `email`, `senha`, `foto`, `bio`) VALUES
-(1, 'la ele', 'diego@gmail.com', '$2y$10$5ycetnL9aZCiYDXosLwAquLHEYU7VTJX2Q3eNk52l9iZKIfCbN9Z.', '31085491aeabc924748921962e82431d.png', 'Bora bill'),
+(1, 'diego', 'diego@gmail.com', '$2y$10$5ycetnL9aZCiYDXosLwAquLHEYU7VTJX2Q3eNk52l9iZKIfCbN9Z.', '27b32b76e477abbc74e16784a2847816.jpg', 'Bora bill'),
 (2, 'arthur', 'arthur@gmail.com', '$2y$10$FW8MPMo09vxDrNl67QIreu0.83AfDg92X.3Ef0CI9/3h4.dFDlAvq', 'padrao.jpg', 'fortnite2 '),
 (3, 'ryan gosling', 'ryan@gmail.com', '$2y$10$BeUWjiYG9w7HvNRnldtMbOG1XWaA7p1.Z2ImJZ7FNRa/rCORkBvNq', 'padrao.jpg', '');
 

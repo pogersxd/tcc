@@ -1,11 +1,14 @@
- <?php
-function renderSearchBar()
-{
-  return <<<HTML
-          <div class="header__search-bar">
-            <form action="./">
-              <input type="text" name="pesquisa" placeholder="Pesquisar..." />
-            </form>
-          </div>
-        HTML;
-}
+
+    <?php
+    function renderSearchBar()
+    {
+      return <<<HTML
+    <form class="header__search-bar" onsubmit="return false;">
+        <input 
+            type="text"
+            placeholder="Buscar músicas, álbuns ou artistas..."
+            oninput="search(this.value)"
+        >
+    </form>
+    HTML;
+    }

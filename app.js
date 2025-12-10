@@ -37,17 +37,6 @@ function reloadLeftBar() {
     .catch(err => { console.error(err) });
 }
 
-function reloadHeader() {
-  const header = document.getElementById("header");
-
-  fetch("./components/header.php")
-    .then(response => response.text())
-    .then(data => {
-      header.outerHTML = data;
-    })
-    .catch(err => { console.error(err) });
-}
-
 function loadProfile(id) {
   const container = document.getElementById('main-menu');
 
@@ -222,9 +211,8 @@ document.addEventListener("submit", function (event) {
     method: "POST",
     body: formData,
   })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
-      console.log(data)
       window.alert(data.message);
 
       if (form.id === "add-music-form") {
@@ -243,7 +231,7 @@ document.addEventListener("submit", function (event) {
           .catch(err => console.error(err));
       }
       if (form.id === "edit-song-form") {
-        fetch("./addMusicForm.php", {
+        fetch("./components/addMusicForm.php", {
           method: "POST",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded"
@@ -260,8 +248,7 @@ document.addEventListener("submit", function (event) {
       else loadComponent(data.nextComponent);
 
       if ((form.id === "loginForm" || form.id === "edit-profile-form") && data.status === "success") {
-        reloadHeader();
-        reloadLeftBar();
+        window.location.reload();
       } else if ((form.id === "edit-album-form" || form.id === "edit-song-form") && data.status === "success") {
         reloadLeftBar();
       }
@@ -642,4 +629,34 @@ function loadEditSongForm(id_musica) {
     .then(data => {
       container.innerHTML = data;
     }).catch(err => console.error(err));
+}
+
+let searchTimeout;
+
+function search(q) {
+  clearTimeout(searchTimeout);
+
+  searchTimeout = setTimeout(() => {
+
+    if (q.trim().length === 0) {
+      loadComponent('mainMenu');
+      return;
+    }
+
+    fetch('components/searchResults.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({ q })
+    })
+      .then(res => res.text())
+      .then(html => {
+        const mainMenu = document.getElementById('main-menu');
+        if (mainMenu) {
+          mainMenu.innerHTML = html;
+        }
+      });
+
+  }, 300);
 }

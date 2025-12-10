@@ -16,7 +16,7 @@
       $id_usuario = $_SESSION['usuario']['id_usuario'];
       $curtidosQuery = mysqli_query($conexao, "SELECT * FROM curtido WHERE id_usuario = '$id_usuario'");
       if (mysqli_num_rows($curtidosQuery) > 0) {
-        $curtidos = '<h3 style="margin: 20px 0 0 20px">Curtidos:</h3>';
+        $curtidos = '<h3 style="margin: 10px 0 0 10px">Curtidos:</h3>';
         while ($curtido = mysqli_fetch_assoc($curtidosQuery)) {
           if ($curtido['tipo'] == "musica") {
             $musicaQuery = mysqli_query($conexao, "SELECT * FROM musica WHERE id_musica = {$curtido['id_item']}");
@@ -60,11 +60,10 @@
           }
         }
       } else {
-        $html = "<b style='margin: 10px'>Não tem nada curtido.</b>";
+        $html = "<h3 style='margin: 10px'>Não tem nada curtido.</h3>";
       }
     } else {
-      $html = "<b>Precisa estar logado para usar isso.</b>";
-      $style = 'style="padding: 10px;"';
+      $html = "<h3 style='margin: 10px'>Precisa estar logado para usar isso.</h3>";
     }
     return <<<HTML
           <div id="left-bar" class="left-bar">

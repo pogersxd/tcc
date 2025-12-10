@@ -21,7 +21,7 @@ function renderEditSongForm()
         <br>
 
         <label>Detalhes:</label>
-        <textarea name="detalhes" required>{$detalhes}</textarea>
+        <textarea name="detalhes" rows="15" required>{$detalhes}</textarea>
 
         <br>
 
