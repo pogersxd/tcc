@@ -110,11 +110,16 @@ img {
 
 .left-bar {
   max-height: 100%;
-  display: grid;
-  justify-items: center;
+  width: 220px;
   background-color: var(--cor-principal-30);
   border-radius: inherit 0 inherit 0;
   overflow-y: auto;
+}
+.left-bar-container {
+  max-height: 100%;
+  width: 100%;
+  display: grid;
+  justify-items: center;
 }
 
 /* Main Menu */
@@ -155,7 +160,7 @@ img {
 }
 
 .player__time {
-  font-size: 24px;
+  font-size: 20px;
 }
 .player__progress-wrapper {
   position: relative;
@@ -199,7 +204,7 @@ img {
 }
 
 #player__pause-icon {
-  font-size: 50px;
+  font-size: 40px;
   transition: transform, ease, 200ms;
 }
 
@@ -313,7 +318,7 @@ img {
   display: flex;
 }
 
-.single-item__image-artist {
+.single-item__image-artist, .single-item__image-song {
   border-radius: 50%;
 }
 
@@ -854,6 +859,7 @@ img {
 /* container do formulário */
 .default-form {
     width: 60%;
+    min-width: fit-content;
     background: var(--cor-principal-20);
     padding: 20px;
     border-radius: 10px;
@@ -1041,4 +1047,92 @@ img {
 .btn-curtir:hover {
     transform: scale(1.1);
 }
+
+/* listarmusicaseditalbum */
+
+.album-music-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Título */
+
+.page-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Tabela */
+
+.album-music-table-wrapper {
+  overflow-x: auto;
+}
+
+.album-music-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.album-music-table th,
+.album-music-table td {
+  padding: 10px;
+  text-align: left;
+}
+
+.album-music-table th {
+  color: var(--cor-principal-50);
+  font-weight: 500;
+}
+
+.album-music-table tr:hover {
+  background-color: var(--cor-azul-10);
+}
+
+/* Detalhes */
+
+.music-details {
+  max-width: 300px;
+  font-size: 14px;
+  color: var(--cor-principal-70);
+}
+
+/* Ações */
+
+.music-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.music-actions button {
+  border: none;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-edit {
+  background-color: var(--cor-azul-30);
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: var(--cor-azul-50);
+}
+
+.btn-delete {
+  background-color: #d9534f;
+  color: white;
+}
+
+.btn-delete:hover {
+  opacity: 0.85;
+}
+
+/* Estado vazio */
+
+.empty-info {
+  color: var(--cor-principal-60);
+}
+
 

@@ -22,11 +22,23 @@ function renderSong()
   $usuarioFetch = mysqli_fetch_assoc($usuarioQuery);
   $usuarioNome = $usuarioFetch['nome'];
   $duracao = gmdate("i:s", $musicaFetch['duracao']);
-  $botaoPlaylist = '';
+  $botao = '';
   if (isset($_SESSION['usuario'])) {
-    $botaoPlaylist = <<<HTML
+    $id_usuarioSessao = $_SESSION['usuario']['id_usuario'];
+    $curtido = mysqli_query($conexao, "SELECT * FROM curtido WHERE id_item = '$id_musica' AND tipo = 'musica' AND id_usuario = '$id_usuarioSessao'");
+    $curtido = (mysqli_num_rows($curtido) > 0);
+    $ativoDesativo = $curtido ? "ativo" : "";
+    $botao = <<<HTML
           <button class="song-add-playlist" onclick="openAddToPlaylistModal('{$id_musica}')">
               <i class="fa-solid fa-plus"></i> Adicionar à playlist
+          </button>
+          <button 
+              class="btn-curtir {$ativoDesativo}"
+              data-tipo="musica"
+              data-id="{$id_musica}"
+              onclick="toggleCurtida(this)"
+              >
+              ❤︎
           </button>
           HTML;
   }
@@ -55,7 +67,7 @@ function renderSong()
         <a href="#" onclick="loadMusica('{$musicaArquivo}', '{$id_usuario}')" class="song-play">
           <i class="fa-solid fa-play"></i> Tocar
         </a>
-        {$botaoPlaylist}
+        {$botao}
       </div>
     
       <!-- Detalhes -->

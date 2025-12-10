@@ -16,13 +16,13 @@ if (!isset($_SESSION['usuario']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 } else {
     $titulo = mysqli_real_escape_string($conexao, $_POST["titulo"]);
-    $id_playlist = $_POST['id_playlist'];
-    if (registroExiste($conexao, 'playlist', 'id_playlist', $id_playlist)) {
+    $id_album = $_POST['id_album'];
+    if (registroExiste($conexao, 'album', 'id_album', $id_album)) {
         if ($_FILES['capa']['size'] <= 1024 * 1024 * 10) {
             $tipoCorreto = false;
             $tipoAlternativo = false;
             if (!empty($_FILES['capa']['name'])) {
-                $pasta = __DIR__ . "/assets/playlistCovers/";
+                $pasta = __DIR__ . "/assets/albumCovers/";
 
                 if (!is_dir($pasta)) {
                     mkdir($pasta, 0777, true);
@@ -55,7 +55,7 @@ if (!isset($_SESSION['usuario']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
             if ($tipoCorreto || $tipoAlternativo || empty($_FILES['capa']['name'])) {
                 if (!empty($_FILES['capa']['name'])) {
                     $feitoUpload = move_uploaded_file($_FILES['capa']['tmp_name'], $pasta . $nomeArquivoExtensao);
-                    $antigoArquivoQuery = mysqli_query($conexao, "SELECT capa FROM playlist WHERE id_playlist = '$id_playlist'");
+                    $antigoArquivoQuery = mysqli_query($conexao, "SELECT capa FROM album WHERE id_album = '$id_album'");
                     $antigoArquivo = mysqli_fetch_assoc($antigoArquivoQuery)['capa'];
                     $feitoUpload = move_uploaded_file($_FILES['capa']['tmp_name'], $pasta . $nomeArquivoExtensao);
                     if ($feitoUpload) {
@@ -65,25 +65,25 @@ if (!isset($_SESSION['usuario']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
                     $feitoUpload = false;
                 }
                 if ($feitoUpload || empty($_FILES['capa']['name'])) {
-                    mysqli_query($conexao, "UPDATE playlist SET titulo = '$titulo', capa  = '$nomeArquivoExtensao' WHERE id_playlist = '$id_playlist'");
+                    mysqli_query($conexao, "UPDATE album SET titulo = '$titulo', capa  = '$nomeArquivoExtensao' WHERE id_album = '$id_album'");
                     $response["status"] = "success";
-                    $response["message"] = "Album alterado com sucesso!";
-                    $response["nextComponent"] = "editPlaylist";
+                    $response["message"] = "Álbum alterado com sucesso!";
+                    $response["nextComponent"] = "editAlbum";
                 }
             } else {
                 $response["status"] = "error";
                 $response["message"] = "Formato de arquivo inválido (apenas arquivo de imagem)";
-                $response["nextComponent"] = "editPlaylist";
+                $response["nextComponent"] = "editAlbum";
             }
         } else {
             $response["status"] = "error";
             $response["message"] = "Arquivo muito grande (máx 10MB)";
-            $response["nextComponent"] = "editPlaylist";
+            $response["nextComponent"] = "editAlbum";
         }
     } else {
         $response["status"] = "error";
-        $response["message"] = "A playlist não existe mais";
-        $response["nextComponent"] = "editPlaylist";
+        $response["message"] = "O álbum não existe mais";
+        $response["nextComponent"] = "editAlbum";
     }
 }
 echo json_encode($response, JSON_UNESCAPED_UNICODE);

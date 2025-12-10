@@ -108,6 +108,23 @@ function loadEditPlaylist(id_playlist) {
     }).catch(err => console.error(err));
 }
 
+function loadEditProfile(id_usuario) {
+  const container = document.getElementById('main-menu');
+
+  fetch("./components/editProfileForm.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "id_usuario=" + encodeURIComponent(id_usuario)
+  }).then(response => response.text())
+    .then(data => {
+      container.innerHTML = data;
+    }).catch(err => console.error(err));
+}
+
+
+
 function loadItemList(tipo) {
   const container = document.getElementById("main-menu");
   let nome;
@@ -187,6 +204,15 @@ document.addEventListener("submit", function (event) {
     case "edit-playlist-form":
       arquivo = "./editplaylist.php";
       break;
+    case "edit-profile-form":
+      arquivo = "./editprofile.php";
+      break;
+    case "edit-album-form":
+      arquivo = "./editalbum.php";
+      break;
+    case "edit-song-form":
+      arquivo = "./editsong.php";
+      break;
   }
 
   event.preventDefault();
@@ -196,9 +222,9 @@ document.addEventListener("submit", function (event) {
     method: "POST",
     body: formData,
   })
-    .then(response => response.json())
+    .then(response => response.text())
     .then(data => {
-      console.log(data);
+      console.log(data)
       window.alert(data.message);
 
       if (form.id === "add-music-form") {
@@ -216,13 +242,46 @@ document.addEventListener("submit", function (event) {
           })
           .catch(err => console.error(err));
       }
+      if (form.id === "edit-song-form") {
+        fetch("./addMusicForm.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: "id_album=" + encodeURIComponent(data.id)
+        }).then(response => response.text())
+          .then(data => {
+            const container = document.getElementById('main-menu');
+            container.innerHTML = data;
+            reloadLeftBar();
+          })
+          .catch(err => console.error(err));
+      }
       else loadComponent(data.nextComponent);
 
-      if (form.id === "loginForm" && data.status === "success") {
-        window.location.reload();
+      if ((form.id === "loginForm" || form.id === "edit-profile-form") && data.status === "success") {
+        reloadHeader();
+        reloadLeftBar();
+      } else if ((form.id === "edit-album-form" || form.id === "edit-song-form") && data.status === "success") {
+        reloadLeftBar();
       }
     }).catch(err => console.error(err));
 });
+
+function loadEditAlbumForm(id_album) {
+  const container = document.getElementById('main-menu');
+
+  fetch("./components/editAlbumForm.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "id_album=" + encodeURIComponent(id_album)
+  }).then(response => response.text())
+    .then(data => {
+      container.innerHTML = data;
+    }).catch(err => console.error(err));
+}
 
 function deletePlaylist(id) {
   fetch("./deleteAlbum.php", {
@@ -568,4 +627,19 @@ function toggleCurtida(botao) {
       }
       reloadLeftBar();
     });
+}
+
+function loadEditSongForm(id_musica) {
+  const container = document.getElementById('main-menu');
+
+  fetch("./components/editSongForm.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "id_musica=" + encodeURIComponent(id_musica)
+  }).then(response => response.text())
+    .then(data => {
+      container.innerHTML = data;
+    }).catch(err => console.error(err));
 }

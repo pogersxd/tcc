@@ -3,6 +3,7 @@
   require_once __DIR__ . "/singleItemAlbum.php";
   require_once __DIR__ . "/singleItemArtista.php";
   require_once __DIR__ . "/../conect.php";
+  require_once __DIR__ . "/../functions.php";
   function renderLeftBar()
   {
     global $conexao;
@@ -10,11 +11,12 @@
       session_start();
     }
     $html = '';
-    $style = '';
+    $curtidos = '';
     if (isset($_SESSION['usuario'])) {
       $id_usuario = $_SESSION['usuario']['id_usuario'];
       $curtidosQuery = mysqli_query($conexao, "SELECT * FROM curtido WHERE id_usuario = '$id_usuario'");
       if (mysqli_num_rows($curtidosQuery) > 0) {
+        $curtidos = '<h3 style="margin: 20px 0 0 20px">Curtidos:</h3>';
         while ($curtido = mysqli_fetch_assoc($curtidosQuery)) {
           if ($curtido['tipo'] == "musica") {
             $musicaQuery = mysqli_query($conexao, "SELECT * FROM musica WHERE id_musica = {$curtido['id_item']}");
@@ -43,18 +45,33 @@
             $nome = $usuario['nome'];
             $html .= renderSingleItemAlbum($capaAlbum, $titulo, $id_usuario, $id_album, $nome);
           }
+          if ($curtido['tipo'] == "artista") {
+            $sql = mysqli_query($conexao, "SELECT * FROM usuario");
+            if (mysqli_num_rows($sql) > 0) {
+              while ($linha = mysqli_fetch_assoc($sql)) {
+                $id_usuario = $linha['id_usuario'];
+                if (registroExiste($conexao, "album", "id_usuario", $id_usuario)) {
+                  $foto = $linha['foto'];
+                  $nome = $linha['nome'];
+                  $html .= renderSingleItemArtista($id_usuario, $nome, $foto);
+                }
+              }
+            }
+          }
         }
       } else {
-        $html = "<b>Não tem nada curtido!</b>";
-        $style = 'style="padding: 10px;"';
+        $html = "<b style='margin: 10px'>Não tem nada curtido.</b>";
       }
     } else {
-      $html = "<b>Precisa estar logado para usar isso</b>";
+      $html = "<b>Precisa estar logado para usar isso.</b>";
       $style = 'style="padding: 10px;"';
     }
     return <<<HTML
-          <div id="left-bar" class="left-bar" {$style}>
-            $html
+          <div id="left-bar" class="left-bar">
+            $curtidos
+            <div class="left-bar__container">
+              $html
+            </div>
           </div>
         HTML;
   }

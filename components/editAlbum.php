@@ -39,7 +39,7 @@ function renderEditAlbum()
 
                     <button 
                         class="album-btn"
-                        onclick="editAlbum('{$linha['id_album']}')">
+                        onclick="loadEditAlbumForm('{$linha['id_album']}')">
                         Editar
                     </button>
 

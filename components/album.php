@@ -5,7 +5,9 @@ function renderAlbum()
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-    $id_usuarioSessao = $_SESSION['usuario']['id_usuario'];
+    if (isset($_SESSION['usuario'])) {
+        $id_usuarioSessao = $_SESSION['usuario']['id_usuario'];
+    }
     global $conexao;
     $id_album = $_POST['id_album'];
     $html = '';
@@ -32,6 +34,7 @@ function renderAlbum()
         }
         $somaDuracao = $horas . $minutos;
         $musicasQuery = mysqli_query($conexao, "SELECT * FROM musica WHERE id_album = '$id_album'");
+        $botao = '';
         if (mysqli_num_rows($musicasQuery) > 0) {
             $numero = 1;
             $html .= <<<HTML
@@ -60,9 +63,25 @@ function renderAlbum()
             }
             $html .= "</div>";
         }
-        $curtido = mysqli_query($conexao, "SELECT * FROM curtido WHERE id_item = '$id_album' AND tipo = 'album' AND id_usuario = '$id_usuarioSessao'");
-        $curtido = (mysqli_num_rows($curtido) > 0);
-        $ativoDesativo = $curtido ? "ativo" : "";
+        if (isset($_SESSION['usuario'])) {
+            $id_usuarioSessao = $_SESSION['usuario']['id_usuario'];
+            $curtido = mysqli_query($conexao, "SELECT * FROM curtido WHERE id_item = '$id_album' AND tipo = 'album' AND id_usuario = '$id_usuarioSessao'");
+            $curtido = (mysqli_num_rows($curtido) > 0);
+            $ativoDesativo = $curtido ? "ativo" : "";
+            $botao = <<<HTML
+                <div class="album-actions">
+                    <button 
+                        class="btn-curtir {$ativoDesativo}"
+                        data-tipo="album"
+                        data-id="{$id_album}"
+                        onclick="toggleCurtida(this)"
+                        >
+                        ❤︎
+                    </button>
+    
+                </div>
+            HTML;
+        }
     }
 
 
@@ -77,17 +96,7 @@ function renderAlbum()
                 <h1 class="album-title">{$titulo}</h1>
                 <a href="#" class="album-artist" onclick="loadProfile('{$id_usuario}')">{$usuarioNome}</a>
                 <p class="album-meta">{$somaMusicas} música(s) • {$somaDuracao}</p>
-                <div class="album-actions">
-                    <button 
-                        class="btn-curtir {$ativoDesativo}"
-                        data-tipo="album"
-                        data-id="{$id_album}"
-                        onclick="toggleCurtida(this)"
-                        >
-                        ❤︎
-                    </button>
-    
-                </div>
+                {$botao}
             </div>
         </div>
 

@@ -17,14 +17,14 @@ function renderProfile()
     if (!$_POST && isset($_SESSION['usuario'])) $postNaoExisteMasSessaoSim = true;
     $buttons = '';
     if ($sessionIgualPost || $postNaoExisteMasSessaoSim) {
+        $id_usuario = $_SESSION['usuario']['id_usuario'];
         $buttons = <<<HTML
                         <div class="profile-buttons">
-                            <button class="profile-edit"><i class="fa-solid fa-pen"></i> Editar perfil</button>
+                            <button class="profile-edit" onclick="loadEditProfile('{$id_usuario}')"><i class="fa-solid fa-pen"></i> Editar perfil</button>
                             <a href="./logout.php" class="profile-logout" ><i class="fa-solid fa-right-from-bracket"></i> Sair</a>
                         </div>
         HTML;
         $nome = $_SESSION['usuario']['nome'];
-        $id_usuario = $_SESSION['usuario']['id_usuario'];
         $bio = $_SESSION['usuario']['bio'];
         $foto = $_SESSION['usuario']['foto'];
     } else {
@@ -33,7 +33,25 @@ function renderProfile()
         $usuario = mysqli_fetch_assoc($usuarioQuery);
         $nome = $usuario['nome'];
         $foto = $usuario['foto'];
-        $bio = $usuario['bio'];
+        $bio = nl2br($usuario['bio']);
+        if (isset($_SESSION['usuario'])) {
+            $id_usuarioSessao = $_SESSION['usuario']['id_usuario'];
+            $curtido = mysqli_query($conexao, "SELECT * FROM curtido WHERE id_item = '$id_usuario' AND tipo = 'artista' AND id_usuario = '$id_usuarioSessao'");
+            $curtido = (mysqli_num_rows($curtido) > 0);
+            $ativoDesativo = $curtido ? "ativo" : "";
+            $buttons = <<<HTML
+                    <div class="profile-buttons">
+                        <button 
+                            class="btn-curtir {$ativoDesativo}"
+                            data-tipo="artista"
+                            data-id="{$id_usuario}"
+                            onclick="toggleCurtida(this)"
+                            >
+                            ❤︎
+                        </button>
+                    </div>
+            HTML;
+        }
     }
     $albumQuery = mysqli_query($conexao, "SELECT * FROM album WHERE id_usuario = '$id_usuario'");
     $albuns = '<h2>Este perfil não tem álbuns</h2>';
