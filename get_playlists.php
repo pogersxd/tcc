@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+
 header("Content-Type: application/json");
 $id_usuario = $_SESSION['usuario']['id_usuario'];
 $playslistsSQL = mysqli_query($conexao, "SELECT * FROM playlist WHERE id_usuario = '$id_usuario'");

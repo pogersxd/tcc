@@ -274,6 +274,7 @@ img {
 .single-item {
   padding: 10px;
   width: 200px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   align-items:baseline;
@@ -1023,3 +1024,21 @@ img {
   background-color: var(--cor-azul-10);
   cursor: pointer;
 }
+
+.btn-curtir {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #aaa;
+    width: fit-content;
+}
+
+.btn-curtir.ativo {
+    color: red;
+}
+
+.btn-curtir:hover {
+    transform: scale(1.1);
+}
+

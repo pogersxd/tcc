@@ -22,7 +22,36 @@ function renderPlaylist()
             $horas = floor($somaDuracao / (60 * 60)) . 'h e ';
         }
         $somaDuracao = $horas . $minutos;
-        return <<<HTML
+        $musicasQuery = mysqli_query($conexao, "SELECT * FROM musica m JOIN musica_playlist mp ON mp.id_musica = m.id_musica WHERE mp.id_playlist = '$id_playlist'");
+        $html = '';
+        if (mysqli_num_rows($musicasQuery) > 0) {
+            $numero = 1;
+            $html .= <<<HTML
+                <div class="playlist-tracklist">
+                <div class="playlist-track playlist-track--header">
+                    <span>#</span>
+                    <span>Título</span>
+                    <span>Duração</span>
+                </div>
+                    <!-- <div class="album-actions">
+                        <button class="album-play">
+                        <i class="fa-solid fa-play"></i> Tocar
+                        </button>
+                    </div> -->
+                HTML;
+            while ($musica = mysqli_fetch_assoc($musicasQuery)) {
+                $duracao = gmdate('i:s', $musica['duracao']);
+                $html .= <<<HTML
+                    <a href="#" onclick="loadMusicaTela('{$musica['id_musica']}')" class="playlist-track">
+                        <span>{$numero}</span>
+                        <span>{$musica['titulo']}</span>
+                        <span>{$duracao}</span>
+                    </a>
+                HTML;
+                $numero++;
+            }
+            $html .= "</div>";
+            return <<<HTML
         <div class="playlist-page">
             <!-- Cabeçalho da playlist -->
             <div class="playlist-header">
@@ -47,28 +76,11 @@ function renderPlaylist()
             </div>
 
             <!-- Lista de músicas -->
-            <div class="playlist-tracklist">
-                <div class="playlist-track playlist-track--header">
-                <span>#</span>
-                <span>Título</span>
-                <span>Duração</span>
-                </div>
-
-                <div class="playlist-track">
-                <span>1</span>
-                <span>Nome da Música</span>
-                <span>3:12</span>
-                </div>
-
-                <div class="playlist-track">
-                <span>2</span>
-                <span>Outra Música</span>
-                <span>2:58</span>
-                </div>
-            </div>
+            {$html}
 
         </div>
-    HTML;
+        HTML;
+        }
     }
 }
 if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {

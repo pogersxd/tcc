@@ -10,7 +10,7 @@ function renderEditPlaylistForm()
     $capa = $playlist['capa'];
     return <<<HTML
     <h2>Editar Playlist</h2>
-    <form class="default-form" action="editar_playlist.php" method="POST" enctype="multipart/form-data">
+    <form id="edit-playlist-form" class="default-form" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id_playlist" value="{$id_playlist}">
         <input type="hidden" name="capa_atual" value="{$capa}">
 

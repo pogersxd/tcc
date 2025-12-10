@@ -184,6 +184,9 @@ document.addEventListener("submit", function (event) {
     case "add-music-form":
       arquivo = "./addMusica.php";
       break;
+    case "edit-playlist-form":
+      arquivo = "./editplaylist.php";
+      break;
   }
 
   event.preventDefault();
@@ -195,6 +198,7 @@ document.addEventListener("submit", function (event) {
   })
     .then(response => response.json())
     .then(data => {
+      console.log(data);
       window.alert(data.message);
 
       if (form.id === "add-music-form") {
@@ -468,44 +472,49 @@ function openAddToPlaylistModal(songId) {
 
   document.getElementById("addToPlaylistModal").style.display = "flex";
 
-  loadUserPlaylists();
+  loadUserPlaylists(songId);
 }
 
 function closeAddToPlaylistModal() {
   document.getElementById("addToPlaylistModal").style.display = "none";
 }
 
-function loadUserPlaylists() {
+function loadUserPlaylists(id_musica) {
   fetch("./get_playlists.php")
     .then(res => res.json())
     .then(playlists => {
       const container = document.getElementById("playlistList");
       container.innerHTML = "";
-
       playlists.forEach(p => {
         container.innerHTML += `
-          <div class="playlist-option" onclick="addSongToPlaylist(${p.id})">
-            ${p.nome}
-          </div>
+          <br>
+          <a href="#" class="playlist-option" onclick="addSongToPlaylist('${p.id}',${id_musica})">
+            ${p.titulo}
+          </a>
         `;
       });
       if (container.innerHTML == "") container.innerHTML = "<br>Você não tem playlists";
     }).catch(err => console.error(err));
 }
 
-function addSongToPlaylist(playlistId) {
-  fetch("./add_song_playlist.php", {
+function addSongToPlaylist(id_playlist, id_musica) {
+  fetch("./addSongPlaylist.php", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      song_id: selectedSongId,
-      playlist_id: playlistId
-    })
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "id_playlist=" + encodeURIComponent(id_playlist) +
+      "&id_musica=" + encodeURIComponent(id_musica),
   })
     .then(res => res.json())
     .then(data => {
+      console.log(data)
       alert(data.message);
       closeAddToPlaylistModal();
+      if (data.status == "success") {
+        reloadLeftBar();
+      }
+      loadMusicaTela(data.id);
     });
 }
 
@@ -538,4 +547,25 @@ function openDeleteModal(type, id) {
     event.preventDefault();
     modal.style.display = "none";
   })
+}
+
+function toggleCurtida(botao) {
+  const tipo = botao.dataset.tipo;
+  const id = botao.dataset.id;
+
+  fetch('./toggleCurtida.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: "tipo=" + encodeURIComponent(tipo) +
+      "&id_item=" + encodeURIComponent(id)
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.curtido) {
+        botao.classList.add('ativo');
+      } else {
+        botao.classList.remove('ativo');
+      }
+      reloadLeftBar();
+    });
 }
