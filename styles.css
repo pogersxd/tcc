@@ -1174,3 +1174,7 @@ img {
   position: relative;
 }
 
+.editPlaylist__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}

@@ -53,7 +53,7 @@ if (!isset($_SESSION['usuario']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
                     mysqli_query($conexao, "INSERT INTO playlist (titulo, capa, id_usuario) VALUES ('$titulo','$nomeArquivoExtensao',$id_usuario)");
                     $tabelaPlaylist = mysqli_query($conexao, "SELECT id_playlist FROM playlist WHERE capa='$nomeArquivoExtensao'");
                     $response["status"] = "success";
-                    $response["message"] = "Album cadastrado!";
+                    $response["message"] = "Playlist cadastrada!";
                     $response["nextComponent"] = "editPlaylist";
                 }
             } else {

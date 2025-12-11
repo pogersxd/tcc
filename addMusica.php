@@ -13,7 +13,7 @@ $detalhes = mysqli_real_escape_string($conexao, $_POST['detalhes']);
 $id_album = $_POST["id_album"];
 if (isset($_SESSION['usuario'])) {
     if (registroExiste($conexao, 'album', 'id_album', $id_album)) {
-        if ($_FILES['arquivo']['size'] <= 1024 * 1024 * 20) {
+        if ($_FILES['arquivo']['size'] <= 1024 * 1024 * 10) {
             $pasta = __DIR__ . "/assets/songs/";
             if (!is_dir($pasta)) {
                 mkdir($pasta, 0777, true);

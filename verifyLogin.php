@@ -16,8 +16,8 @@ if (registroExiste($conexao, 'usuario', 'email', $email)) {
         $banco = mysqli_fetch_assoc(mysqli_query($conexao, "SELECT * FROM usuario where email = '$email'"));
         $_SESSION["usuario"] = $banco;
         $response["status"] = "success";
-        $response["message"] = "Login feito com sucesso!";
         $response["nextComponent"] = "login";
+        $response["reloadPage"] = true;
     } else {
         $response["status"] = "error";
         $response["message"] = "Email ou senha incorretos.";

@@ -33,11 +33,6 @@ function renderPlaylist()
                     <span>Título</span>
                     <span>Duração</span>
                 </div>
-                    <!-- <div class="album-actions">
-                        <button class="album-play">
-                        <i class="fa-solid fa-play"></i> Tocar
-                        </button>
-                    </div> -->
                 HTML;
             while ($musica = mysqli_fetch_assoc($musicasQuery)) {
                 $duracao = gmdate('i:s', $musica['duracao']);
@@ -51,36 +46,45 @@ function renderPlaylist()
                 $numero++;
             }
             $html .= "</div>";
-            return <<<HTML
-        <div class="playlist-page">
+        }
+        return <<<HTML
+            <div class="playlist-page">
             <!-- Cabeçalho da playlist -->
-            <div class="playlist-header">
-                <img src="./assets/playlistCovers/{$capa}" alt="Capa da playlist {$titulo}" class="playlist-cover">
+                <div class="playlist-header">
+                    <img src="./assets/playlistCovers/{$capa}" alt="Capa da playlist {$titulo}" class="playlist-cover">
 
-                <div class="playlist-info">
-                <span class="playlist-type">Playlist</span>
-                <h1 class="playlist-title">{$titulo}</h1>
-                <p class="playlist-meta">{$quantidade} música(s) • {$somaDuracao}</p>
+                    <div class="playlist-info">
+                    <span class="playlist-type">Playlist</span>
+                    <h1 class="playlist-title">{$titulo}</h1>
+                    <p class="playlist-meta">{$quantidade} música(s) • {$somaDuracao}</p>
+                    </div>
                 </div>
-            </div>
 
             <!-- Ações -->
-            <div class="playlist-actions">
-                <button class="playlist-edit" onclick="loadEditPlaylist('{$id_playlist}')">
-                <i class="fa-solid fa-pen"></i> Editar
-                </button>
+                <div class="playlist-actions">
+                    <button class="playlist-edit" onclick="loadEditPlaylist('{$id_playlist}')">
+                    <i class="fa-solid fa-pen"></i> Editar
+                    </button>
 
-                <button class="playlist-delete">
-                <i class="fa-solid fa-trash"></i> Excluir
-                </button>
-            </div>
+                    <button class="playlist-delete" onclick="openDeletePlaylistModal()">
+                    <i class="fa-solid fa-trash"></i> Excluir
+                    </button>
+                </div>
+                <div id='confirmModal' class='modal' style='display:none'>
+                    <div class='modal-content'>
+                        <h2 id='modalTitle'>Deletar Playlist</h2>
+                        <p id='modalMessage'>Deseja deletar essa playlist</p>
+                        <div class='modal-buttons'>
+                            <a id='confirmDelete' href='#' class='deleteSongBtn' onclick="deletePlaylist('{$id_playlist}')">Excluir</a>
+                            <a id='cancelDelete' class='cancelBtn' href='#' onclick="closeDeletePlaylistModal()">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
 
+                {$html}
             <!-- Lista de músicas -->
-            {$html}
-
-        </div>
-        HTML;
-        }
+            
+            HTML;
     }
 }
 if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
