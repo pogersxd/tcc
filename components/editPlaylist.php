@@ -19,9 +19,7 @@ function renderEditAlbum()
         echo "</div>";
     } else {
         echo "Você não tem nenhuma playlist cadastrada. <br>";
-        echo "<a href='#' onclick='loadComponent(\"addPlaylistForm\")'>Cadastrar álbum</a>";
     }
-    echo '<br><a href="#" onclick="loadComponent(\'mainMenu\')">Voltar à página inicial</a></div>';
 }
 if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
     echo renderEditAlbum();

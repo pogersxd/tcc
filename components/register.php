@@ -19,7 +19,6 @@ function renderRegister()
         <button type="submit" id="botao" disabled>Registrar</button>
         <div id="mensagem" style="color: red;"></div>
         <span  class="form-link">Já tem uma conta? <a href="#" onclick="loadComponent('login')">Entre</a></span><br>
-        <a href="#" class="form-link" onclick="loadComponent('mainMenu')">Continuar sem conta</a>
     </form>
     </div>
     HTML;

@@ -78,7 +78,6 @@ function renderEditAlbum()
         echo "</div>";
     } else {
         echo "Você não tem nenhum álbum cadastrado. <br>";
-        echo "<a href='#' onclick='loadComponent(\"addAlbumForm\")'>Cadastrar álbum</a>";
     }
 }
 if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
