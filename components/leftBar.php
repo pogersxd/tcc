@@ -46,7 +46,7 @@
             $html .= renderSingleItemAlbum($capaAlbum, $titulo, $id_usuario, $id_album, $nome);
           }
           if ($curtido['tipo'] == "artista") {
-            $sql = mysqli_query($conexao, "SELECT * FROM usuario");
+            $sql = mysqli_query($conexao, "SELECT * FROM usuario WHERE id_usuario = {$curtido['id_item']}");
             if (mysqli_num_rows($sql) > 0) {
               while ($linha = mysqli_fetch_assoc($sql)) {
                 $id_usuario = $linha['id_usuario'];
