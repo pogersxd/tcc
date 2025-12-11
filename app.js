@@ -203,7 +203,7 @@ document.addEventListener("submit", function (event) {
   })
     .then(response => response.json())
     .then(data => {
-      window.alert(data.message);
+      if (data.message) window.alert(data.message);
 
       if (form.id === "add-music-form") {
         fetch("./components/addMusicForm.php", {
