@@ -25,7 +25,8 @@ function renderProfile()
                         </div>
         HTML;
         $nome = $_SESSION['usuario']['nome'];
-        $bio = $_SESSION['usuario']['bio'];
+        $bio_corrigido = str_replace(["\\r\\n", "\\n", "\\r"], "\n", $_SESSION['usuario']['bio']);
+        $bio = nl2br($bio_corrigido);
         $foto = $_SESSION['usuario']['foto'];
     } else {
         $id_usuario = $_POST['id_usuario'];
@@ -33,7 +34,9 @@ function renderProfile()
         $usuario = mysqli_fetch_assoc($usuarioQuery);
         $nome = $usuario['nome'];
         $foto = $usuario['foto'];
-        $bio = nl2br($usuario['bio']);
+        $bio_corrigido = str_replace(["\\r\\n", "\\n", "\\r"], "\\n", $usuario['bio']);
+        $bio = nl2br($bio_corrigido);
+
         if (isset($_SESSION['usuario'])) {
             $id_usuarioSessao = $_SESSION['usuario']['id_usuario'];
             $curtido = mysqli_query($conexao, "SELECT * FROM curtido WHERE id_item = '$id_usuario' AND tipo = 'artista' AND id_usuario = '$id_usuarioSessao'");
