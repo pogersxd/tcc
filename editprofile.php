@@ -59,7 +59,8 @@ if (!isset($_SESSION['usuario']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
                     $antigoArquivo = mysqli_fetch_assoc($antigoArquivoQuery)['foto'];
                     $feitoUpload = move_uploaded_file($_FILES['foto']['tmp_name'], $pasta . $nomeArquivoExtensao);
                     if ($feitoUpload) {
-                        unlink($pasta . $antigoArquivo);
+                        if ($antigoArquivo != "padrao.jpg")
+                            unlink($pasta . $antigoArquivo);
                     }
                 } else {
                     $feitoUpload = false;
