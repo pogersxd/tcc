@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 12/12/2025 às 19:10
+-- Tempo de geração: 12/12/2025 às 19:17
 -- Versão do servidor: 9.1.0
 -- Versão do PHP: 8.3.14
 
@@ -135,14 +135,6 @@ CREATE TABLE IF NOT EXISTS `playlist` (
   PRIMARY KEY (`id_playlist`),
   KEY `id_usuario_em_playlist` (`id_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Despejando dados para a tabela `playlist`
---
-
-INSERT INTO `playlist` (`id_playlist`, `titulo`, `capa`, `id_usuario`) VALUES
-(2, 'time', 'dcae80328694f17974ab9d076725a99e.jpg', 1),
-(3, 'fortnite', 'c25a35d08e9a18248d218a607712c1bf.jpg', 1);
 
 -- --------------------------------------------------------
 

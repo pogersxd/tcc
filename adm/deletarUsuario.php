@@ -16,7 +16,6 @@ if (registroExiste($conexao, 'usuario', 'id_usuario', $id_usuario)) {
         $sql = mysqli_query($conexao, "SELECT * FROM usuario WHERE id_usuario = '$id_usuario'");
         $usuario = mysqli_fetch_assoc($sql);
         $foto = $usuario['foto'];
-        echo __DIR__ . "/../assets/pfps/" . $foto;
         if ($foto != "padrao.jpg") $deletou = unlink(__DIR__ . "/../assets/pfps/" . $foto);
         else $deletou = false;
         if ($deletou || $foto == "padrao.jpg") {
