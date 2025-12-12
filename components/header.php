@@ -6,13 +6,14 @@
   {
     global $conexao;
     $html = renderSearchBar();
+    $adm = '';
     if (isset($_SESSION['usuario'])) {
       $tabelaUsuario = mysqli_query($conexao, "SELECT * FROM usuario WHERE id_usuario = {$_SESSION['usuario']['id_usuario']}");
       $usuario = mysqli_fetch_assoc($tabelaUsuario);
       $foto = $usuario['foto'];
       $nome = $usuario['nome'];
       $perfil = "<a class='header__icon' href='#' onclick='loadComponent(\"profile\")'><img class='header__icon' src='assets/pfps/{$foto}' alt='Foto de {$nome}'></a>";
-      $logout = '
+      $logado = '
           <a href="#" onclick="loadComponent(\'addPlaylistForm\');" class="header__link">
             <h2>Adicionar playlist</h2>
           </a>
@@ -26,9 +27,16 @@
             <h2>Meus álbuns</h2>
           </a>
           ';
+      if ($_SESSION['usuario']['adm'] != 0) {
+        $adm = <<<HTML
+          <a href="./adm/adm.php" class="header__link">
+            <h2>Administrador</h2>
+          </a>
+        HTML;
+      }
     } else {
       $perfil = '<a href="#" onclick="loadComponent(\'login\')"><img class="header__icon" src="./assets/pfps/padrao.jpg" alt="Foto padrão"></a>';
-      $logout = '<h2 title="Clique no ícone à esquerda para logar.">Não está logado</h2>';
+      $logado = '<h2 title="Clique no ícone à esquerda para logar.">Não está logado</h2>';
     }
     return <<<HTML
         <div id="header">
@@ -37,7 +45,8 @@
               $perfil
               $html
             </div>  
-            $logout 
+            $logado 
+            $adm
             <a href="#" onclick="loadComponent('mainMenu')" class="header__link">
               <h2>Home</h2>
             </a>
