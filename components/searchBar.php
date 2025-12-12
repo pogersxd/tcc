@@ -4,11 +4,15 @@
     {
         return <<<HTML
     <form class="header__search-bar" onsubmit="return false;">
-        <label>
+        <label style="
+        display: flex;
+        gap: 10px;
+        flex-direction: row;
+        ">
             <i class="fa-solid fa-magnifying-glass"></i>
             <input 
                 type="text"
-                placeholder="Buscar músicas, álbuns ou artistas..."
+                placeholder="Buscar..."
                 oninput="search(this.value)"
             >
         </label>

@@ -43,7 +43,7 @@ if (!isset($_SESSION['usuario']) || (isset($_SESSION['usuario']) && $_SESSION['u
             gap: 5px
             ">
             <tr>
-                <td>ID: {$usuario['id_usuario']}</td>
+                <td>{$usuario['id_usuario']}</td>
                 <input type="hidden" name="id_usuario" value="{$usuario['id_usuario']}">
                 <input type="hidden" name="foto_atual" value="{$usuario['foto']}">
                 <td><input type="text" name="nome" value="{$usuario['nome']}"></td>

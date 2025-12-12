@@ -26,6 +26,7 @@ if (!isset($_SESSION['usuario']) || (isset($_SESSION['usuario']) && $_SESSION['u
             <table border="1">
                 <tr>
                     <th>ID</th>
+                    <th>ID dono<th>
                     <th>Titulo</th>
                     <th>Capa Atual</th>
                     <th>Nova Capa(opcional)</th>
@@ -41,7 +42,8 @@ if (!isset($_SESSION['usuario']) || (isset($_SESSION['usuario']) && $_SESSION['u
             gap: 5px
             ">
             <tr>
-                <td>ID: {$album['id_album']}</td>
+                <td>{$album['id_album']}</td>
+                <td>{$album['id_usuario']}</td>
                 <input type="hidden" name="id_album" value="{$album['id_album']}">
                 <input type="hidden" name="capa_atual" value="{$album['capa']}">
                 <td><input type="text" name="titulo" value="{$album['titulo']}"></td>
