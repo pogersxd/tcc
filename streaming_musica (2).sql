@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 11/12/2025 às 14:13
+-- Tempo de geração: 12/12/2025 às 15:10
 -- Versão do servidor: 9.1.0
 -- Versão do PHP: 8.3.14
 
@@ -173,6 +173,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `senha` varchar(255) NOT NULL,
   `foto` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'padrao.jpg',
   `bio` text NOT NULL,
+  `adm` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -180,10 +181,10 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 -- Despejando dados para a tabela `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nome`, `email`, `senha`, `foto`, `bio`) VALUES
-(1, 'diego', 'diego@gmail.com', '$2y$10$5ycetnL9aZCiYDXosLwAquLHEYU7VTJX2Q3eNk52l9iZKIfCbN9Z.', '27b32b76e477abbc74e16784a2847816.jpg', 'Bora bill'),
-(2, 'arthur', 'arthur@gmail.com', '$2y$10$FW8MPMo09vxDrNl67QIreu0.83AfDg92X.3Ef0CI9/3h4.dFDlAvq', 'padrao.jpg', 'fortnite2 '),
-(3, 'ryan gosling', 'ryan@gmail.com', '$2y$10$BeUWjiYG9w7HvNRnldtMbOG1XWaA7p1.Z2ImJZ7FNRa/rCORkBvNq', 'padrao.jpg', '');
+INSERT INTO `usuario` (`id_usuario`, `nome`, `email`, `senha`, `foto`, `bio`, `adm`) VALUES
+(1, 'diego', 'diego@gmail.com', '$2y$10$5ycetnL9aZCiYDXosLwAquLHEYU7VTJX2Q3eNk52l9iZKIfCbN9Z.', '27b32b76e477abbc74e16784a2847816.jpg', 'Bora bill\r\nasdasd\r\nasdasd\r\nasdasd\r\nasdasd\r\nasdasda\r\nasdasd\r\nasdasd\r\nasasd\r\nasdasd', 1),
+(2, 'arthur', 'arthur@gmail.com', '$2y$10$FW8MPMo09vxDrNl67QIreu0.83AfDg92X.3Ef0CI9/3h4.dFDlAvq', '4e6efae1848141722864b48eb0115030.jpeg', 'fsigma boy', 0),
+(3, 'ryan gosling', 'ryan@gmail.com', '$2y$10$BeUWjiYG9w7HvNRnldtMbOG1XWaA7p1.Z2ImJZ7FNRa/rCORkBvNq', 'padrao.jpg', '', 0);
 
 --
 -- Restrições para tabelas despejadas
