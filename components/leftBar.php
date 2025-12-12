@@ -14,7 +14,7 @@
     $curtidos = '';
     if (isset($_SESSION['usuario'])) {
       $id_usuario = $_SESSION['usuario']['id_usuario'];
-      $curtidosQuery = mysqli_query($conexao, "SELECT * FROM curtido WHERE id_usuario = '$id_usuario'");
+      $curtidosQuery = mysqli_query($conexao, "SELECT * FROM curtido WHERE id_usuario = '$id_usuario' ORDER BY id_curtido DESC");
       if (mysqli_num_rows($curtidosQuery) > 0) {
         $curtidos = '<h3 style="margin: 10px 0 0 10px">Curtidos:</h3>';
         while ($curtido = mysqli_fetch_assoc($curtidosQuery)) {

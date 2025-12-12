@@ -27,6 +27,7 @@ function searchByType($tipo, $q)
                 JOIN album a   ON a.id_album = m.id_album
                 JOIN usuario u ON u.id_usuario = a.id_usuario
                 WHERE m.titulo LIKE '%$q%'
+                ORDER BY m.id_musica DESC
             ");
 
             if (mysqli_num_rows($sql) > 0) {
@@ -60,6 +61,7 @@ function searchByType($tipo, $q)
                 FROM album a
                 JOIN usuario u ON u.id_usuario = a.id_usuario
                 WHERE a.titulo LIKE '%$q%'
+                ORDER BY a.id_album DESC
             ");
 
             if (mysqli_num_rows($sql) > 0) {
@@ -91,6 +93,7 @@ function searchByType($tipo, $q)
                 FROM usuario u
                 JOIN album a ON a.id_usuario = u.id_usuario
                 WHERE u.nome LIKE '%$q%'
+                ORDER BY u.id_usuario DESC
             ");
 
             if (mysqli_num_rows($sql) > 0) {

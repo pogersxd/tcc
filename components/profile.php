@@ -56,7 +56,7 @@ function renderProfile()
             HTML;
         }
     }
-    $albumQuery = mysqli_query($conexao, "SELECT * FROM album WHERE id_usuario = '$id_usuario'");
+    $albumQuery = mysqli_query($conexao, "SELECT * FROM album WHERE id_usuario = '$id_usuario' ORDER BY id_album DESC");
     $albuns = '<h2>Este perfil não tem álbuns</h2>';
     if (mysqli_num_rows($albumQuery) > 0) {
         $albuns = '<h2>Álbuns</h2>';

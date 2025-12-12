@@ -10,7 +10,7 @@
     $html = '';
     switch ($tipo) {
       case "musicas": {
-          $sql = mysqli_query($conexao, "SELECT * FROM musica");
+          $sql = mysqli_query($conexao, "SELECT * FROM musica ORDER BY id_musica DESC");
           if (mysqli_num_rows($sql) > 0) {
             while ($linha = mysqli_fetch_assoc($sql)) {
               $musica = $linha['arquivo'];
@@ -28,7 +28,7 @@
           break;
         }
       case "albuns": {
-          $sql = mysqli_query($conexao, "SELECT * FROM album");
+          $sql = mysqli_query($conexao, "SELECT * FROM album ORDER BY id_album DESC");
           if (mysqli_num_rows($sql) > 0) {
             while ($linha = mysqli_fetch_assoc($sql)) {
               $capaAlbum = $linha['capa'];
@@ -45,7 +45,7 @@
         }
       case "artistas": {
           $teste = false;
-          $sql = mysqli_query($conexao, "SELECT * FROM usuario");
+          $sql = mysqli_query($conexao, "SELECT * FROM usuario ORDER BY id_usuario DESC");
           if (mysqli_num_rows($sql) > 0) {
             while ($linha = mysqli_fetch_assoc($sql)) {
               $id_usuario = $linha['id_usuario'];
