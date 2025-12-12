@@ -4,14 +4,13 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require_once __DIR__ . "/../conect.php";
 require_once __DIR__ . "/../functions.php";
-$response = [];
 $nome = mysqli_real_escape_string($conexao, $_POST["nome"]);
-$bio = mysqli_real_escape_string($conexao, $_POST["bio"]);
-$id_usuario = $_POST['id_usuario'];
-if (!isset($_SESSION['usuario']) || (isset($_SESSION['usuario']) && $_SESSION['usuario']['adm'] == 0)) {
+if (!isset($_SESSION['usuario']) || !isset($_POST['id_usuario']) || (isset($_SESSION['usuario']) && $_SESSION['usuario']['adm'] == 0)) {
     header("Location: ../index.php");
     exit();
 }
+$id_usuario = $_POST['id_usuario'];
+$bio = mysqli_real_escape_string($conexao, $_POST["bio"]);
 if (registroExiste($conexao, 'usuario', 'id_usuario', $id_usuario)) {
     if ($_FILES['foto']['size'] <= 1024 * 1024 * 10) {
         $tipoCorreto = false;
@@ -61,7 +60,7 @@ if (registroExiste($conexao, 'usuario', 'id_usuario', $id_usuario)) {
             }
             if ($feitoUpload || empty($_FILES['foto']['name'])) {
                 mysqli_query($conexao, "UPDATE usuario SET nome = '$nome', foto  = '$nomeArquivoExtensao', bio = '$bio' WHERE id_usuario = '$id_usuario'");
-                echo "O usuário foi alterado";
+                header("Location: ./usuarios.php");
             }
         } else {
             echo "Formato de arquivo inválido (apenas imagens não .jfif)";

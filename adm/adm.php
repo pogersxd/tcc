@@ -16,7 +16,10 @@ if (!isset($_SESSION['usuario']) || (isset($_SESSION['usuario']) && $_SESSION['u
 
 <body>
     <a href="../index.php">Retornar a tela principal</a><br>
-    <a href="./usuarios.php">Lista de usuários</a>
+    <a href="./usuarios.php">Lista de usuários</a><br>
+    <a href="./albuns.php">Lista de álbuns</a><br>
+    <a href="./musicas.php">Lista de músicas</a><br>
+    <a href="./playlists.php">Lista de playlists</a>
 </body>
 
 </html>
