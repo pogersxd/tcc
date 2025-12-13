@@ -57,6 +57,7 @@ img {
 
 .header__icon {
   max-height: 10svh;
+  width: 100px;
   min-width: 75px;
   aspect-ratio: 1 / 1;
   object-fit: cover;

@@ -203,7 +203,14 @@ document.addEventListener("submit", function (event) {
   })
     .then(response => response.json())
     .then(data => {
-      if (data.message) window.alert(data.message);
+      console.log(data)
+      const isLoginSuccess =
+        form.id === "loginForm" && data.status === "success";
+
+      if (!isLoginSuccess && typeof data.message === "string" && data.message.trim() !== "") {
+        window.alert(data.message);
+      }
+
 
       if (form.id === "add-music-form") {
         fetch("./components/addMusicForm.php", {

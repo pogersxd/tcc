@@ -12,7 +12,7 @@
       $usuario = mysqli_fetch_assoc($tabelaUsuario);
       $foto = $usuario['foto'];
       $nome = $usuario['nome'];
-      $perfil = "<a class='header__icon' href='#' onclick='loadComponent(\"profile\")'><img class='header__icon' src='assets/pfps/{$foto}' alt='Foto de {$nome}'></a>";
+      $perfil = "<a class='header__icon' href='#' onclick='loadComponent(\"profile\")'><img class='header__icon' src='./assets/pfps/{$foto}' alt='Foto de {$nome}'></a>";
       $logado = '
           <a href="#" onclick="loadComponent(\'addPlaylistForm\');" class="header__link">
             <h2>Adicionar playlist</h2>
@@ -36,7 +36,7 @@
       }
     } else {
       $perfil = '<a href="#" onclick="loadComponent(\'login\')"><img class="header__icon" src="./assets/pfps/padrao.jpg" alt="Foto padrão"></a>';
-      $logado = '<h2 title="Clique no ícone à esquerda para logar.">Não está logado</h2>';
+      $logado = '<h2 title="Clique no ícone à esquerda para logar.">Clique à esquerda para logar</h2>';
     }
     return <<<HTML
         <div id="header">

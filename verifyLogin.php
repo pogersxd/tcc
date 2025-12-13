@@ -17,6 +17,7 @@ if (registroExiste($conexao, 'usuario', 'email', $email)) {
         $_SESSION["usuario"] = $banco;
         $response["status"] = "success";
         $response["nextComponent"] = "login";
+        $response["message"] = "";
         $response["reloadPage"] = true;
     } else {
         $response["status"] = "error";
