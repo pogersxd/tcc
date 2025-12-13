@@ -48,6 +48,7 @@
             $logado 
             $adm
             <a href="#" onclick="loadComponent('mainMenu')" class="header__link">
+              <i class="fa-solid fa-house" style="font-size: 40px"></i>
               <h2>Home</h2>
             </a>
           </div>
