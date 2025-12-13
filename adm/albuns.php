@@ -26,7 +26,7 @@ if (!isset($_SESSION['usuario']) || (isset($_SESSION['usuario']) && $_SESSION['u
             <table border="1">
                 <tr>
                     <th>ID</th>
-                    <th>ID dono<th>
+                    <th>ID dono</th>
                     <th>Titulo</th>
                     <th>Capa Atual</th>
                     <th>Nova Capa(opcional)</th>
