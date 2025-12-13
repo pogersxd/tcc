@@ -4,7 +4,7 @@ function renderRegister()
     return <<<HTML
     <div>
     <h2 class="form-title">Cadastrar-se</h2>
-    <form id="registerForm" class="default-form">
+    <form id="registerForm" class="default-form" onsubmit="">
         <label>Nome: <input type="text" name="nome" required></label><br>
         <label>Email: <input type="text" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title='O email precisa ter "@" e "."'  name="email" required></label><br>
         <label>Senha: <input type="password"
@@ -16,6 +16,16 @@ function renderRegister()
         </label>
         <br>
         <label>Confirmar senha: <input type="password" id="confirmar" required></label><br>
+        <label style="
+        display: flex;
+        flex-direction: row;
+        ">
+            <input type="checkbox" name="aceitou_termos" id="termos">
+            Li e aceito os 
+            <a href="termos.html" target="_blank" style="color: blue;" rel="noopener noreferrer">
+                Termos de Uso
+            </a>
+        </label>
         <button type="submit" id="botao" disabled>Registrar</button>
         <div id="mensagem" style="color: red;"></div>
         <span  class="form-link">Já tem uma conta? <a href="#" onclick="loadComponent('login')">Entre</a></span><br>

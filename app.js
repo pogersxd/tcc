@@ -203,7 +203,6 @@ document.addEventListener("submit", function (event) {
   })
     .then(response => response.json())
     .then(data => {
-      console.log(data)
       const isLoginSuccess =
         form.id === "loginForm" && data.status === "success";
 
@@ -664,4 +663,3 @@ function search(q) {
 
   }, 300);
 }
-
