@@ -40,6 +40,7 @@ if (registroExiste($conexao, 'musica', 'id_musica', $id_musica)) {
             ];
             $extensoesPermitidas = [
                 'mp3',
+                'mpeg',
                 'wav',
                 'ogg',
                 'm4a'

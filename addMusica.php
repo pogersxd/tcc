@@ -33,6 +33,7 @@ if (isset($_SESSION['usuario'])) {
             ];
             $extensoesPermitidas = [
                 'mp3',
+                'mpeg',
                 'wav',
                 'ogg',
                 'm4a'
