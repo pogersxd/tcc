@@ -57,7 +57,6 @@ if (!isset($_SESSION['usuario']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
                     $feitoUpload = move_uploaded_file($_FILES['capa']['tmp_name'], $pasta . $nomeArquivoExtensao);
                     $antigoArquivoQuery = mysqli_query($conexao, "SELECT capa FROM album WHERE id_album = '$id_album'");
                     $antigoArquivo = mysqli_fetch_assoc($antigoArquivoQuery)['capa'];
-                    $feitoUpload = move_uploaded_file($_FILES['capa']['tmp_name'], $pasta . $nomeArquivoExtensao);
                     if ($feitoUpload) {
                         unlink($pasta . $antigoArquivo);
                     }
@@ -68,6 +67,11 @@ if (!isset($_SESSION['usuario']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
                     mysqli_query($conexao, "UPDATE album SET titulo = '$titulo', capa  = '$nomeArquivoExtensao' WHERE id_album = '$id_album'");
                     $response["status"] = "success";
                     $response["message"] = "Álbum alterado com sucesso!";
+                    $response["nextComponent"] = "editAlbum";
+                    echo "vou dar a bunda merda";
+                } else {
+                    $response["status"] = "error";
+                    $response["message"] = "Erro ao alterar o álbum.";
                     $response["nextComponent"] = "editAlbum";
                 }
             } else {
@@ -86,5 +90,4 @@ if (!isset($_SESSION['usuario']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
         $response["nextComponent"] = "editAlbum";
     }
 }
-echo json_encode($response, JSON_UNESCAPED_UNICODE);
-exit;
+echo json_encode($response);

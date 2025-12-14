@@ -162,6 +162,8 @@ function loadMusicaTela(id_musica) {
 
 // submit de formularios
 document.addEventListener("submit", function (event) {
+  event.preventDefault();
+  showLoader();
   const form = event.target;
   let arquivo;
   switch (form.id) {
@@ -194,7 +196,6 @@ document.addEventListener("submit", function (event) {
       break;
   }
 
-  event.preventDefault();
   const formData = new FormData(form);
 
   fetch(arquivo, {
@@ -211,7 +212,7 @@ document.addEventListener("submit", function (event) {
       }
 
 
-      if (form.id === "add-music-form") {
+      if (form.id === "add-music-form" || form.id === "edit-song-form") {
         fetch("./components/addMusicForm.php", {
           method: "POST",
           headers: {
@@ -226,29 +227,18 @@ document.addEventListener("submit", function (event) {
           })
           .catch(err => console.error(err));
       }
-      if (form.id === "edit-song-form") {
-        fetch("./components/addMusicForm.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          body: "id_album=" + encodeURIComponent(data.id)
-        }).then(response => response.text())
-          .then(data => {
-            const container = document.getElementById('main-menu');
-            container.innerHTML = data;
-            reloadLeftBar();
-          })
-          .catch(err => console.error(err));
-      }
-      else loadComponent(data.nextComponent);
+      else if (data.nextComponent) loadComponent(data.nextComponent);
 
       if ((form.id === "loginForm" || form.id === "edit-profile-form") && data.status === "success") {
         window.location.reload();
-      } else if ((form.id === "edit-album-form" || form.id === "edit-song-form") && data.status === "success") {
+      }
+      if ((form.id === "edit-album-form" || form.id === "edit-song-form") && data.status === "success") {
         reloadLeftBar();
       }
-    }).catch(err => console.error(err));
+    }).catch(err => console.error(err))
+    .finally(() => {
+      hideLoader();
+    });
 });
 
 function loadEditAlbumForm(id_album) {
@@ -662,4 +652,14 @@ function search(q) {
       });
 
   }, 300);
+}
+
+function showLoader() {
+  const loader = document.getElementById("loader");
+  if (loader) loader.classList.remove("hidden");
+}
+
+function hideLoader() {
+  const loader = document.getElementById("loader");
+  if (loader) loader.classList.add("hidden");
 }

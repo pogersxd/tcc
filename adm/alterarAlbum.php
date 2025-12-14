@@ -51,7 +51,6 @@ if (registroExiste($conexao, 'album', 'id_album', $id_album)) {
                 $feitoUpload = move_uploaded_file($_FILES['capa']['tmp_name'], $pasta . $nomeArquivoExtensao);
                 $antigoArquivoQuery = mysqli_query($conexao, "SELECT capa FROM album WHERE id_album = '$id_album'");
                 $antigoArquivo = mysqli_fetch_assoc($antigoArquivoQuery)['capa'];
-                $feitoUpload = move_uploaded_file($_FILES['capa']['tmp_name'], $pasta . $nomeArquivoExtensao);
                 if ($feitoUpload) {
                     unlink($pasta . $antigoArquivo);
                 }

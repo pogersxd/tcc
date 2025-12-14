@@ -1179,3 +1179,47 @@ img {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
+
+.loader {
+  position: fixed;      /* 🔴 ESSENCIAL */
+  top: 0;
+  left: 0;
+  width: 100vw;         /* largura da viewport */
+  height: 100vh;        /* altura da viewport */
+  background-color: rgba(15, 15, 15, 0.85);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+}
+
+/* Esconder */
+.hidden {
+  display: none;
+}
+
+/* Spinner */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #555;
+  border-top: 5px solid #1db954; /* verde estilo Spotify */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+/* Texto */
+.loader p {
+  color: white;
+  font-size: 16px;
+}
+
+/* Animação */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

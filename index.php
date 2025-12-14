@@ -20,6 +20,12 @@
  </head>
 
  <body>
+   <!-- Loader -->
+   <div id="loader" class="loader hidden">
+     <div class="spinner"></div>
+     <p>Carregando...</p>
+   </div>
+
    <?= renderHeader(); ?>
    <div class="leftbar-mainmenu">
      <?= renderLeftBar(); ?>

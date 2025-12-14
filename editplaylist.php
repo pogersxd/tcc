@@ -57,7 +57,6 @@ if (!isset($_SESSION['usuario']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
                     $feitoUpload = move_uploaded_file($_FILES['capa']['tmp_name'], $pasta . $nomeArquivoExtensao);
                     $antigoArquivoQuery = mysqli_query($conexao, "SELECT capa FROM playlist WHERE id_playlist = '$id_playlist'");
                     $antigoArquivo = mysqli_fetch_assoc($antigoArquivoQuery)['capa'];
-                    $feitoUpload = move_uploaded_file($_FILES['capa']['tmp_name'], $pasta . $nomeArquivoExtensao);
                     if ($feitoUpload) {
                         unlink($pasta . $antigoArquivo);
                     }
