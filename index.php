@@ -31,7 +31,9 @@
      <?= renderLeftBar(); ?>
      <?= renderMainMenu(); ?>
    </div>
-   <?= renderPlayer(); ?>
+   <div id="player">
+     <?= renderPlayer(); ?>
+   </div>
    <script src="app.js"></script>
  </body>
 

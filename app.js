@@ -389,7 +389,7 @@ function loadMusica(musica, id_usuario) {
   }
   ).then(response => response.text())
     .then(data => {
-      player.outerHTML = data;
+      player.innerHTML = data;
       logicaPlayer();
     }).catch(err => console.error(err));
 }

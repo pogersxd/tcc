@@ -26,7 +26,6 @@
       $pausePlay = "pause";
       $toca = 'autoplay';
       return <<<HTML
-            <div id='player'>
               <div class="player">
                 <div class="player__image-links">
                   <a href="#" onclick="loadAlbum('{$id_album}')"><img class="player__image" src="./assets/albumCovers/{$capaAlbum}" alt="Imagem do álbum {$tituloAlbum}"></a>
@@ -50,12 +49,8 @@
                   <span class="player__time" id="player__time-final"></span>
                 </div>
               </div>
-            </div>
           HTML;
-    } else return <<<HTML
-      <div id="player">
-      </div>
-      HTML;
+    }
   }
   if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
     echo renderPlayer();
