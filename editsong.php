@@ -41,6 +41,7 @@ if (isset($_SESSION['usuario'])) {
                     'mpeg',
                     'wav',
                     'ogg',
+                    'opus',
                     'm4a'
                 ];
                 $extensaoCorreta = (in_array($extensao, $extensoesPermitidas));

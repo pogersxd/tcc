@@ -43,6 +43,7 @@ if (registroExiste($conexao, 'musica', 'id_musica', $id_musica)) {
                 'mpeg',
                 'wav',
                 'ogg',
+                'opus',
                 'm4a'
             ];
             $extensaoCorreta = (in_array($extensao, $extensoesPermitidas));

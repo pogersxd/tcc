@@ -25,6 +25,19 @@
       $nome = $tabelaUsuario['nome'];
       $pausePlay = "pause";
       $toca = 'autoplay';
+      $ext = strtolower(pathinfo($musica, PATHINFO_EXTENSION));
+
+      $mimeMap = [
+        'mp3'  => 'audio/mpeg',
+        'wav'  => 'audio/wav',
+        'ogg'  => 'audio/ogg',
+        'opus' => 'audio/ogg',
+        'webm' => 'audio/webm',
+        'm4a'  => 'audio/mp4'
+      ];
+
+      $type = $mimeMap[$ext] ?? 'audio/mpeg';
+
       return <<<HTML
               <div class="player">
                 <div class="player__image-links">
@@ -39,7 +52,7 @@
                     <i class="fa-solid fa-circle-{$pausePlay}" id="player__pause-icon"></i>
                   </div>
                   <audio class="player__audio" id="player__audio" {$toca}>
-                    <source src="./assets/songs/{$musica}">
+                    <source src="./assets/songs/{$musica}" type="{$type}">
                   </audio>
                   <span class="player__time" id="player__time-start"></span>
                   <div class="player__progress-wrapper">
