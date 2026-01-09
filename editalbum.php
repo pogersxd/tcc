@@ -68,7 +68,6 @@ if (!isset($_SESSION['usuario']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
                     $response["status"] = "success";
                     $response["message"] = "Álbum alterado com sucesso!";
                     $response["nextComponent"] = "editAlbum";
-                    echo "vou dar a bunda merda";
                 } else {
                     $response["status"] = "error";
                     $response["message"] = "Erro ao alterar o álbum.";

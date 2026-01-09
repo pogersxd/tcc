@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 12/12/2025 às 19:17
+-- Tempo de geração: 09/01/2026 às 18:10
 -- Versão do servidor: 9.1.0
 -- Versão do PHP: 8.3.14
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `album` (
   `id_usuario` int NOT NULL,
   PRIMARY KEY (`id_album`),
   KEY `id_usuario_em_album` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `album`
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `curtido` (
   `id_usuario` int NOT NULL,
   PRIMARY KEY (`id_curtido`),
   KEY `curtido_id_usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `musica` (
   `id_album` int NOT NULL,
   PRIMARY KEY (`id_musica`),
   KEY `id_album_em_musica` (`id_album`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `musica`
@@ -102,7 +102,8 @@ INSERT INTO `musica` (`id_musica`, `titulo`, `arquivo`, `duracao`, `detalhes`, `
 (53, 'While My Guitar Gently Weeps', 'e8e8b01737eea1382201196e0336a019.mp3', 285, 'I look at you all, see the love there that\'s sleeping\r\nWhile my guitar gently weeps\r\nI look at the floor and I see it needs sweeping\r\nStill my guitar gently weeps\r\n\r\nI don\'t know why nobody told you\r\nHow to unfold your love\r\nI don\'t know how someone controlled you\r\nThey bought and sold you\r\n\r\nI look at the world and I notice it\'s turning\r\nWhile my guitar gently weeps\r\nWith every mistake, we must surely be learning\r\nStill my guitar gently weeps\r\n\r\nI don\'t know how you were diverted\r\nYou were perverted too\r\nI don\'t know how you were inverted\r\nNo one alerted you\r\n\r\nI look from the wings at the play you are staging\r\nWhile my guitar gently weeps\r\nAs I\'m sitting here doing nothing but aging\r\nStill my guitar gently weeps', 40),
 (54, 'Maxwell\'s Silver Hammer', '8877cd1e1ebb731cb1f773cb14ae3df6.mp3', 208, 'Joan was quizzical, studied pataphysical\r\nScience in the home\r\nLate nights all alone with a test tube\r\nOh, oh, oh, oh\r\n\r\nMaxwell Edison, majoring in medicine\r\nCalls her on the phone\r\nCan I take you out to the pictures\r\nJoa, oa, oa, oan?\r\n\r\nBut as she\'s getting ready to go\r\nA knock comes on the door\r\n\r\nBang! Bang! Maxwell\'s silver hammer\r\nCame down upon her head\r\nClang! Clang! Maxwell\'s silver hammer\r\nMade sure that she was dead\r\n\r\nBack in school again, Maxwell plays the fool again\r\nTeacher gets annoyed\r\nWishing to avoid an unpleasant\r\nSce, e, e, ene\r\n\r\nShe tells Max to stay when the class has gone away\r\nSo he waits behind\r\nWriting fifty times: I must not be\r\nSo-o-o\r\n\r\nBut when she turns her back on the boy\r\nHe creeps up from behind\r\n\r\nBang! Bang! Maxwell\'s silver hammer\r\nCame down upon her head (do, do, do, do)\r\nClang! Clang! Maxwell\'s silver hammer\r\nMade sure that she was dead\r\n\r\nP.C. thirty-one said: We caught a dirty one\r\nMaxwell stands alone\r\nPainting testimonial pictures\r\nOh, oh, oh, oh\r\n\r\nRose and Valerie, screaming from the gallery\r\nSay he must go free (Maxwell must go free)\r\nThe judge does not agree and he tells them\r\nSo, o, o, o\r\n\r\nBut as the words are leaving his lips\r\nA noise comes from behind\r\n\r\nBang! Bang! Maxwell\'s silver hammer\r\nCame down upon his head\r\nClang! Clang! Maxwell\'s silver hammer\r\nMade sure that he was dead\r\n\r\nWhoa, oh, oh, oh\r\nSilver hammer man', 35),
 (58, 'Garota de venda medicamento', 'c759693558496311df15240e22a48894.mp3', 246, 'babababa', 42),
-(59, 'Que ela vem', '75309519d05b795deac1fe9c4de26182.mp3', 128, 'bolo', 42);
+(59, 'Que ela vem', '75309519d05b795deac1fe9c4de26182.mp3', 128, 'bolo', 42),
+(70, 'Dogs', '2554ce91465785a398900f1511178541.opus', 1025, 'teste', 37);
 
 -- --------------------------------------------------------
 
@@ -118,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `musica_playlist` (
   PRIMARY KEY (`id_musicaplaylist`),
   KEY `id_musica_em_conexao_playlist` (`id_musica`),
   KEY `id_playlist_em_conexao_playlist` (`id_playlist`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -134,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `playlist` (
   `id_usuario` int NOT NULL,
   PRIMARY KEY (`id_playlist`),
   KEY `id_usuario_em_playlist` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -152,14 +153,14 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `bio` text NOT NULL,
   `adm` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `usuario`
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nome`, `email`, `senha`, `foto`, `bio`, `adm`) VALUES
-(1, 'diego', 'diego@gmail.com', '$2y$10$5ycetnL9aZCiYDXosLwAquLHEYU7VTJX2Q3eNk52l9iZKIfCbN9Z.', '27b32b76e477abbc74e16784a2847816.jpg', 'Bora bill\r\nasdasd\r\nasdasd\r\nasdasd\r\nasdasd\r\nasdasda\r\nasdasd\r\nasdasd\r\nasasd\r\nasdasd', 1);
+(1, 'diego', 'diego@gmail.com', '$2y$10$5ycetnL9aZCiYDXosLwAquLHEYU7VTJX2Q3eNk52l9iZKIfCbN9Z.', '2d9a91b3d0d4015ff38e049b32e03167.jpg', 'criador do site e unico administrador\r\npor favor nao tente invadir minha conta\r\nminha senha é obvia', 1);
 
 --
 -- Restrições para tabelas despejadas
