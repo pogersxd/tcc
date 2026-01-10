@@ -276,9 +276,7 @@ img {
 .item-list {
   display: flex;
   flex-direction: column;
-  flex: 1;
   gap: 10px;
-  max-height: 100%;
 }
 
 .item-list__header {
