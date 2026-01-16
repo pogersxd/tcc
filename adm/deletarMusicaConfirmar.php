@@ -12,11 +12,12 @@ $id_musica = $_GET['id_musica'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../admin.css">
     <title>Deletar música?</title>
 </head>
 
 <body>
-    <h2>Deseja deletar a música</h2>
+    <h2>Deseja deletar a música?</h2>
     <a href="./musicas.php">Não </a>
     <a href="./deletarMusica.php?id_musica=<?= $id_musica ?>">Sim</a>
 </body>

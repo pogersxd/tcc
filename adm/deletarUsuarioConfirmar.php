@@ -12,11 +12,12 @@ $id_usuario = $_GET['id_usuario'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../admin.css">
     <title>Deletar usuário?</title>
 </head>
 
 <body>
-    <h2>Deseja deletar o usuário</h2>
+    <h2>Deseja deletar o usuário?</h2>
     <a href="./usuarios.php">Não </a>
     <a href="./deletarUsuario.php?id_usuario=<?= $id_usuario ?>">Sim</a>
 </body>

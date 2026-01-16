@@ -1,0 +1,182 @@
+/* ===== VARIÁVEIS (mesma identidade do site) ===== */
+:root{
+  --cor-principal-70: hsl(0, 0%, 70%);
+  --cor-principal-60: hsl(0, 0%, 60%);
+  --cor-principal-50: hsl(0, 0%, 50%);
+  --cor-principal-40: hsl(0, 0%, 40%);
+  --cor-principal-30: hsl(0, 0%, 30%);
+  --cor-principal-20: hsl(0, 0%, 20%);
+  --cor-principal-15: hsl(0, 0%, 15%);
+  --cor-azul-70: hsl(240, 54%, 70%);
+  --cor-azul-50: hsl(240, 54%, 50%);
+  --cor-azul-30: hsl(240, 54%, 30%);
+  --cor-azul-20: hsl(240, 54%, 20%);
+  --cor-azul-10: hsl(240, 54%, 10%);
+}
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===== BASE ===== */
+body {
+  background-color: var(--cor-principal-15);
+  color: var(--cor-principal-70);
+  padding: 30px;
+}
+
+/* ===== TÍTULOS ===== */
+h1, h2 {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 28px;
+  color: var(--cor-principal-70);
+}
+
+h2 {
+  font-size: 22px;
+  color: var(--cor-principal-60);
+}
+
+/* ===== LINKS ===== */
+a {
+  display: inline-block;
+  margin: 6px 10px 6px 0;
+  padding: 8px 14px;
+  text-decoration: none;
+  background-color: var(--cor-azul-50);
+  color: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+a:hover {
+  background-color: var(--cor-azul-70);
+}
+
+/* links de deletar */
+a[href*="deletar"] {
+  background-color: #b03030;
+}
+
+a[href*="deletar"]:hover {
+  background-color: #8f2424;
+}
+
+/* ===== TABELAS ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--cor-principal-20);
+  margin-top: 20px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+thead {
+  background-color: var(--cor-principal-30);
+}
+
+th, td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--cor-principal-30);
+  font-size: 14px;
+}
+
+th {
+  color: var(--cor-principal-60);
+  font-weight: bold;
+}
+
+td {
+  color: var(--cor-principal-70);
+}
+
+tr:hover {
+  background-color: var(--cor-principal-30);
+}
+
+/* ===== FORMULÁRIOS ===== */
+form {
+  background-color: var(--cor-principal-20);
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 6px;
+  max-width: 600px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  font-size: 14px;
+  color: var(--cor-principal-60);
+}
+
+input,
+select,
+button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 14px;
+  border-radius: 4px;
+  border: 1px solid var(--cor-principal-30);
+  background-color: var(--cor-principal-15);
+  color: var(--cor-principal-70);
+  font-size: 14px;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--cor-azul-50);
+}
+
+/* ===== BOTÕES ===== */
+button,
+input[type="submit"] {
+  background-color: var(--cor-azul-50);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background-color: var(--cor-azul-70);
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 600px) {
+  body {
+    padding: 15px;
+  }
+
+  a {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  th, td {
+    font-size: 13px;
+  }
+}
+  input[type="text"],
+  input[type="number"],
+  input[type="password"],
+  input[type="email"],
+  select {
+    min-width: 150px;
+  }
+

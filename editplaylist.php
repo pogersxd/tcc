@@ -66,7 +66,7 @@ if (!isset($_SESSION['usuario']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
                 if ($feitoUpload || empty($_FILES['capa']['name'])) {
                     mysqli_query($conexao, "UPDATE playlist SET titulo = '$titulo', capa  = '$nomeArquivoExtensao' WHERE id_playlist = '$id_playlist'");
                     $response["status"] = "success";
-                    $response["message"] = "Album alterado com sucesso!";
+                    $response["message"] = "Playlist alterada com sucesso!";
                     $response["nextComponent"] = "editPlaylist";
                 }
             } else {
